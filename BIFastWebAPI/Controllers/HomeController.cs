@@ -14,5 +14,9 @@ namespace BIFastWebAPI.Controllers
 
             return View();
         }
+
+        public ActionResult Docs() { return View(); }   
+
     }
 }
+        

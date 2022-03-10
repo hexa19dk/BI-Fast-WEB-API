@@ -1,0 +1,422 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>CoderDocs - Bootstrap 4 Documentation Template For Software Projects</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="BI Fast API Documentation">
+    <meta name="author" content="Bank Raya Indonesia">
+    <link rel="shortcut icon" href="https://bankraya.co.id/img/favicon.png">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script src="https://kit.fontawesome.com/2c64293122.js" crossorigin="anonymous"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="~/Scripts/plugins/simplelightbox/simple-lightbox.min.css">
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="~/Scripts/theme.css">
+
+</head>
+
+<body class="docs-page">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+                    <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none" type="button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2" src="~/Content/images/logo-Raya.png" alt="logo" width="35%" height="35%"></span></a></div>
+                </div><!--//docs-logo-wrapper-->
+                <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                    <div class="top-search-box d-none d-lg-flex">
+                        <form class="search-form">
+                            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+                            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+
+                    <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                    <a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-5-documentation-template-for-software-projects/" class="btn btn-primary d-none d-lg-flex">Download</a>
+                </div><!--//docs-top-utilities-->
+            </div><!--//container-->
+        </div><!--//branding-->
+    </header><!--//header-->
+
+
+    <div class="docs-wrapper">
+        <div id="docs-sidebar" class="docs-sidebar">
+            <div class="top-search-box d-lg-none p-3">
+                <form class="search-form">
+                    <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+                    <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <nav id="docs-nav" class="docs-nav navbar">
+                <ul class="section-items list-unstyled nav flex-column pb-3">
+
+                    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-2"><span class="theme-icon-holder me-2"><i class="fas fa-box"></i></span>Operation Definition</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-1">2.1 Alias Management</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-2">2.2 Alias Resolution</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-3">2.3 Alias Registration inquiry</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-4">2.4 Alias Notification</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-5">2.5 System notification</a></li>
+                    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-3"><span class="theme-icon-holder me-2"><i class="fas fa-box"></i></span>Financial Definition</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-1">3.1 Account Enquiry</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-2">3.2 Credit Transfer</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-3">3.3 Credit Transfer to Proxy</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-3">3.4 Reversal Credit Transfer</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-3">3.5 Payment Status</a></li>
+
+                </ul>
+
+            </nav><!--//docs-nav-->
+        </div><!--//docs-sidebar-->
+        <div class="docs-content">
+            <div class="container">
+
+
+                <article class="docs-article" id="section-2">
+                    <header class="docs-header">
+                        <h1 class="docs-heading">2 Operation Definition</h1>
+                        <section class="docs-intro">
+                            <p>
+                                Following are the operation Definition for the services.
+                            </p>
+                        </section><!--//docs-intro-->
+                    </header>
+                    <section class="docs-section" id="item-2-1">
+                        <h2 class="section-heading">2.1 Alias Management</h2>
+                        <h5>REQUEST</h5>
+                        <p>
+                            <span class="btn btn-primary">post</span>
+                            <span class="text-api-url">/jsonAPI/prxy001</span>
+                        </p>
+                        <h5>BODY</h5>
+                        <div class="row">
+                            <div class="col-md-6 bg-light">
+                                Format
+                                <div class="def">
+                                    <p>
+                                        {<br />
+                                        <code>SendingSystemBIC</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ReceivingSystemBIC</code>
+                                        <em>(string* </em>)<br />
+                                        <code>BizMsgIdr</code>
+                                        <em>(string* </em>)<br />
+                                        <code>MsgDefIdr</code>
+                                        <em>(string* </em>)<br />
+                                        <code>CreationDateTime</code>
+                                        <em>(ISO Date Time* </em>)<br />
+                                        <code>TranRefNUM</code>
+                                        <em>(string* </em>)<br />
+                                        <code>MsgCreationDate</code>
+                                        <em>(ISO Date Time* </em>)<br />
+                                        <code>SendingParticipantID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>MsgSenderAccountId</code>
+                                        <em>(string* </em>)<br />
+                                        <code>OperationType</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ProxyType</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ProxyValue</code>
+                                        <em>(string* </em>)<br />
+                                        <code>RegistrationID</code>
+                                        <em>(string </em>)<br />
+                                        <code>DisplayName</code>
+                                        <em>(string </em>)<br />
+                                        <code>ProxyBankID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>AccountID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>AccountType</code>
+                                        <em>(string* </em>)<br />
+                                        <code>AccountName</code>
+                                        <em>(string </em>)<br />
+                                        <code>SecondaryIDType</code>
+                                        <em>(string* </em>)<br />
+                                        <code>SecondaryIDValue</code>
+                                        <em>(string* </em>)<br />
+                                        <code>RegistrationStatus</code>
+                                        <em>(string </em>)<br />
+                                        <code>CustomerType</code>
+                                        <em>(string </em>)<br />
+                                        <code>CustomerID</code>
+                                        <em>(string </em>)<br />
+                                        <code>CustomerResidentStatus</code>
+                                        <em>(string </em>)<br />
+                                        <code>CustomerTownName</code>
+                                        <em>(string </em>)<br />
+
+
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                Example
+                                <div class="docs-code-block">
+                                    <pre class="shadow-lg rounded">
+                                    <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210301INDOIDJA710O0112345678"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.001.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20210301INDOIDJA71012345678"</span>,
+    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
+    <span class="hljs-attr">"SendingParticipantID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"MsgSenderAccountId"</span>: <span class="hljs-string">"????????"</span>,
+    <span class="hljs-attr">"SendingParticipantID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"OperationType"</span>: <span class="hljs-string">"NEWR"</span>,
+    <span class="hljs-attr">"SendingParticipantID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"ProxyType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"ProxyValue"</span>: <span class="hljs-string">"0211234567"</span>,
+    <span class="hljs-attr">"RegistrationID"</span>: <span class="hljs-string">"REGID123123123"</span>,
+    <span class="hljs-attr">"DisplayName"</span>: <span class="hljs-string">"Mr. James Brown"</span>,
+    <span class="hljs-attr">"ProxyBankID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"AccountID"</span>: <span class="hljs-string">"03005000069295"</span>,
+    <span class="hljs-attr">"AccountType"</span>: <span class="hljs-string">"CACC"</span>,
+    <span class="hljs-attr">"AccountName"</span>: <span class="hljs-string">"James Brown"</span>,
+    <span class="hljs-attr">"SecondaryIDType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"SecondaryIDValue"</span>: <span class="hljs-string">"0211234567"</span>,
+    <span class="hljs-attr">"RegistrationStatus"</span>: <span class="hljs-string">"ACTV"</span>,
+    <span class="hljs-attr">"CustomerType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"CustomerID"</span>: <span class="hljs-string">"0102030405060708"</span>,
+    <span class="hljs-attr">"CustomerResidentStatus"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"CustomerTownName"</span>: <span class="hljs-string">"0300"</span>,
+}
+
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h5>RESPONSE</h5>
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Success</button>
+                                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Reject</button>
+                                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Error</button>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div>
+                                    <div class="row">
+                                        
+                                            <div class="col-md-6">
+                                                Body
+                                                <div class="def">
+                                                    <p> {</p>
+                                                    <p class="def-key">
+                                                        <code>SendingSystemBIC</code> <em>(string )</em><br>
+                                                        <code>ReceivingSystemBIC</code> <em>(string )</em><br>
+                                                        <code>BizMsgIdr</code> <em>(string )</em><br>
+                                                        <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                        <code>CreationDateTime</code> <em>(ISO DateTime )</em><br>
+                                                        <code>TranRefNUM</code> <em>(string )</em><br>
+                                                        <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                        <code>SendingParticipantID</code> <em>(string )</em><br>
+                                                        <code>OrigUniqueRequestID</code> <em>(string )</em><br>
+                                                        <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                        <code>OrigMsgCreationDate</code> <em>(string )</em><br>
+                                                        <code>ProxyInqRespStatusCode</code> <em>(string )</em><br>
+                                                        <code>StatusReasonCode</code> <em>(string )</em><br>
+                                                        <code>OperationType</code> <em>(string )</em><br>
+                                                        <code>RegistrationID</code> <em>(string )</em><br>
+                                                        <code>ProxyBankID</code> <em>(string )</em><br>
+                                                        <code>CustomerType</code> <em>(string )</em><br>
+                                                        <code>CustomerID</code> <em>(string )</em><br>
+                                                        <code>CustomerResidentStatus</code> <em>(string )</em><br>
+                                                        <code>CustomerTownName</code> <em>(string )</em><br>
+                                                    <p> }</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                Example
+                                                <div class="docs-code-block">
+                                                    <pre class="shadow-lg rounded">
+                                                    <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210301INDOIDJA710HRB12345678"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.002.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20210301INDOIDJA710HRB12345678"</span>,
+    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
+    <span class="hljs-attr">"SendingParticipantID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"OrigUniqueRequestID"</span>: <span class="hljs-string">"20210326INDOIDJAO12345671"</span>,
+    <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"prxy.001.001.01"</span>,
+    <span class="hljs-attr">"OrigMsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
+    <span class="hljs-attr">"ProxyInqRespStatusCode"</span>: <span class="hljs-string">"ACTC"</span>,
+    <span class="hljs-attr">"StatusReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+    <span class="hljs-attr">"OperationType"</span>: <span class="hljs-string">"NEWR"</span>,
+    <span class="hljs-attr">"RegistrationID"</span>: <span class="hljs-string">"6789012345"</span>,
+    <span class="hljs-attr">"ProxyBankID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"CustomerType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"CustomerID"</span>: <span class="hljs-string">"0102030405060708"</span>,
+    <span class="hljs-attr">"CustomerResidentStatus"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"CustomerTownName"</span>: <span class="hljs-string">"0300"</span>
+}
+                                                        </code></pre>
+                                                </div>
+                                            </div>
+
+                                        
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <br />
+                                            Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"BTANIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20211214BTANIDJA610O0100005691"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.002.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-12-14T06:27:13Z"</span>,
+    <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20211214BTANIDJA61000005690"</span>,
+    <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"U804"</span>,
+    <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-12-14 01:26:00"</span>
+}
+                                                        </code></pre>
+                                            </div>
+
+                                        </div>
+                                     </div>
+                                 </div>
+                                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <br />
+                                            Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"BTANIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20211214BTANIDJA610O0100005697"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.002.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-12-14T06:28:46Z"</span>,
+    <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20211214BTANIDJA61000005696"</span>,
+    <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"0015"</span>,
+    <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-12-14 01:27:30"</span>,
+    <span class="hljs-attr">"ErrorLocation"</span>: <span class="hljs-string">"StaxXmlSubFieldType"</span>,
+    <span class="hljs-attr">"ReasonDesc"</span>: <span class="hljs-string">"javax.xml.stream.XMLStreamException: org.xml.sax.SAXParseException;lineNumber: 1; columnNumber: 1183; cvc-complex-type.2.4.b: The content of element'ns2:PrxyRtrvl' is not complete. One of '{\"urn:iso:std:iso:20022:tech:xsd:prxy.003.001.01\":Val}'is expected."</span>
+}
+                                                        </code></pre>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+            </div>
+
+
+
+            </section><!--//section-->
+
+            <section class="docs-section" id="item-2-2">
+                <h2 class="section-heading">2.2 Alias Resolution</h2>
+                <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+            </section><!--//section-->
+
+            <section class="docs-section" id="item-2-3">
+                <h2 class="section-heading">2.3 Alias Registration Inquiry</h2>
+                <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+            </section><!--//section-->
+            </article><!--//docs-article-->
+
+
+            <article class="docs-article" id="section-3">
+                <header class="docs-header">
+                    <h1 class="docs-heading">APIs</h1>
+                    <section class="docs-intro">
+                        <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
+                    </section><!--//docs-intro-->
+                </header>
+                <section class="docs-section" id="item-3-1">
+                    <h2 class="section-heading">Section Item 3.1</h2>
+                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+                </section><!--//section-->
+
+                <section class="docs-section" id="item-3-2">
+                    <h2 class="section-heading">Section Item 3.2</h2>
+                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+                </section><!--//section-->
+
+                <section class="docs-section" id="item-3-3">
+                    <h2 class="section-heading">Section Item 3.3</h2>
+                    <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+                </section><!--//section-->
+            </article><!--//docs-article-->
+
+            <footer class="footer">
+                <div class="container text-center py-5">
+                    <small class="copyright">Template Copyright &copy; <a href="https://themes.3rdwavemedia.com/" target="_blank">3rd Wave Media</a></small>
+                    <ul class="social-list list-unstyled pt-4 mb-0">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                </div>
+            </footer>
+        </div>
+    </div>
+    </div><!--//docs-wrapper-->
+    <!-- Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+
+    <!-- Page Specific JS -->
+    <script src="~/Scripts/smoothscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="~/Scripts/highlight-custom.js"></script>
+    <script src="~/Scripts/plugins/simplelightbox/simple-lightbox.min.js"></script>
+    <script src="~/Scripts/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+    <script src="~/Scripts/docs.js"></script>
+
+</body>
+</html>
+

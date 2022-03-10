@@ -1,24 +1,140 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-</div>
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CoderDocs - Bootstrap 5 Documentation Template For Software Projects</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BI Fast API Documentation">
+    <meta name="author" content="Bank Raya Indonesia">
+    <link rel="shortcut icon" href="https://bankraya.co.id/img/favicon.png">
+    @*<link rel="icon" type="image/x-icon" href="https://bankraya.co.id/img/favicon.png">*@
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script src="https://kit.fontawesome.com/2c64293122.js" crossorigin="anonymous"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="~/Scripts/theme.css">
+</head>
+
+<body>
+    <header class="header fixed-top">
+
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+                    <div class="site-logo"><a class="navbar-brand" href="index"><img class="logo-icon me-2" src="~/Content/images/logo-Raya.png" alt="logo" width="35%" height="35%"></a></div>
+                </div>
+                <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+
+                    <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                </div>
+            </div><!--//container-->
+        </div><!--//branding-->
+    </header><!--//header-->
+
+
+    <div class="page-header theme-bg-dark py-5 text-center position-relative">
+        <div class="theme-bg-shapes-right"></div>
+        <div class="theme-bg-shapes-left"></div>
+        <div class="container">
+            <h1 class="page-heading single-col-max mx-auto">BI FAST API Documentation</h1>
+            <div class="page-intro single-col-max mx-auto">Everything you need to get your software documentation online.</div>
+            <div class="main-search-box pt-3 d-block mx-auto">
+                @*<form class="search-form w-100">
+                        <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+                    </form>*@
+            </div>
+        </div>
+    </div><!--//page-header-->
+    <div class="page-content">
+        <div class="container">
+            <div class="docs-overview py-5">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-4 py-3">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title mb-3">
+                                    <span class="theme-icon-holder card-icon-holder me-2">
+                                        <i class="fa fa-box"></i>
+                                    </span><!--//card-icon-holder-->
+                                    <span class="card-title-text">Transactional API</span>
+                                </h5>
+                                <div class="card-text">
+                                    API yang berhubungan dengan transaksi seperti Cek Saldo, Pembayaran, Transfer, dll.
+                                </div>
+                                <a class="card-link-mask" href="docs-page.html#section-1"></a>
+                            </div><!--//card-body-->
+                        </div><!--//card-->
+                    </div><!--//col-->
+                    <div class="col-12 col-lg-4 py-3">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title mb-3">
+                                    <span class="theme-icon-holder card-icon-holder me-2">
+                                        <i class="fa fa-box"></i>
+                                    </span><!--//card-icon-holder-->
+                                    <span class="card-title-text">Non-Transactional API</span>
+                                </h5>
+                                <div class="card-text">
+                                    API yang berhubungan dengan on-transaksional seperti Alias Management, Alias Notification dll.
+                                </div>
+                                <a class="card-link-mask" href="docs-page.html#section-1"></a>
+                            </div><!--//card-body-->
+                        </div>
+                    </div>
+
+
+
+
+                </div><!--//row-->
+            </div><!--//container-->
+        </div><!--//container-->
+    </div><!--//page-content-->
+
+    <footer class="footer">
+
+        <div class="footer-bottom text-center py-5">
+
+            <ul class="social-list list-unstyled pb-4 mb-0">
+                <li class="list-inline-item"><a href="http://bankraya.co.id" target="_blank"><i class="fa fa-globe"></i></a></li>
+                <li class="list-inline-item"><a href="https://play.google.com/store/apps/details?id=id.co.bankraya.apps" target="_blank"><i class="fa fa-android"></i></a></li>
+                <li class="list-inline-item"><a href="http://instagram.com/bankraya" target="_blank"><i class="fab fa-instagram fa-fw"></i></a></li>
+            </ul><!--//social-list-->
+            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Developed by <a class="theme-link" href="http://bankraya.co.id" target="_blank">PT Bank Raya Indonesia Tbk </a> - 2022</small>
+
+
+        </div>
+
+    </footer>
+
+    <!-- Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Page Specific JS -->
+    <script src="~/Scripts/smoothscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="~/Scripts/highlight-custom.js"></script>
+    <script src="~/Scripts/plugins/simplelightbox/simple-lightbox.min.js"></script>
+    <script src="~/Scripts/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+    <script src="~/Scripts/docs.js"></script>
+
+</body>
+</html>
+
