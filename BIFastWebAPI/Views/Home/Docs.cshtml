@@ -347,16 +347,227 @@
                             </div>
                             
                         </div>
-            </div>
-
-
-
+                    
             </section><!--//section-->
 
-            <section class="docs-section" id="item-2-2">
-                <h2 class="section-heading">2.2 Alias Resolution</h2>
-                <p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-            </section><!--//section-->
+                    <section class="docs-section" id="item-2-2">
+                        <h2 class="section-heading">2.2 Alias Resolution</h2>
+                        <h5>REQUEST</h5>
+                        <p>
+                            <span class="btn btn-primary">post</span>
+                            <span class="text-api-url">/jsonAPI/prxy003</span>
+                        </p>
+                        <h5>BODY</h5>
+                        <div class="row">
+                            <div class="col-md-6 bg-light">
+                                Format
+                                <div class="def">
+                                    <p>
+                                        {<br />
+                                        <code>SendingSystemBIC</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ReceivingSystemBIC</code>
+                                        <em>(string* </em>)<br />
+                                        <code>BizMsgIdr</code>
+                                        <em>(string* </em>)<br />
+                                        <code>MsgDefIdr</code>
+                                        <em>(string* </em>)<br />
+                                        <code>CreationDateTime</code>
+                                        <em>(ISO Date Time* </em>)<br />
+                                        <code>TranRefNUM</code>
+                                        <em>(string* </em>)<br />
+                                        <code>MsgCreationDate</code>
+                                        <em>(ISO Date Time* </em>)<br />
+                                        <code>SendingParticipantID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>MsgSenderAccountId</code>
+                                        <em>(string* </em>)<br />
+                                        <code>AlisaResolutionLookup</code>
+                                        <em>(string* </em>)<br />
+                                        <code>UniqueRequestID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ProxyType</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ProxyValue</code>
+                                        <em>(string* </em>)<br />
+
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                Example
+                                <div class="docs-code-block">
+                                    <pre class="shadow-lg rounded">
+                                    <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210301INDOIDJA710O0112345678"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.003.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20210301INDOIDJA71012345678"</span>,
+    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
+    <span class="hljs-attr">"SendingParticipantID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"MsgSenderAccountId"</span>: <span class="hljs-string">"????????"</span>,
+    <span class="hljs-attr">"AlisaResolutionLookup"</span>: <span class="hljs-string">"PXRS"</span>,
+    <span class="hljs-attr">"UniqueRequestID"</span>: <span class="hljs-string">"20210326INDOIDJAO12345678"</span>,
+    <span class="hljs-attr">"ProxyType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"ProxyValue"</span>: <span class="hljs-string">"62818888777666"</span>
+}
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h5>RESPONSE</h5>
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-succ-tab" data-bs-toggle="tab" data-bs-target="#nav-succ" type="button" role="tab" aria-controls="nav-succ" aria-selected="true">Success</button>
+                                    <button class="nav-link" id="nav-rej-tab" data-bs-toggle="tab" data-bs-target="#nav-rej" type="button" role="tab" aria-controls="nav-rej" aria-selected="false">Reject</button>
+                                    <button class="nav-link" id="nav-err-tab" data-bs-toggle="tab" data-bs-target="#nav-err" type="button" role="tab" aria-controls="nav-err" aria-selected="false">Error</button>
+                                </div>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-succ" role="tabpanel" aria-labelledby="nav-succ-tab">
+                                        <br />
+                                        Response Code <div class="btn btn-sm btn-success">200</div>
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                Body
+                                                <div class="def">
+                                                    
+                                                    <p class="def-key">
+                                                    <p>{</p>
+                                                        <code>SendingSystemBIC</code> <em>(string )</em><br>
+                                                        <code>ReceivingSystemBIC</code> <em>(string )</em><br>
+                                                        <code>BizMsgIdr</code> <em>(string )</em><br>
+                                                        <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                        <code>CreationDateTime</code> <em>(ISO DateTime )</em><br>
+                                                        <code>TranRefNUM</code> <em>(string )</em><br>
+                                                        <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                        <code>RecipientParticipantID</code> <em>(string )</em><br>
+                                                        <code>OrigUniqueRequestID</code> <em>(string )</em><br>
+                                                        <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                        <code>OrigMsgCreationDate</code> <em>(string )</em><br>
+                                                        <code>OrigUniqueRequestID</code> <em>(string )</em><br>
+                                                        <code>OrigMsgCreationDate</code> <em>(string )</em><br>
+                                                        <code>OriginalProxyValue</code> <em>(string )</em><br>
+                                                        <code>ProxyInqRespStatusCode</code> <em>(string )</em><br>
+                                                        <code>StatusReasonCode</code> <em>(string )</em><br>
+                                                        <code>OperationType</code> <em>(string )</em><br>
+                                                        <code>RegistrationID</code> <em>(string )</em><br>
+                                                        <code>DisplayName</code> <em>(string )</em><br>
+                                                        <code>ProxyBankID</code> <em>(string )</em><br>
+                                                        <code>AccountID</code> <em>(string )</em><br>
+                                                        <code>AccountType</code> <em>(string )</em><br>
+                                                        <code>AccountName</code> <em>(string )</em><br>
+                                                        <code>CustomerType</code> <em>(string )</em><br>
+                                                        <code>CustomerID</code> <em>(string )</em><br>
+                                                        <code>CustomerResidentStatus</code> <em>(string )</em><br>
+                                                        <code>CustomerTownName</code> <em>(string )</em><br>
+                                                        }</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                Example
+                                                <div class="docs-code-block">
+                                                    <pre class="shadow-lg rounded">
+                                                    <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210301INDOIDJA710HRB12345678"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.002.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20210301INDOIDJA710HRB12345678"</span>,
+    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
+    <span class="hljs-attr">"RecipentParticipantID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"UniqueRequestID"</span>: <span class="hljs-string">"20210301INDOIDJA61012345678"</span>,
+    <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"prxy.003.001.01"</span>,
+    <span class="hljs-attr">"OrigMsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
+    <span class="hljs-attr">"OrigUniqueRequestID"</span>: <span class="hljs-string">"20210326INDOIDJAO12345671"</span>,
+    <span class="hljs-attr">"OriginalProxyType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"OriginalProxyValue"</span>: <span class="hljs-string">"62818888777666"</span>,
+    <span class="hljs-attr">"ProxyInqRespStatusCode"</span>: <span class="hljs-string">"ACTC"</span>,
+    <span class="hljs-attr">"StatusReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+    <span class="hljs-attr">"ProxyType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"ProxyValue"</span>: <span class="hljs-string">"0211234567"</span>,
+    <span class="hljs-attr">"RegistrationID"</span>: <span class="hljs-string">"6789012345"</span>,
+    <span class="hljs-attr">"DisplayName"</span>: <span class="hljs-string">"JOHN SMITH"</span>,
+    <span class="hljs-attr">"ProxyBankID"</span>: <span class="hljs-string">"CENAIDJA"</span>,
+    <span class="hljs-attr">"AccountID"</span>: <span class="hljs-string">"03005000069295"</span>,
+    <span class="hljs-attr">"AccountType"</span>: <span class="hljs-string">"CACC"</span>,
+    <span class="hljs-attr">"AccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>,
+    <span class="hljs-attr">"CustomerType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"CustomerID"</span>: <span class="hljs-string">"0102030405060708"</span>,
+    <span class="hljs-attr">"CustomerResidentStatus"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"CustomerTownName"</span>: <span class="hljs-string">"0300"</span>
+}
+                                                        </code></pre>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-rej" role="tabpanel" aria-labelledby="nav-rej-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <br />
+                                                Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                                Example
+                                                <div class="docs-code-block">
+                                                    <pre class="shadow-lg rounded">
+                                                    <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"BTANIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20211214BTANIDJA610O0100005691"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.002.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-12-14T06:27:13Z"</span>,
+    <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20211214BTANIDJA61000005690"</span>,
+    <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"U804"</span>,
+    <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-12-14 01:26:00"</span>
+}
+                                                        </code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-err" role="tabpanel" aria-labelledby="nav-err-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <br />
+                                                Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                                Example
+                                                <div class="docs-code-block">
+                                                    <pre class="shadow-lg rounded">
+                                                    <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"BTANIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20211214BTANIDJA610O0100005697"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.002.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-12-14T06:28:46Z"</span>,
+    <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20211214BTANIDJA61000005696"</span>,
+    <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"0015"</span>,
+    <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-12-14 01:27:30"</span>,
+    <span class="hljs-attr">"ErrorLocation"</span>: <span class="hljs-string">"StaxXmlSubFieldType"</span>,
+    <span class="hljs-attr">"ReasonDesc"</span>: <span class="hljs-string">""</span>
+}
+                                                        </code></pre>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+</nav>
+                        </div>
+
+                    </section><!--//section-->
 
             <section class="docs-section" id="item-2-3">
                 <h2 class="section-heading">2.3 Alias Registration Inquiry</h2>
