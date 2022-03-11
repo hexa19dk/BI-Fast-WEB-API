@@ -7,7 +7,7 @@
 
 <html lang="en">
 <head>
-    <title>CoderDocs - Bootstrap 4 Documentation Template For Software Projects</title>
+    <title>Bank Raya | BI Fast API Docs</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -667,20 +667,25 @@
                                                         <code>CreationDateTime</code> <em>(ISO DateTime )</em><br>
                                                         <code>TranRefNUM</code> <em>(string )</em><br>
                                                         <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
-                                                        <code>SendingParticipantID</code> <em>(string )</em><br>
+                                                        <code>RecipentParticipantID</code> <em>(string )</em><br>
                                                         <code>OrigUniqueRequestID</code> <em>(string )</em><br>
                                                         <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
                                                         <code>OrigMsgCreationDate</code> <em>(string )</em><br>
                                                         <code>ProxyInqRespStatusCode</code> <em>(string )</em><br>
                                                         <code>StatusReasonCode</code> <em>(string )</em><br>
-                                                        <code>OperationType</code> <em>(string )</em><br>
-                                                        <code>RegistrationID</code> <em>(string )</em><br>
-                                                        <code>ProxyBankID</code> <em>(string )</em><br>
-                                                        <code>CustomerType</code> <em>(string )</em><br>
-                                                        <code>CustomerID</code> <em>(string )</em><br>
-                                                        <code>CustomerResidentStatus</code> <em>(string )</em><br>
-                                                        <code>CustomerTownName</code> <em>(string )</em><br>
-                                                    <p> }</p>
+                                                        <code>RspnData</code> <em>(array )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;[{</code><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RegistrationID</code> <em>(string )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisplayName</code> <em>(string )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProxyType</code> <em>(string )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProxyValue</code> <em>(string )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProxyRecordStatus</code> <em>(string )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AccountBIC</code> <em>(string )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AccountID</code> <em>(string )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AccountType</code> <em>(string )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AccountName</code> <em>(string )</em><br>
+                                                        <code>&nbsp;&nbsp;&nbsp;}]</code><br>
+<p> }</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -689,27 +694,44 @@
                                                     <pre class="shadow-lg rounded">
                                                     <code class="json hljs">
 {
-                                                    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
-                                                    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"INDOIDJA"</span>,
-                                                    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210301INDOIDJA710HRB12345678"</span>,
-                                                    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.002.001.01"</span>,
-                                                    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
-                                                    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20210301INDOIDJA710HRB12345678"</span>,
-                                                    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
-                                                    <span class="hljs-attr">"SendingParticipantID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
-                                                    <span class="hljs-attr">"OrigUniqueRequestID"</span>: <span class="hljs-string">"20210326INDOIDJAO12345671"</span>,
-                                                    <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"prxy.001.001.01"</span>,
-                                                    <span class="hljs-attr">"OrigMsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
-                                                    <span class="hljs-attr">"ProxyInqRespStatusCode"</span>: <span class="hljs-string">"ACTC"</span>,
-                                                    <span class="hljs-attr">"StatusReasonCode"</span>: <span class="hljs-string">"U000"</span>,
-                                                    <span class="hljs-attr">"OperationType"</span>: <span class="hljs-string">"NEWR"</span>,
-                                                    <span class="hljs-attr">"RegistrationID"</span>: <span class="hljs-string">"6789012345"</span>,
-                                                    <span class="hljs-attr">"ProxyBankID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
-                                                    <span class="hljs-attr">"CustomerType"</span>: <span class="hljs-string">"01"</span>,
-                                                    <span class="hljs-attr">"CustomerID"</span>: <span class="hljs-string">"0102030405060708"</span>,
-                                                    <span class="hljs-attr">"CustomerResidentStatus"</span>: <span class="hljs-string">"01"</span>,
-                                                    <span class="hljs-attr">"CustomerTownName"</span>: <span class="hljs-string">"0300"</span>
-}
+<span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+<span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+<span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210301INDOIDJA710HRB12345678"</span>,
+<span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.002.001.01"</span>,
+<span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+<span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20210301INDOIDJA710HRB12345678"</span>,
+<span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
+<span class="hljs-attr">"SendingParticipantID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+<span class="hljs-attr">"OrigUniqueRequestID"</span>: <span class="hljs-string">"20210326INDOIDJAO12345671"</span>,
+<span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"prxy.001.001.01"</span>,
+<span class="hljs-attr">"OrigMsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
+<span class="hljs-attr">"ProxyInqRespStatusCode"</span>: <span class="hljs-string">"ACTC"</span>,
+<span class="hljs-attr">"StatusReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+<span class="hljs-attr">"RspnData"</span>:[
+    {
+    <span class="hljs-attr">"RegistrationID"</span>: <span class="hljs-string">"0001230064"</span>,
+    <span class="hljs-attr">"DisplayName"</span>: <span class="hljs-string">"LUCKY FABIAN"</span>,
+    <span class="hljs-attr">"ProxyType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"ProxyValue"</span>: <span class="hljs-string">"*********3102"</span>,
+    <span class="hljs-attr">"ProxyRecordStatus"</span>: <span class="hljs-string">"ACTV"</span>,
+    <span class="hljs-attr">"AccountBIC"</span>: <span class="hljs-string">"SYBTIDJ1"</span>,
+    <span class="hljs-attr">"AccountID"</span>: <span class="hljs-string">"******1781"</span>,
+    <span class="hljs-attr">"AccountType"</span>: <span class="hljs-string">"SVGS"</span>,
+    <span class="hljs-attr">"AccountName"</span>: <span class="hljs-string">"Mr. LUCKY FABIAN"</span>
+    },
+                                                         {
+    <span class="hljs-attr">"RegistrationID"</span>: <span class="hljs-string">"0001110250"</span>,
+    <span class="hljs-attr">"DisplayName"</span>: <span class="hljs-string">"LUCKY FABIAN"</span>,
+    <span class="hljs-attr">"ProxyType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"ProxyValue"</span>: <span class="hljs-string">"*********3100"</span>,
+    <span class="hljs-attr">"ProxyRecordStatus"</span>: <span class="hljs-string">"SUSP"</span>,
+    <span class="hljs-attr">"AccountBIC"</span>: <span class="hljs-string">"SYBTIDJ1"</span>,
+    <span class="hljs-attr">"AccountID"</span>: <span class="hljs-string">"******1781"</span>,
+    <span class="hljs-attr">"AccountType"</span>: <span class="hljs-string">"SVGS"</span>,
+    <span class="hljs-attr">"AccountName"</span>: <span class="hljs-string">"Mr. LUCKY FABIAN"</span>
+    }
+    ]
+ }                                           
                                                         </code></pre>
                                                 </div>
                                             </div>
@@ -719,29 +741,56 @@
                                     </div>
                                     <div class="tab-pane fade" id="nav-rej2" role="tabpanel" aria-labelledby="nav-rej2-tab">
                                         <div class="col-md-6">
-
+                                            <br />
+                                            Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+{
+                                                <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"BTANIDJA"</span>,
+                                                <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+                                                <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20211214BTANIDJA610O0100005691"</span>,
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.002.001.01"</span>,
+                                                <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-12-14T06:27:13Z"</span>,
+                                                <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20211214BTANIDJA61000005690"</span>,
+                                                <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"U804"</span>,
+                                                <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-12-14 01:26:00"</span>
+}
+                                                        </code></pre>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-
-                                        </div>
+                                        
                                     </div>
                                     <div class="tab-pane fade" id="nav-err2" role="tabpanel" aria-labelledby="nav-err2-tab">
                                         <div class="col-md-6">
-
+                                            <br />
+                                            Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+{
+                                                <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"BTANIDJA"</span>,
+                                                <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+                                                <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20211214BTANIDJA610O0100005697"</span>,
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.002.001.01"</span>,
+                                                <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-12-14T06:28:46Z"</span>,
+                                                <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20211214BTANIDJA61000005696"</span>,
+                                                <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"0015"</span>,
+                                                <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-12-14 01:27:30"</span>,
+                                                <span class="hljs-attr">"ErrorLocation"</span>: <span class="hljs-string">"StaxXmlSubFieldType"</span>,
+                                                <span class="hljs-attr">"ReasonDesc"</span>: <span class="hljs-string">"javax.xml.stream.XMLStreamException: org.xml.sax.SAXParseException;lineNumber: 1; columnNumber: 1183; cvc-complex-type.2.4.b: The content of element'ns2:PrxyRtrvl' is not complete. One of '{\"urn:iso:std:iso:20022:tech:xsd:prxy.003.001.01\":Val}'is expected."</span>
+}
+                                                        </code></pre>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-
-                                        </div>
+                                      
                                     </div>
                                 </div>
 </nav>
 
-                            <div class="col-md-6">
-
-                            </div>
-                            <div class="col-md-6">
-
-                            </div>
+                          
                         </div>
 
 
@@ -751,15 +800,97 @@
                         <h5>REQUEST</h5>
                         <p>
                             <span class="btn btn-primary">post</span>
-                            <span class="text-api-url">/jsonAPI/prxy005</span>
+                            <span class="text-api-url">/jsonAPI/prxy901</span>
                         </p>
                         <h5>BODY</h5>
                         <div class="row">
                             <div class="col-md-6 bg-light">
-
+                                Format
+                                <div class="def">
+                                    <p>
+                                        {<br />
+                                        <code>SendingSystemBIC</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ReceivingSystemBIC</code>
+                                        <em>(string* </em>)<br />
+                                        <code>BizMsgIdr</code>
+                                        <em>(string* </em>)<br />
+                                        <code>MsgDefIdr</code>
+                                        <em>(string* </em>)<br />
+                                        <code>CreationDateTime</code>
+                                        <em>(ISO Date Time* </em>)<br />
+                                        <code>TranRefNUM</code>
+                                        <em>(string* </em>)<br />
+                                        <code>MsgCreationDate</code>
+                                        <em>(ISO Date Time* </em>)<br />
+                                        <code>SendingParticipantID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>OrigUniqueRequestID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ProxyType</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ProxyValue</code>
+                                        <em>(string* </em>)<br />
+                                        <code>OriginRegistrationID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>OriginDisplayName</code>
+                                        <em>(string* </em>)<br />
+                                        <code>OriginProxyBankID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>OriginAccountID</code>
+                                        <em>(string* </em>)<br />
+                                        <code>OriginAccountType</code>
+                                        <em>(string* </em>)<br />
+                                        <code>OriginAccountName</code>
+                                        <em>(string </em>)<br />
+                                        <code>OriginCustomerType</code>
+                                        <em>(string </em>)<br />
+                                        <code>OriginCustomerID</code>
+                                        <em>(string </em>)<br />
+                                        }
+                                    </p>
+                                </div>
                             </div>
                             <div class="col-md-6">
-
+                                Example
+                                <div class="docs-code-block">
+                                    <pre class="shadow-lg rounded">
+                                        <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210301INDOIDJA710O0112345678"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"prxy.005.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20210301INDOIDJA71012345678"</span>,
+    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2021-03-01T19:00:00.000"</span>,
+    <span class="hljs-attr">"SendingParticipantID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"OrigUniqueRequestID"</span>: <span class="hljs-string">"20210326INDOIDJAO12345671"</span>,
+    <span class="hljs-attr">"ProxyType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"ProxyValue"</span>: <span class="hljs-string">"0211234567"</span>,
+    <span class="hljs-attr">"OriginRegistrationID"</span>: <span class="hljs-string">"1044999995"</span>,
+    <span class="hljs-attr">"OriginDisplayName"</span>: <span class="hljs-string">"Mr. James Brown"</span>,
+    <span class="hljs-attr">"OriginProxyBankID"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+    <span class="hljs-attr">"OriginAccountID"</span>: <span class="hljs-string">"111111111001"</span>,
+    <span class="hljs-attr">"OriginAccountType"</span>: <span class="hljs-string">"SVGS"</span>,
+    <span class="hljs-attr">"OriginDisplayName"</span>: <span class="hljs-string">"James Brown"</span>,
+    <span class="hljs-attr">"OriginCustomerType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"OriginCusotmerID"</span>: <span class="hljs-string">"5302022290990001"</span>,
+    <span class="hljs-attr">"OriginCustomerResidentStatus"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"OriginCustomerTownName"</span>: <span class="hljs-string">"0300"</span>,
+    <span class="hljs-attr">"NewRegistrationID"</span>: <span class="hljs-string">"0044999995"</span>,
+    <span class="hljs-attr">"NewDisplayName"</span>: <span class="hljs-string">"Mr. James Brown"</span>,
+    <span class="hljs-attr">"NewProxyBankID"</span>: <span class="hljs-string">"CENAIDJA"</span>,
+    <span class="hljs-attr">"NewAccountID"</span>: <span class="hljs-string">"111111111002"</span>,
+    <span class="hljs-attr">"NewAccountType"</span>: <span class="hljs-string">"SVGS"</span>,
+    <span class="hljs-attr">"NewAccountName"</span>: <span class="hljs-string">"James Brown"</span>,
+    <span class="hljs-attr">"NewCustomerType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"NewCusotmerID"</span>: <span class="hljs-string">"5302022290990001"</span>,
+    <span class="hljs-attr">"NewCustomerResidentStatus"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"NewCustomerTownName"</span>: <span class="hljs-string">"0300"</span>
+}
+                                        </code></pre>
+                                </div>
                             </div>
                         </div>
 
@@ -767,44 +898,34 @@
                             <h5>RESPONSE</h5>
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active" id="nav-succ2-tab" data-bs-toggle="tab" data-bs-target="#nav-succ2" type="button" role="tab" aria-controls="nav-succ2" aria-selected="true">Success</button>
-                                    <button class="nav-link" id="nav-rej2-tab" data-bs-toggle="tab" data-bs-target="#nav-rej2" type="button" role="tab" aria-controls="nav-rej2" aria-selected="false">Reject</button>
-                                    <button class="nav-link" id="nav-err2-tab" data-bs-toggle="tab" data-bs-target="#nav-err2" type="button" role="tab" aria-controls="nav-err2" aria-selected="false">Error</button>
+                                    <button class="nav-link active" id="nav-succ3-tab" data-bs-toggle="tab" data-bs-target="#nav-succ3" type="button" role="tab" aria-controls="nav-succ3" aria-selected="true">Success</button>
+                                    <button class="nav-link" id="nav-rej3-tab" data-bs-toggle="tab" data-bs-target="#nav-rej3" type="button" role="tab" aria-controls="nav-rej3" aria-selected="false">Reject</button>
+                                    <button class="nav-link" id="nav-err3-tab" data-bs-toggle="tab" data-bs-target="#nav-err3" type="button" role="tab" aria-controls="nav-err3" aria-selected="false">Error</button>
                                 </div>
                                 <div class="tab-content" id="nav-tabContent">
-                                    <div class="tab-pane fade show active" id="nav-succ2" role="tabpanel" aria-labelledby="nav-succ2-tab">
+                                    <div class="tab-pane fade show active" id="nav-succ3" role="tabpanel" aria-labelledby="nav-succ3-tab">
                                         <div class="col-md-6">
-
+                                            <br />
+                                            Response Code <div class="btn btn-sm btn-success">200</div>
                                         </div>
-                                        <div class="col-md-6">
-
-                                        </div>
+                                       
                                     </div>
-                                    <div class="tab-pane fade" id="nav-rej2" role="tabpanel" aria-labelledby="nav-rej2-tab">
+                                    <div class="tab-pane fade" id="nav-rej3" role="tabpanel" aria-labelledby="nav-rej3-tab">
                                         <div class="col-md-6">
-
+                                            <br />
+                                            Response Code <div class="btn btn-sm btn-success">200</div>
                                         </div>
-                                        <div class="col-md-6">
-
-                                        </div>
+                                      
                                     </div>
-                                    <div class="tab-pane fade" id="nav-err2" role="tabpanel" aria-labelledby="nav-err2-tab">
+                                    <div class="tab-pane fade" id="nav-err3" role="tabpanel" aria-labelledby="nav-err3-tab">
                                         <div class="col-md-6">
-
+                                            <br />
+                                            Response Code <div class="btn btn-sm btn-danger">500</div>
                                         </div>
-                                        <div class="col-md-6">
-
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </nav>
-
-                            <div class="col-md-6">
-
-                            </div>
-                            <div class="col-md-6">
-
-                            </div>
                         </div>
 
                     </section><!--//section-->
@@ -813,15 +934,56 @@
                         <h5>REQUEST</h5>
                         <p>
                             <span class="btn btn-primary">post</span>
-                            <span class="text-api-url">/jsonAPI/prxy005</span>
+                            <span class="text-api-url">/jsonAPI/adm004</span>
                         </p>
                         <h5>BODY</h5>
                         <div class="row">
                             <div class="col-md-6 bg-light">
-
+                                Format
+                                <div class="def">
+                                    <p>
+                                        {<br />
+                                        <code>SendingSystemBIC</code>
+                                        <em>(string* </em>)<br />
+                                        <code>ReceivingSystemBIC</code>
+                                        <em>(string* </em>)<br />
+                                        <code>BizMsgIdr</code>
+                                        <em>(string* </em>)<br />
+                                        <code>MsgDefIdr</code>
+                                        <em>(string* </em>)<br />
+                                        <code>CreationDateTime</code>
+                                        <em>(ISO Date Time* </em>)<br />
+                                        <code>EventCode</code>
+                                        <em>(string* </em>)<br />
+                                        <code>EventParam</code>
+                                        <em>(string </em>)<br />
+                                        <code>EventDesc</code>
+                                        <em>(string </em>)<br />
+                                        <code>EventTime</code>
+                                        <em>(string </em>)<br />
+                                        }
+                                    </p>
+                                </div>
                             </div>
                             <div class="col-md-6">
-
+                                Example
+                                <div class="docs-code-block">
+                                    <pre class="shadow-lg rounded">
+                                        <code class="json hljs">
+                                            {
+                                            <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+                                            <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+                                            <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210301INDOIDJA710O0112345678"</span>,
+                                            <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.004.001.02"</span>,
+                                            <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+                                            <span class="hljs-attr">"EventCode"</span>: <span class="hljs-string">"2001"</span>,
+                                            <span class="hljs-attr">"EvtParam"</span>: <span class="hljs-string"> [ "TENANT_ID=BIFAST", "BANK_ID=INDOIDJA", "EVENT_ID=202103290000000000038", "EVENT_CODE=2001","BANK_STATUS=A", "EVENT_TIME=1617019200000", "EMIT_TIME=1617019200000", "NET_SETTLEMENT_AMOUNT=0" ],</span>
+                                            <span class="hljs-attr">"EvtDesc"</span>: <span class="hljs-string">"Notification Event"</span>,
+                                            <span class="hljs-attr">"EventDesc"</span>: <span class="hljs-string">"Notification Event"</span>,
+                                            <span class="hljs-attr">"EventTime"</span>: <span class="hljs-string">"2021-03-29T19:00:00.300"</span>  
+                                            }
+                                        </code></pre>
+                                </div>
                             </div>
                         </div>
 
@@ -829,12 +991,58 @@
                             <h5>RESPONSE</h5>
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active" id="nav-succ2-tab" data-bs-toggle="tab" data-bs-target="#nav-succ2" type="button" role="tab" aria-controls="nav-succ2" aria-selected="true">Success</button>
-                                    <button class="nav-link" id="nav-rej2-tab" data-bs-toggle="tab" data-bs-target="#nav-rej2" type="button" role="tab" aria-controls="nav-rej2" aria-selected="false">Reject</button>
-                                    <button class="nav-link" id="nav-err2-tab" data-bs-toggle="tab" data-bs-target="#nav-err2" type="button" role="tab" aria-controls="nav-err2" aria-selected="false">Error</button>
+                                    <button class="nav-link active" id="nav-succ4-tab" data-bs-toggle="tab" data-bs-target="#nav-succ4" type="button" role="tab" aria-controls="nav-succ4" aria-selected="true">Success</button>
+                                    <button class="nav-link" id="nav-rej4-tab" data-bs-toggle="tab" data-bs-target="#nav-rej4" type="button" role="tab" aria-controls="nav-rej4" aria-selected="false">Reject</button>
+                                    <button class="nav-link" id="nav-err4-tab" data-bs-toggle="tab" data-bs-target="#nav-err4" type="button" role="tab" aria-controls="nav-err4" aria-selected="false">Error</button>
                                 </div>
                                 <div class="tab-content" id="nav-tabContent">
-                                    <div class="tab-pane fade show active" id="nav-succ2" role="tabpanel" aria-labelledby="nav-succ2-tab">
+                                    <div class="tab-pane fade show active" id="nav-succ4" role="tabpanel" aria-labelledby="nav-succ4-tab">
+                                        <br />
+                                        Response Code <div class="btn btn-sm btn-success">200</div>
+                                                      <div class="row">
+                                                          <div class="col-md-6">
+                                                              Body
+                                                              <div class="def">
+                                                                  <p> {</p>
+                                                                  <p class="def-key">
+                                                                      <code>SendingSystemBIC</code> <em>(string )</em><br>
+                                                                      <code>ReceivingSystemBIC</code> <em>(string )</em><br>
+                                                                      <code>BizMsgIdr</code> <em>(string )</em><br>
+                                                                      <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                                      <code>CreationDateTime</code> <em>(ISO DateTime )</em><br>
+                                                                      <code>msgID</code> <em>(string )</em><br>
+                                                                      <code>originalTranRefNum</code> <em>(string )</em><br>
+                                                                      <code>EventCode</code> <em>(string )</em><br>
+                                                                      <code>EventParam</code> <em>(string )</em><br>
+                                                                      <code>EventDesc</code> <em>(string )</em><br>
+                                                                      <code>EventTime</code> <em>(string )</em><br>
+                                                                  <p> }</p>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-md-6">
+                                                              Example
+                                                              <div class="docs-code-block">
+                                                                  <pre class="shadow-lg rounded">
+                                                                  <code class="json hljs">
+{
+<span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+<span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"INDOIDJA"</span>,
+<span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210301INDOIDJA710HRB12345678"</span>,
+<span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.011.001.01"</span>,
+<span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+<span class="hljs-attr">"msgID"</span>: <span class="hljs-string">"20210301INDOIDJA00012345678"</span>,
+<span class="hljs-attr">"originalTranRefNum"</span>: <span class="hljs-string">"20200915FASTIDJA000HOT20000072"</span>,
+<span class="hljs-attr">"EventCode"</span>: <span class="hljs-string">"2001"</span>,
+<span class="hljs-attr">"EvtParam"</span>: <span class="hljs-string">[ "TENANT_ID=BIFAST", "BANK_ID=INDOIDJA","EVENT_ID=202103290000000000038", "EVENT_CODE=2001","BANK_STATUS=A", "EVENT_TIME=1617019200000", "EMIT_TIME=1617019200000","NET_SETTLEMENT_AMOUNT=0" ]</span>,
+<span class="hljs-attr">"EventDesc"</span>: <span class="hljs-string">"prxy.001.001.01"</span>,
+<span class="hljs-attr">"EventTime"</span>: <span class="hljs-string">"2021-03-29T19:00:00.300"</span>
+}                                           
+                                                        </code></pre>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-rej4" role="tabpanel" aria-labelledby="nav-rej4-tab">
                                         <div class="col-md-6">
 
                                         </div>
@@ -842,15 +1050,9 @@
 
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="nav-rej2" role="tabpanel" aria-labelledby="nav-rej2-tab">
-                                        <div class="col-md-6">
-
-                                        </div>
-                                        <div class="col-md-6">
-
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="nav-err2" role="tabpanel" aria-labelledby="nav-err2-tab">
+                                    <div class="tab-pane fade" id="nav-err4" role="tabpanel" aria-labelledby="nav-err4-tab">
+                                        <br />
+                                        Response Code <div class="btn btn-sm btn-danger">500</div>
                                         <div class="col-md-6">
 
                                         </div>
