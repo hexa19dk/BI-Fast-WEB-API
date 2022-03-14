@@ -489,7 +489,6 @@
     <Content Include="Scripts\scss\theme\_base.scss" />
     <Content Include="Scripts\scss\theme\_docs.scss" />
     <Content Include="Scripts\scss\theme\_mixins.scss" />
-    <Content Include="Views\Home\Index - Copy.cshtml" />
     <Content Include="Scripts\plugins\gumshoe\.DS_Store" />
     <Content Include="Scripts\plugins\gumshoe\.github\contributing.md" />
     <Content Include="Scripts\plugins\gumshoe\.github\issue_template.md" />
