@@ -85,8 +85,8 @@
                     <li class="nav-item"><a class="nav-link scrollto" href="#item-3-1">3.1 Account Enquiry</a></li>
                     <li class="nav-item"><a class="nav-link scrollto" href="#item-3-2">3.2 Credit Transfer</a></li>
                     <li class="nav-item"><a class="nav-link scrollto" href="#item-3-3">3.3 Credit Transfer to Proxy</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-3">3.4 Reversal Credit Transfer</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-3">3.5 Payment Status</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-4">3.4 Reversal Credit Transfer</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-5">3.5 Payment Status</a></li>
 
                 </ul>
 
@@ -95,7 +95,7 @@
         <div class="docs-content">
             <div class="container">
 
-
+                @*Operation Definition*@
                 <article class="docs-article" id="section-2">
                     <header class="docs-header">
                         <h1 class="docs-heading">2 Operation Definition</h1>
@@ -1077,130 +1077,730 @@
 
                 </article><!--//docs-article-->
 
+                @*Financial Definition*@
+            <article class="docs-article" id="section-3">
 
-                <article class="docs-article" id="section-3">
-
-                    <header class="docs-header">
-                        <h1 class="docs-heading">3 Financial Definition</h1>
-                        <section class="docs-intro">
-                            <p>
-                                Following are the operation Definition for the services.
-                            </p>
-                        </section><!--//docs-intro-->
-                    </header>
-
-                    @*Account Enquiry*@
-                    <section class="docs-section" id="item-3-1">
-                        <h2 class="section-heading">3.1 Account Enquiry</h2>
-                        <h5>REQUEST</h5>
+                <header class="docs-header">
+                    <h1 class="docs-heading">3 Financial Definition</h1>
+                    <section class="docs-intro">
                         <p>
-                            <span class="btn btn-primary">post</span>
-                            <span class="text-api-url">/jsonAPI/AccountEnquiry</span>
+                            Following are the Financial Definition for the services.
                         </p>
+                    </section><!--//docs-intro-->
+                </header>
 
-                        <h5>BODY</h5>
-                        <div class="row">
-                            <div class="col-md-6 bg-light">
-                                Format
-                                <div class="def">
-                                    <p>
-                                        {
-                                        <br />
-                                        <code>EndToEndId</code>
-                                        <em>(string* </em>)<br />
-                                        <code>MsgDefIdr</code>
-                                        <em>(string* </em>)<br />
-                                        <code>TranRefNUM</code>
-                                        <em>(string* </em>)<br />
-                                        <code>MsgCreationDate</code>
-                                        <em>(ISO Date Time* </em>)<br />
-                                        <code>RecipentParticipantID</code>
-                                        <em>(string* </em>)<br />
-                                        <code>CreditorAccountNo</code>
-                                        <em>(string* </em>)<br />
-                                        <code>Amount</code>
-                                        <em>(string </em>)<br />
-                                        <code>Currency</code>
-                                        <em>(string </em>)<br />
-                                        <code>PurposeType</code>
-                                        <em>(string </em>)<br />
-                                        }
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                Example
-                                <div class="docs-code-block">
-                                    <pre class="shadow-lg rounded">
-                                    <code class="json hljs">
-{
-                                    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
-                                    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
-                                    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
-                                    <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
-                                    <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
-                                    <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
-                                    <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"ACTC"</span>
-                                    <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"U000"</span>,
-                                    <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
-                                    <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
-                                    <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
-                                    <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
-                                    <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
-                                    <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
-                                    <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
-}
-                                    </code>
-                                </pre>
-                                </div>
+                @*Account Enquiry*@
+                <section class="docs-section" id="item-3-1">
+                    <h2 class="section-heading">3.1 Account Enquiry</h2>
+                    <h5>REQUEST</h5>
+                    <p>
+                        <span class="btn btn-primary">post</span>
+                        <span class="text-api-url">/jsonAPI/AccountEnquiry</span>
+                    </p>
+
+                    <h5>BODY</h5>
+                    <div class="row">
+                        <div class="col-md-6 bg-light">
+                            Format
+                            <div class="def">
+                                <p>
+                                    {
+                                    <br />
+                                    <code>EndToEndId</code>
+                                    <em>(string* </em>)<br />
+                                    <code>MsgDefIdr</code>
+                                    <em>(string* </em>)<br />
+                                    <code>TranRefNUM</code>
+                                    <em>(string* </em>)<br />
+                                    <code>MsgCreationDate</code>
+                                    <em>(ISO Date Time* </em>)<br />
+                                    <code>RecipentParticipantID</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountNo</code>
+                                    <em>(string* </em>)<br />
+                                    <code>Amount</code>
+                                    <em>(string </em>)<br />
+                                    <code>Currency</code>
+                                    <em>(string </em>)<br />
+                                    <code>PurposeType</code>
+                                    <em>(string </em>)<br />
+                                    }
+                                </p>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            Example
+                            <div class="docs-code-block">
+                                <pre class="shadow-lg rounded">
+                                <code class="json hljs">
+        {
+                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+                                <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+                                <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"ACTC"</span>
+                                <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
+                                <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
+                                <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
+                                <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
+                                <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
+                                <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
+                                <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
+        }
+                                            </code>
+                                        </pre>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="row">
-                            <h5>RESPONSE</h5>
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active" id="nav-succ4-tab" data-bs-toggle="tab" data-bs-target="#nav-succ4" type="button" role="tab" aria-controls="nav-succ4" aria-selected="true">Success</button>
-
-                                    <button class="nav-link" id="nav-rej5-tab" data-bs-toggle="tab" data-bs-target="#nav-rej5" type="button" role="tab" aria-controls="nav-rej5" aria-selected="false">Reject</button>
-
-                                    <button class="nav-link" id="nav-err5-tab" data-bs-toggle="tab" data-bs-target="#nav-err5" type="button" role="tab" aria-controls="nav-err5" aria-selected="false">Error</button>
-                                </div>
-                                <div class="tab-content" id="nav-tabContent">
-                                    <div class="tab-pane fade show active" id="nav-succ4" role="tabpanel" aria-labelledby="nav-succ4-tab">
-                                        <br />
-                                        Response Code <div class="btn btn-sm btn-success">200</div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                Body
-                                                <div class="def">
+                    <div class="row">
+                        <h5>RESPONSE</h5>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-succ4-tab" data-bs-toggle="tab" data-bs-target="#nav-succ4" type="button" role="tab" aria-controls="nav-succ4" aria-selected="true">Success</button>
+                                <button class="nav-link" id="nav-rej5-tab" data-bs-toggle="tab" data-bs-target="#nav-rej5" type="button" role="tab" aria-controls="nav-rej5" aria-selected="false">Reject</button>
+                                <button class="nav-link" id="nav-err5-tab" data-bs-toggle="tab" data-bs-target="#nav-err5" type="button" role="tab" aria-controls="nav-err5" aria-selected="false">Error</button>
+                            </div>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-succ4" role="tabpanel" aria-labelledby="nav-succ4-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Body
+                                            <div class="def">
                                                 <p> { </p>
-                                                    <p class="def-key">
-                                                        <code>MsgDefIdr</code> <em>(string )</em><br>
-                                                        <code>TranRefNUM</code> <em>(string )</em><br>
-                                                        <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
-                                                        <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
-                                                        <code>OrigEndToEndId</code> <em>(string )</em><br>
-                                                        <code>OrigTranRefNUM</code> <em>(string )</em><br>
-                                                        <code>TransactionStatus</code> <em>(string )</em><br>
-                                                        <code>ReasonCode</code> <em>(string )</em><br>
-                                                        <code>CreditorAccountNo</code> <em>(string )</em><br>
-                                                        <code>CreditorAccountType</code> <em>(string )</em><br>
-                                                        <code>CreditorAccountName</code> <em>(string )</em><br>
-                                                        <code>CreditorType</code> <em>(string )</em><br>
-                                                        <code>CreditorID</code> <em>(string )</em><br>
-                                                        <code>CreditorResidentStatus</code> <em>(string )</em><br>
-                                                        <code>CreditorTownName</code> <em>(string )</em><br>
-                                                 <p> } </p>
-                                                </div>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountType</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountName</code> <em>(string )</em><br>
+                                                    <code>CreditorType</code> <em>(string )</em><br>
+                                                    <code>CreditorID</code> <em>(string )</em><br>
+                                                    <code>CreditorResidentStatus</code> <em>(string )</em><br>
+                                                    <code>CreditorTownName</code> <em>(string )</em><br>
+                                                <p> } </p>
                                             </div>
+                                        </div>
 
-                                            @* Resp Success *@
-                                            <div class="col-md-6">
-                                                Example
-                                                <div class="docs-code-block">
-                                                    <pre class="shadow-lg rounded">
-                                                        <code class="json hljs">
+                                        @* Resp Success *@
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+        {
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+                                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                                <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                                <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"ACTC"</span>,
+                                                <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+                                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
+                                                <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
+                                                <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
+                                                <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
+                                                <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
+        }
+                                                                </code>
+                                                            </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*Resp Reject*@
+                                <div class="tab-pane fade" id="nav-rej5" role="tabpanel" aria-labelledby="nav-rej5-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Body
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+            {
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+                                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                                <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                                <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"RJCT"</span>,
+                                                <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"52"</span>,
+                                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>
+            }
+                                                                </code>
+                                                            </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @* Resp Error *@
+                                <div class="tab-pane fade" id="nav-err5" role="tabpanel" aria-labelledby="nav-err5-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-danger">500</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Body
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>SendingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>ReceivingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>BizMsgIdr</code> <em>(string )</em><br>
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>Reference</code> <em>(string )</em><br>
+                                                    <code>RejectReason</code> <em>(string )</em><br>
+                                                    <code>RejectDateTime</code> <em>(ISO Date Time )</em><br>
+                                                    <code>ErrorLocation</code> <em>(string )</em><br>
+                                                    <code>ReasonDesc</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+            {
+                                                <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
+                                                <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+                                                <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.002.001.01"</span>,
+                                                <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"0015"</span>,
+                                                <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-04-09T21:21:01.896"</span>,
+                                                <span class="hljs-attr">"ErrorLocation"</span>: <span class="hljs-string">"StaxXmlSubFieldType"</span>,
+                                                <span class="hljs-attr">"ReasonDesc"</span>: <span class="hljs-string">""</span>
+            }
+                                                                </code>
+                                                            </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </section>
+
+                @*Credit Transfer*@
+                <section class="docs-section" id="item-3-2">
+                    <h2 class="section-heading">3.2 Credit Transfer</h2>
+                    <h5>REQUEST</h5>
+                    <p>
+                        <span class="btn btn-primary">post</span>
+                        <span class="text-api-url">/jsonAPI/CreditTransfer</span>
+                    </p>
+
+                    <h5>BODY</h5>
+                    <div class="row">
+                        <div class="col-md-6 bg-light">
+                            Format
+                            <div class="def">
+                                <p>
+                                    {
+                                    <br />
+                                    <code>EndToEndId</code>
+                                    <em>(string* </em>)<br />
+                                    <code>MsgDefIdr</code>
+                                    <em>(string* </em>)<br />
+                                    <code>TranRefNUM</code>
+                                    <em>(string* </em>)<br />
+                                    <code>MsgCreationDate</code>
+                                    <em>(ISO Date Time* </em>)<br />
+                                    <code>Amount</code>
+                                    <em>(string </em>)<br />
+                                    <code>Currency</code>
+                                    <em>(string </em>)<br />
+                                    <code>PurposeType</code>
+                                    <em>(string </em>)<br />
+                                    <code>PaymentInformation</code>
+                                    <em>(string </em>)<br />
+                                    <code>SenderParticipantID</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorAccountNo</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorAccountType</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorAccountName</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorType</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorID</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorResidentStatus</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorTownName</code>
+                                    <em>(string </em>)<br />
+                                    <code>RecipentParticipantID</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountNo</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountType</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountName</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorType</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorID</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorResidentStatus</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorTownName</code>
+                                    <em>(string* </em>)<br />
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            Example
+                            <div class="docs-code-block">
+                                <pre class="shadow-lg rounded">
+                                <code class="json hljs">
+    {
+                                <span class="hljs-attr">"EndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA010O0212345678"</span>,
+                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                <span class="hljs-attr">"Amount"</span>: <span class="hljs-string">"10000"</span>,
+                                <span class="hljs-attr">"Currency"</span>: <span class="hljs-string">"IDR"</span>,
+                                <span class="hljs-attr">"PurposeType"</span>: <span class="hljs-string">"01"</span>,
+                                <span class="hljs-attr">"PaymentInformation"</span>: <span class="hljs-string">"Payment for housing"</span>,
+                                <span class="hljs-attr">"SenderParticipantID"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
+                                <span class="hljs-attr">"DebitorAccountNo"</span>: <span class="hljs-string">"9876543210"</span>,
+                                <span class="hljs-attr">"DebitorAccountType"</span>: <span class="hljs-string">"SVGS"</span>,
+                                <span class="hljs-attr">"DebitorAccountName"</span>: <span class="hljs-string">"SMITH"</span>,
+                                <span class="hljs-attr">"DebitorType"</span>: <span class="hljs-string">"01"</span>,
+                                <span class="hljs-attr">"DebitorID"</span>: <span class="hljs-string">"0102030405060709"</span>,
+                                <span class="hljs-attr">"DebitorResidentStatus"</span>: <span class="hljs-string">"01"</span>,
+                                <span class="hljs-attr">"DebitorTownName"</span>: <span class="hljs-string">"0300"</span>,
+                                <span class="hljs-attr">"RecipentParticipantID"</span>: <span class="hljs-string">"BRINIDJA"</span>,
+                                <span class="hljs-attr">"RecipentParticipantID"</span>: <span class="hljs-string">"BRINIDJA"</span>,
+                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
+                                <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
+                                <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
+                                <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
+                                <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
+                                <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
+                                <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
+    }
+                                                </code>
+                                            </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h5>RESPONSE</h5>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-succ6-tab" data-bs-toggle="tab" data-bs-target="#nav-succ6" type="button" role="tab" aria-controls="nav-succ6" aria-selected="true">Success</button>
+                                <button class="nav-link" id="nav-rej6-tab" data-bs-toggle="tab" data-bs-target="#nav-rej6" type="button" role="tab" aria-controls="nav-rej6" aria-selected="false">Reject</button>
+                                <button class="nav-link" id="nav-err6-tab" data-bs-toggle="tab" data-bs-target="#nav-err6" type="button" role="tab" aria-controls="nav-err6" aria-selected="false">Error</button>
+                            </div>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-succ6" role="tabpanel" aria-labelledby="nav-succ6-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>AdditionalInfo</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountType</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountName</code> <em>(string )</em><br>
+                                                    <code>CreditorType</code> <em>(string )</em><br>
+                                                    <code>CreditorID</code> <em>(string )</em><br>
+                                                    <code>CreditorResidentStatus</code> <em>(string )</em><br>
+                                                    <code>CreditorTownName</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+
+                                        @* Resp Success *@
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+    {
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+                                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                                <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                                <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"ACTC"</span>,
+                                                <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+                                                <span class="hljs-attr">"AdditionalInfo"</span>: <span class="hljs-string">"Payment for housing"</span>,
+                                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
+                                                <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
+                                                <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
+                                                <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
+                                                <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
+    }
+                                                                </code>
+                                                            </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*Resp Reject*@
+                                <div class="tab-pane fade" id="nav-rej6" role="tabpanel" aria-labelledby="nav-rej6-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+    {
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+                                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                                <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                                <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"RJCT"</span>,
+                                                <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"52"</span>,
+                                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>
+    }
+                                                                </code>
+                                                            </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @* Resp Error *@
+                                <div class="tab-pane fade" id="nav-err6" role="tabpanel" aria-labelledby="nav-err6-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-danger">500</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>SendingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>ReceivingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>BizMsgIdr</code> <em>(string )</em><br>
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>Reference</code> <em>(string )</em><br>
+                                                    <code>RejectReason</code> <em>(string )</em><br>
+                                                    <code>RejectDateTime</code> <em>(ISO Date Time )</em><br>
+                                                    <code>ErrorLocation</code> <em>(string )</em><br>
+                                                    <code>ReasonDesc</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+    {
+                                                <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
+                                                <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+                                                <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.002.001.01"</span>,
+                                                <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"0015"</span>,
+                                                <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-04-09T21:21:01.896"</span>,
+                                                <span class="hljs-attr">"ErrorLocation"</span>: <span class="hljs-string">"StaxXmlSubFieldType"</span>,
+                                                <span class="hljs-attr">"ReasonDesc"</span>: <span class="hljs-string">""</span>
+    }
+                                                                </code>
+                                                            </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </section>
+
+                @*Credit Transfer To Proxy*@
+                <section class="docs-section" id="item-3-3">
+                    <h2 class="section-heading">3.3 Credit Transfer To Proxy</h2>
+                    <h5>REQUEST</h5>
+                    <p>
+                        <span class="btn btn-primary">post</span>
+                        <span class="text-api-url">/jsonAPI/CreditTransferToProxy</span>
+                    </p>
+
+                    <h5>BODY</h5>
+                    <div class="row">
+                        <div class="col-md-6 bg-light">
+                            Format
+                            <div class="def">
+                                <p>
+                                    {
+                                    <br />
+                                    <code>EndToEndId</code>
+                                    <em>(string* </em>)<br />
+                                    <code>MsgDefIdr</code>
+                                    <em>(string* </em>)<br />
+                                    <code>TranRefNUM</code>
+                                    <em>(string* </em>)<br />
+                                    <code>MsgCreationDate</code>
+                                    <em>(ISO Date Time* </em>)<br />
+                                    <code>Amount</code>
+                                    <em>(string </em>)<br />
+                                    <code>Currency</code>
+                                    <em>(string </em>)<br />
+                                    <code>PurposeType</code>
+                                    <em>(string </em>)<br />
+                                    <code>PaymentInformation</code>
+                                    <em>(string </em>)<br />
+                                    <code>SenderParticipantID</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorAccountNo</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorAccountType</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorAccountName</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorType</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorID</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorResidentStatus</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorTownName</code>
+                                    <em>(string </em>)<br />
+                                    <code>RecipentParticipantID</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountNo</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountType</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountName</code>
+                                    <em>(string* </em>)<br />
+                                    <code>ProxyType</code>
+                                    <em>(string* </em>)<br />
+                                    <code>ProxyValue</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorType</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorID</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorResidentStatus</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorTownName</code>
+                                    <em>(string* </em>)<br />
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            Example
+                            <div class="docs-code-block">
+                                <pre class="shadow-lg rounded">
+                                <code class="json hljs">
+    {
+                                <span class="hljs-attr">"EndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA010O0212345678"</span>,
+                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                <span class="hljs-attr">"Amount"</span>: <span class="hljs-string">"10000"</span>,
+                                <span class="hljs-attr">"Currency"</span>: <span class="hljs-string">"IDR"</span>,
+                                <span class="hljs-attr">"PurposeType"</span>: <span class="hljs-string">"01"</span>,
+                                <span class="hljs-attr">"PaymentInformation"</span>: <span class="hljs-string">"Payment for housing"</span>,
+                                <span class="hljs-attr">"SenderParticipantID"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
+                                <span class="hljs-attr">"DebitorAccountNo"</span>: <span class="hljs-string">"9876543210"</span>,
+                                <span class="hljs-attr">"DebitorAccountType"</span>: <span class="hljs-string">"SVGS"</span>,
+                                <span class="hljs-attr">"DebitorAccountName"</span>: <span class="hljs-string">"SMITH"</span>,
+                                <span class="hljs-attr">"DebitorType"</span>: <span class="hljs-string">"01"</span>,
+                                <span class="hljs-attr">"DebitorID"</span>: <span class="hljs-string">"0102030405060709"</span>,
+                                <span class="hljs-attr">"DebitorResidentStatus"</span>: <span class="hljs-string">"01"</span>,
+                                <span class="hljs-attr">"DebitorTownName"</span>: <span class="hljs-string">"0300"</span>,
+                                <span class="hljs-attr">"RecipentParticipantID"</span>: <span class="hljs-string">"BRINIDJA"</span>,
+                                <span class="hljs-attr">"RecipentParticipantID"</span>: <span class="hljs-string">"BRINIDJA"</span>,
+                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
+                                <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
+                                <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
+                                <span class="hljs-attr">"ProxyType"</span>: <span class="hljs-string">"01"</span>
+                                <span class="hljs-attr">"ProxyValue"</span>: <span class="hljs-string">"62857123456"</span>
+                                <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
+                                <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
+                                <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
+                                <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
+    }
+                                            </code>
+                                            </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h5>RESPONSE</h5>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-succ7-tab" data-bs-toggle="tab" data-bs-target="#nav-succ7" type="button" role="tab" aria-controls="nav-succ7" aria-selected="true">Success</button>
+                                <button class="nav-link" id="nav-rej7-tab" data-bs-toggle="tab" data-bs-target="#nav-rej7" type="button" role="tab" aria-controls="nav-rej7" aria-selected="false">Reject</button>
+                                <button class="nav-link" id="nav-err7-tab" data-bs-toggle="tab" data-bs-target="#nav-err7" type="button" role="tab" aria-controls="nav-err7" aria-selected="false">Error</button>
+                            </div>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-succ7" role="tabpanel" aria-labelledby="nav-succ7-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>AdditionalInfo</code> <em>(string )</em><br>
+                                                    <code>RecipientParticipantID</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountType</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountName</code> <em>(string )</em><br>
+                                                    <code>CreditorType</code> <em>(string )</em><br>
+                                                    <code>CreditorID</code> <em>(string )</em><br>
+                                                    <code>CreditorResidentStatus</code> <em>(string )</em><br>
+                                                    <code>CreditorTownName</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+
+                                        @* Resp Success *@
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+    {
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+                                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                                <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                                <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"ACTC"</span>,
+                                                <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+                                                <span class="hljs-attr">"AdditionalInfo"</span>: <span class="hljs-string">"Payment for housing"</span>,
+                                                <span class="hljs-attr">"RecipentParticipantID"</span>: <span class="hljs-string">"BRINIDJA"</span>,
+                                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
+                                                <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
+                                                <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
+                                                <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
+                                                <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
+    }
+                                                            </code>
+                                                            </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*Resp Reject*@
+                                <div class="tab-pane fade" id="nav-rej7" role="tabpanel" aria-labelledby="nav-rej7-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
 {
     <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
     <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
@@ -1208,8 +1808,162 @@
     <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
     <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
     <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
-    <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"ACTC"</span>,
-    <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+    <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"RJCT"</span>,
+    <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"52"</span>,
+    <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>
+}
+                                                            </code>
+                                                        </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @* Resp Error *@
+                                <div class="tab-pane fade" id="nav-err7" role="tabpanel" aria-labelledby="nav-err7-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-danger">500</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>SendingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>ReceivingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>BizMsgIdr</code> <em>(string )</em><br>
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>CreationDateTime</code> <em>(string )</em><br>
+                                                    <code>Reference</code> <em>(string )</em><br>
+                                                    <code>RejectReason</code> <em>(string )</em><br>
+                                                    <code>RejectDateTime</code> <em>(ISO Date Time )</em><br>
+                                                    <code>ErrorLocation</code> <em>(string )</em><br>
+                                                    <code>ReasonDesc</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+    {
+        <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
+        <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+        <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+        <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.002.001.01"</span>,
+        <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+        <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+        <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"0015"</span>,
+        <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-04-09T21:21:01.896"</span>,
+        <span class="hljs-attr">"ErrorLocation"</span>: <span class="hljs-string">"StaxXmlSubFieldType"</span>,
+        <span class="hljs-attr">"ReasonDesc"</span>: <span class="hljs-string">""</span>
+    }
+                                                    </code>
+                                                </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </section>
+
+                @*Reversal Credit Transfer*@
+                <section class="docs-section" id="item-3-4">
+                    <h2 class="section-heading">3.4 Reversal Credit Transfer </h2>
+                    <h5>REQUEST</h5>
+                    <p>
+                        <span class="btn btn-primary">post</span>
+                        <span class="text-api-url">/jsonAPI/ReversalCreditTransfer</span>
+                    </p>
+
+                    <h5>BODY</h5>
+                    <div class="row">
+                        <div class="col-md-6 bg-light">
+                            Format
+                            <div class="def">
+                                <p>
+                                    {
+                                    <br />
+                                    <code>EndToEndId</code>
+                                    <em>(string* </em>)<br />
+                                    <code>MsgDefIdr</code>
+                                    <em>(string* </em>)<br />
+                                    <code>TranRefNUM</code>
+                                    <em>(string* </em>)<br />
+                                    <code>MsgCreationDate</code>
+                                    <em>(ISO Date Time* </em>)<br />
+                                    <code>Amount</code>
+                                    <em>(string </em>)<br />
+                                    <code>Currency</code>
+                                    <em>(string </em>)<br />
+                                    <code>PurposeType</code>
+                                    <em>(string </em>)<br />
+                                    <code>PaymentInformation</code>
+                                    <em>(string </em>)<br />
+                                    <code>SendingParticipantID</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorAccountNo</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorAccountType</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorAccountName</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorType</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorID</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorResidentStatus</code>
+                                    <em>(string </em>)<br />
+                                    <code>DebitorTownName</code>
+                                    <em>(string </em>)<br />
+                                    <code>RecipentParticipantID</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountNo</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountType</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorAccountName</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorType</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorID</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorResidentStatus</code>
+                                    <em>(string* </em>)<br />
+                                    <code>CreditorTownName</code>
+                                    <em>(string* </em>)<br />
+                                    <code>RltdEndToEndId</code>
+                                    <em>(string* </em>)<br />
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            Example
+                            <div class="docs-code-block">
+                                <pre class="shadow-lg rounded">
+                                <code class="json hljs">
+{
+    <span class="hljs-attr">"EndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA010O0212345678"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+    <span class="hljs-attr">"Amount"</span>: <span class="hljs-string">"10000"</span>,
+    <span class="hljs-attr">"Currency"</span>: <span class="hljs-string">"IDR"</span>,
+    <span class="hljs-attr">"PurposeType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"PaymentInformation"</span>: <span class="hljs-string">"Payment for housing"</span>,
+    <span class="hljs-attr">"SenderParticipantID"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
+    <span class="hljs-attr">"DebitorAccountNo"</span>: <span class="hljs-string">"9876543210"</span>,
+    <span class="hljs-attr">"DebitorAccountType"</span>: <span class="hljs-string">"SVGS"</span>,
+    <span class="hljs-attr">"DebitorAccountName"</span>: <span class="hljs-string">"SMITH"</span>,
+    <span class="hljs-attr">"DebitorType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"DebitorID"</span>: <span class="hljs-string">"0102030405060709"</span>,
+    <span class="hljs-attr">"DebitorResidentStatus"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"DebitorTownName"</span>: <span class="hljs-string">"0300"</span>,
+    <span class="hljs-attr">"RecipentParticipantID"</span>: <span class="hljs-string">"BRINIDJA"</span>,
     <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
     <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
     <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
@@ -1217,111 +1971,414 @@
     <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
     <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
     <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
+    <span class="hljs-attr">"RltdEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA011O9987654321"</span>
+}
+                                        </code>
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h5>RESPONSE</h5>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-succ8-tab" data-bs-toggle="tab" data-bs-target="#nav-succ8" type="button" role="tab" aria-controls="nav-succ8" aria-selected="true">Success</button>
+                                <button class="nav-link" id="nav-rej8-tab" data-bs-toggle="tab" data-bs-target="#nav-rej8" type="button" role="tab" aria-controls="nav-rej8" aria-selected="false">Reject</button>
+                                <button class="nav-link" id="nav-err8-tab" data-bs-toggle="tab" data-bs-target="#nav-err8" type="button" role="tab" aria-controls="nav-err8" aria-selected="false">Error</button>
+                            </div>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-succ8" role="tabpanel" aria-labelledby="nav-succ8-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>AdditionalInfo</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountType</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountName</code> <em>(string )</em><br>
+                                                    <code>CreditorType</code> <em>(string )</em><br>
+                                                    <code>CreditorID</code> <em>(string )</em><br>
+                                                    <code>CreditorResidentStatus</code> <em>(string )</em><br>
+                                                    <code>CreditorTownName</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+
+                                        @* Resp Success *@
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+{
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+                                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                                <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                                <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"ACTC"</span>,
+                                                <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+                                                <span class="hljs-attr">"AdditionalInfo"</span>: <span class="hljs-string">"Payment for housing"</span>,
+                                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
+                                                <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
+                                                <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
+                                                <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
+                                                <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
 }
                                                         </code>
                                                     </pre>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @*Resp Reject*@
-                                    <div class="tab-pane fade" id="nav-rej5" role="tabpanel" aria-labelledby="nav-rej5-tab">
-                                        <br />
-                                        Response Code <div class="btn btn-sm btn-success">200</div><br />
-                                        Example
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                Body
-                                                <div class="def">
-                                                    <p> { </p>
-                                                    <p class="def-key">
-                                                        <code>MsgDefIdr</code> <em>(string )</em><br>
-                                                        <code>TranRefNUM</code> <em>(string )</em><br>
-                                                        <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
-                                                        <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
-                                                        <code>OrigEndToEndId</code> <em>(string )</em><br>
-                                                        <code>OrigTranRefNUM</code> <em>(string )</em><br>
-                                                        <code>TransactionStatus</code> <em>(string )</em><br>
-                                                        <code>ReasonCode</code> <em>(string )</em><br>
-                                                        <code>CreditorAccountNo</code> <em>(string )</em><br>
-                                                    <p> } </p>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-5">
-                                                <div class="docs-code-block">
-                                                    <pre class="shadow-lg rounded">
-                                                        <code class="json hljs">
-    {
-        <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
-        <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
-        <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
-        <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
-        <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
-        <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
-        <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"RJCT"</span>,
-        <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"52"</span>,
-        <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>
-    }
-                                                        </code>
-                                                    </pre>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @* Resp Error *@
-                                    <div class="tab-pane fade" id="nav-err5" role="tabpanel" aria-labelledby="nav-err5-tab">
-                                        <br />
-                                        Response Code <div class="btn btn-sm btn-danger">500</div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                Body
-                                                <div class="def">
-                                                    <p> { </p>
-                                                    <p class="def-key">
-                                                        <code>SendingSystemBIC</code> <em>(string )</em><br>
-                                                        <code>ReceivingSystemBIC</code> <em>(string )</em><br>
-                                                        <code>BizMsgIdr</code> <em>(string )</em><br>
-                                                        <code>MsgDefIdr</code> <em>(string )</em><br>
-                                                        <code>Reference</code> <em>(string )</em><br>
-                                                        <code>RejectReason</code> <em>(string )</em><br>
-                                                        <code>RejectDateTime</code> <em>(ISO Date Time )</em><br>
-                                                        <code>ErrorLocation</code> <em>(string )</em><br>
-                                                        <code>ReasonDesc</code> <em>(string )</em><br>
-                                                    <p> } </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="docs-code-block">
-                                                    <pre class="shadow-lg rounded">
-                                                    <code class="json hljs">
-    {
-        <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
-        <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
-        <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
-        <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.002.001.01"</span>,
-        <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
-        <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"0015"</span>,
-        <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-04-09T21:21:01.896"</span>,
-        <span class="hljs-attr">"ErrorLocation"</span>: <span class="hljs-string">"StaxXmlSubFieldType"</span>,
-        <span class="hljs-attr">"ReasonDesc"</span>: <span class="hljs-string">""</span>
-    }
-                                                        </code>
-                                                    </pre>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </nav>
+
+                                @*Resp Reject*@
+                                <div class="tab-pane fade" id="nav-rej8" role="tabpanel" aria-labelledby="nav-rej8-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+    {
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+                                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                                <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                                <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"RJCT"</span>,
+                                                <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"52"</span>,
+                                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>
+    }
+                                                            </code>
+                                                        </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @* Resp Error *@
+                                <div class="tab-pane fade" id="nav-err8" role="tabpanel" aria-labelledby="nav-err8-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-danger">500</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>SendingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>ReceivingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>BizMsgIdr</code> <em>(string )</em><br>
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>CreationDateTime</code> <em>(string )</em><br>
+                                                    <code>Reference</code> <em>(string )</em><br>
+                                                    <code>RejectReason</code> <em>(string )</em><br>
+                                                    <code>RejectDateTime</code> <em>(ISO Date Time )</em><br>
+                                                    <code>ErrorLocation</code> <em>(string )</em><br>
+                                                    <code>ReasonDesc</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+    {
+                                                <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
+                                                <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+                                                <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.002.001.01"</span>,
+                                                <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+                                                <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"0015"</span>,
+                                                <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-04-09T21:21:01.896"</span>,
+                                                <span class="hljs-attr">"ErrorLocation"</span>: <span class="hljs-string">"StaxXmlSubFieldType"</span>,
+                                                <span class="hljs-attr">"ReasonDesc"</span>: <span class="hljs-string">""</span>
+    }
+                                                                </code>
+                                                            </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </section>
+
+                @*Payment Status*@
+                <section class="docs-section" id="item-3-5">
+                    <h2 class="section-heading">3.5 Payment Statuas </h2>
+                    <h5>REQUEST</h5>
+                    <p>
+                        <span class="btn btn-primary">post</span>
+                        <span class="text-api-url">/jsonAPI/PaymentStatus</span>
+                    </p>
+
+                    <h5>BODY</h5>
+                    <div class="row">
+                        <div class="col-md-6 bg-light">
+                            Format
+                            <div class="def">
+                                <p>
+                                    {
+                                    <br />
+                                    <code>TranRefNUM</code>
+                                    <em>(string* </em>)<br />
+                                    <code>MsgCreationDate</code>
+                                    <em>(string* </em>)<br />
+                                    <code>OrigEndToEndId</code>
+                                    <em>(string* </em>)<br />
+                                    }
+                                </p>
+                            </div>
                         </div>
-                    </section>
+                        <div class="col-md-6">
+                            Example
+                            <div class="docs-code-block">
+                                <pre class="shadow-lg rounded">
+                                    <code class="json hljs">
+{
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+    <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.028.001.08"</span>,
+    <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA011O9912345678"</span>,
+    <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA00012345678"</span>,
+    <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"ACTC"</span>,
+    <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+    <span class="hljs-attr">"AdditionalInfo"</span>: <span class="hljs-string">"Payment for housing"</span>,
+    <span class="hljs-attr">"SendingParticipantID"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
+    <span class="hljs-attr">"DebitorAccountNo"</span>: <span class="hljs-string">"9876543210"</span>,
+    <span class="hljs-attr">"DebitorAccountType"</span>: <span class="hljs-string">"SVGS"</span>,
+    <span class="hljs-attr">"DebitorAccountName"</span>: <span class="hljs-string">"SMITH"</span>,
+    <span class="hljs-attr">"DebitorType"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"DebitorID"</span>: <span class="hljs-string">"0102030405060709"</span>,
+    <span class="hljs-attr">"DebitorResidentStatus"</span>: <span class="hljs-string">"01"</span>,
+    <span class="hljs-attr">"DebitorTownName"</span>: <span class="hljs-string">"0300"</span>,
+    <span class="hljs-attr">"RecipentParticipantID"</span>: <span class="hljs-string">"BRINIDJA"</span>,
+    <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
+    <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
+    <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
+    <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
+    <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
+    <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
+    <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
+    <span class="hljs-attr">"DebitorSettlementAccount"</span>: <span class="hljs-string">"654321098"</span>
+    <span class="hljs-attr">"CreditorSettlementAccount"</span>: <span class="hljs-string">"890123456"</span>
+}
+                                    </code>
+                                    </pre>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <h5>RESPONSE</h5>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-succ9-tab" data-bs-toggle="tab" data-bs-target="#nav-succ9" type="button" role="tab" aria-controls="nav-succ9" aria-selected="true">Success</button>
+                                <button class="nav-link" id="nav-rej9-tab" data-bs-toggle="tab" data-bs-target="#nav-rej9" type="button" role="tab" aria-controls="nav-rej9" aria-selected="false">Reject</button>
+                                <button class="nav-link" id="nav-err9-tab" data-bs-toggle="tab" data-bs-target="#nav-err9" type="button" role="tab" aria-controls="nav-err9" aria-selected="false">Error</button>
+                            </div>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-succ9" role="tabpanel" aria-labelledby="nav-succ9-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>AdditionalInfo</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountType</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountName</code> <em>(string )</em><br>
+                                                    <code>CreditorType</code> <em>(string )</em><br>
+                                                    <code>CreditorID</code> <em>(string )</em><br>
+                                                    <code>CreditorResidentStatus</code> <em>(string )</em><br>
+                                                    <code>CreditorTownName</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
 
+                                        @* Resp Success *@
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+{
+                                                <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+                                                <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+                                                <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+                                                <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+                                                <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+                                                <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"ACTC"</span>,
+                                                <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"U000"</span>,
+                                                <span class="hljs-attr">"AdditionalInfo"</span>: <span class="hljs-string">"Payment for housing"</span>,
+                                                <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>,
+                                                <span class="hljs-attr">"CreditorAccountType"</span>: <span class="hljs-string">"CACC"</span>
+                                                <span class="hljs-attr">"CreditorAccountName"</span>: <span class="hljs-string">"JOHN SMITH"</span>
+                                                <span class="hljs-attr">"CreditorType"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorID"</span>: <span class="hljs-string">"0102030405060708"</span>
+                                                <span class="hljs-attr">"CreditorResidentStatus"</span>: <span class="hljs-string">"01"</span>
+                                                <span class="hljs-attr">"CreditorTownName"</span>: <span class="hljs-string">"0300"</span>
+}
+                                                        </code>
+                                                    </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                </article><!--//docs-article-->
+                                @*Resp Reject*@
+                                <div class="tab-pane fade" id="nav-rej9" role="tabpanel" aria-labelledby="nav-rej9-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-success">200</div><br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>TranRefNUM</code> <em>(string )</em><br>
+                                                    <code>MsgCreationDate</code> <em>(ISO DateTime )</em><br>
+                                                    <code>OriginalMsgdefIdr</code> <em>(string )</em><br>
+                                                    <code>OrigEndToEndId</code> <em>(string )</em><br>
+                                                    <code>OrigTranRefNUM</code> <em>(string )</em><br>
+                                                    <code>TransactionStatus</code> <em>(string )</em><br>
+                                                    <code>ReasonCode</code> <em>(string )</em><br>
+                                                    <code>CreditorAccountNo</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+{
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"pacs.002.001.10"</span>,
+    <span class="hljs-attr">"TranRefNUM"</span>: <span class="hljs-string">"20220301BRINIDJA51012345678"</span>,
+    <span class="hljs-attr">"MsgCreationDate"</span>: <span class="hljs-string">"2022-01-21T19:00:00.000"</span>,
+    <span class="hljs-attr">"OriginalMsgdefIdr"</span>: <span class="hljs-string">"pacs.008.001.08"</span>,
+    <span class="hljs-attr">"OrigEndToEndId"</span>: <span class="hljs-string">"20220121AGTBIDJA510O0212345678"</span>,
+    <span class="hljs-attr">"OrigTranRefNUM"</span>: <span class="hljs-string">"20220121AGTBIDJA51012345678"</span>,
+    <span class="hljs-attr">"TransactionStatus"</span>: <span class="hljs-string">"RJCT"</span>,
+    <span class="hljs-attr">"ReasonCode"</span>: <span class="hljs-string">"52"</span>,
+    <span class="hljs-attr">"CreditorAccountNo"</span>: <span class="hljs-string">"987654321"</span>
+}
+                                                            </code>
+                                                        </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @* Resp Error *@
+                                <div class="tab-pane fade" id="nav-err9" role="tabpanel" aria-labelledby="nav-err9-tab">
+                                    <br />
+                                    Response Code <div class="btn btn-sm btn-danger">500</div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Format
+                                            <div class="def">
+                                                <p> { </p>
+                                                <p class="def-key">
+                                                    <code>SendingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>ReceivingSystemBIC</code> <em>(string )</em><br>
+                                                    <code>BizMsgIdr</code> <em>(string )</em><br>
+                                                    <code>MsgDefIdr</code> <em>(string )</em><br>
+                                                    <code>CreationDateTime</code> <em>(string )</em><br>
+                                                    <code>Reference</code> <em>(string )</em><br>
+                                                    <code>RejectReason</code> <em>(string )</em><br>
+                                                    <code>RejectDateTime</code> <em>(ISO Date Time )</em><br>
+                                                    <code>ErrorLocation</code> <em>(string )</em><br>
+                                                    <code>ReasonDesc</code> <em>(string )</em><br>
+                                                <p> } </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            Example
+                                            <div class="docs-code-block">
+                                                <pre class="shadow-lg rounded">
+                                                <code class="json hljs">
+{
+    <span class="hljs-attr">"SendingSystemBIC"</span>: <span class="hljs-string">"AGTBIDJA"</span>,
+    <span class="hljs-attr">"ReceivingSystemBIC"</span>: <span class="hljs-string">"FASTIDJA"</span>,
+    <span class="hljs-attr">"BizMsgIdr"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+    <span class="hljs-attr">"MsgDefIdr"</span>: <span class="hljs-string">"admi.002.001.01"</span>,
+    <span class="hljs-attr">"CreationDateTime"</span>: <span class="hljs-string">"2021-03-04T08:13:00Z"</span>,
+    <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"20210121AGTBIDJA510O0212345678"</span>,
+    <span class="hljs-attr">"RejectReason"</span>: <span class="hljs-string">"0015"</span>,
+    <span class="hljs-attr">"RejectDateTime"</span>: <span class="hljs-string">"2021-04-09T21:21:01.896"</span>,
+    <span class="hljs-attr">"ErrorLocation"</span>: <span class="hljs-string">"StaxXmlSubFieldType"</span>,
+    <span class="hljs-attr">"ReasonDesc"</span>: <span class="hljs-string">""</span>
+}
+                                                                </code>
+                                                            </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </section>
+
+            </article><!--//docs-article-->
 
                 <footer class="footer">
                     <div class="footer-bottom text-center py-5">
