@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/BIFastWebAPI/Migrations/202203310826176_pindahLagiii.resx
+/BIFastWebAPI/Migrations/202203310826176_pindahLagiii.Designer.cs
+/BIFastWebAPI/Migrations/202203310826176_pindahLagiii.cs
