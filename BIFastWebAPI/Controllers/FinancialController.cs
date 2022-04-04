@@ -28,7 +28,7 @@ namespace BIFastWebAPI.Controllers
             RespRejectAccEnquiry rejcAcc = new RespRejectAccEnquiry();
             RespErrAccEnquiry errAcc = new RespErrAccEnquiry();
 
-            string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.MsgDefIdr, num = reqAcc.TranRefNUM;
+            string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
             string jsonResponse = Hp.GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");                  
 
             if (Hp.Ck(reqAcc.EndToEndId) && Hp.Ck(reqAcc.MsgDefIdr) && Hp.Ck(reqAcc.TranRefNUM) && Hp.Ck(reqAcc.RecipentParticipantID) && Hp.Ck(reqAcc.CreditorAccountNo) && Hp.Ck(reqAcc.Amount) && Hp.Ck(reqAcc.Currency) && Hp.Ck(reqAcc.MsgCreationDate))
@@ -65,7 +65,7 @@ namespace BIFastWebAPI.Controllers
             RejectCreditTransfer rejCt = new RejectCreditTransfer();
             ErrorCreditTransfer errCt = new ErrorCreditTransfer();
 
-            string jsonRequest = JsonConvert.SerializeObject(req), idr = req.MsgDefIdr, num = req.TranRefNUM;
+            string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
             string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
 
             if (Hp.Ck(req.EndToEndId) && Hp.Ck(req.MsgDefIdr) && Hp.Ck(req.TranRefNUM) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.Amount) && Hp.Ck(req.Currency) && Hp.Ck(req.MsgCreationDate) && Hp.Ck(req.PurposeType) && Hp.Ck(req.SendingParticipantID) && Hp.Ck(req.DebitorAccountNo) && Hp.Ck(req.DebitorAccountType) && Hp.Ck(req.DebitorAccountName) && Hp.Ck(req.DebitorID) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.CreditorAccountName))
@@ -102,7 +102,7 @@ namespace BIFastWebAPI.Controllers
             RespRejectCreditTransferToProxy rejCtPrx = new RespRejectCreditTransferToProxy();
             RespErrCreditTransferToProxy errCtPrx = new RespErrCreditTransferToProxy();
 
-            string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.MsgDefIdr, num = reqCtPrx.TranRefNUM;
+            string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.EndToEndId, num = reqCtPrx.TranRefNUM;
             string jsonResponse = Hp.GenerateReq(reqCtPrx, "http://10.99.0.72:8355/jsonAPI/CreditTransferToProxy");
 
             if (Hp.Ck(reqCtPrx.EndToEndId) && Hp.Ck(reqCtPrx.MsgDefIdr) && Hp.Ck(reqCtPrx.TranRefNUM) && Hp.Ck(reqCtPrx.RecipentParticipantID) && Hp.Ck(reqCtPrx.CreditorAccountNo) && Hp.Ck(reqCtPrx.Amount) && Hp.Ck(reqCtPrx.Currency) && Hp.Ck(reqCtPrx.MsgCreationDate) && Hp.Ck(reqCtPrx.PurposeType) && Hp.Ck(reqCtPrx.SendingParticipantID) && Hp.Ck(reqCtPrx.DebitorAccountNo) && Hp.Ck(reqCtPrx.DebitorAccountType) && Hp.Ck(reqCtPrx.DebitorAccountName) && Hp.Ck(reqCtPrx.DebitorID) && Hp.Ck(reqCtPrx.RecipentParticipantID) && Hp.Ck(reqCtPrx.CreditorAccountNo) && Hp.Ck(reqCtPrx.CreditorAccountName))
@@ -139,7 +139,7 @@ namespace BIFastWebAPI.Controllers
             RespRejectRCT rej = new RespRejectRCT();
             RespErrRCT err = new RespErrRCT();
 
-            string jsonRequest = JsonConvert.SerializeObject(req), idr = req.MsgDefIdr, num = req.TranRefNUM;
+            string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
             string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/ReversalCreditTransfer");
 
             if (Hp.Ck(req.EndToEndId) && Hp.Ck(req.MsgDefIdr) && Hp.Ck(req.TranRefNUM) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.Amount) && Hp.Ck(req.Currency) && Hp.Ck(req.PurposeType) && Hp.Ck(req.SendingParticipantID) && Hp.Ck(req.DebitorAccountNo) && Hp.Ck(req.DebitorAccountType) && Hp.Ck(req.DebitorAccountName) && Hp.Ck(req.DebitorID) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.CreditorAccountName))
@@ -176,7 +176,7 @@ namespace BIFastWebAPI.Controllers
             RespRejectPaymentStatus rej = new RespRejectPaymentStatus();
             RespErrPaymentStatus err = new RespErrPaymentStatus();
 
-            string jsonRequest = JsonConvert.SerializeObject(req), idr = "", num = req.TranRefNUM;
+            string jsonRequest = JsonConvert.SerializeObject(req), idr = req.OrigEndToEndId, num = req.TranRefNUM;
             string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/PaymentStatus");
 
             if (Hp.Ck(req.TranRefNUM) && Hp.Ck(req.OrigEndToEndId))

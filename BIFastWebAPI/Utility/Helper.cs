@@ -37,7 +37,6 @@ namespace BIFastWebAPI.Utility
             log.RespDate = respModel;
             _db.ActivityLogs.Add(log);
             _db.SaveChanges();
-
         }
 
         public string GenerateReq(object reqModel, string link)
