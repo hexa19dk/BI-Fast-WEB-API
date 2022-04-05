@@ -118,7 +118,9 @@ namespace BIFastWebAPI.Controllers
             RespRejectAliasRegInquiry rejARI = new RespRejectAliasRegInquiry();
             RespErrAliasRegInquiry errARI = new RespErrAliasRegInquiry();
             string jsonRequest, jsonResponse;
-            jsonResponse = hp.GenerateReq(reqARI, "localhost:44350/jsonAPI/prxy005");
+            //jsonResponse = hp.GenerateReq(reqARI, "localhost:44350/jsonAPI/prxy005");
+            jsonResponse = hp.GenerateReq(reqARI, "http://172.18.99.30:4343/jsonAPI/prxy005");
+        
 
 
             if (hp.Ck(reqARI.SendingSystemBIC) && hp.Ck(reqARI.ReceivingSystemBIC) && hp.Ck(reqARI.BizMsgIdr) && hp.Ck(reqARI.MsgDefIdr) && hp.Ck(reqARI.CreationDateTime) && hp.Ck(reqARI.TranRefNUM) && hp.Ck(reqARI.MsgCreationDate) && hp.Ck(reqARI.SendingParticipantID) && hp.Ck(reqARI.MsgSenderAccountId))
@@ -149,7 +151,8 @@ namespace BIFastWebAPI.Controllers
         {
 
             string jsonRequest,jsonResponse;
-            jsonResponse = hp.GenerateReq(reqAN, "localhost:44350/jsonAPI/prxy901");
+            //jsonResponse = hp.GenerateReq(reqAN, "localhost:44350/jsonAPI/prxy901");
+            jsonResponse = hp.GenerateReq(reqAN, "http://172.18.99.30:4343/jsonAPI/prxy901");
 
             if (hp.Ck(reqAN.SendingSystemBIC) && hp.Ck(reqAN.ReceivingSystemBIC) && hp.Ck(reqAN.BizMsgIdr) && hp.Ck(reqAN.MsgDefIdr) && hp.Ck(reqAN.CreationDateTime) && hp.Ck(reqAN.TranRefNUM) && hp.Ck(reqAN.MsgCreationDate) && hp.Ck(reqAN.SendingParticipantID) && hp.Ck(reqAN.OrigUniqueRequestID) && hp.Ck(reqAN.ProxyType) && hp.Ck(reqAN.ProxyValue) && hp.Ck(reqAN.OriginRegistrationID) && hp.Ck(reqAN.OriginDisplayName) && hp.Ck(reqAN.OriginProxyBankID) && hp.Ck(reqAN.OriginAccountID) && hp.Ck(reqAN.OriginAccountType) && hp.Ck(reqAN.NewRegistrationID) && hp.Ck(reqAN.NewDisplayName) && hp.Ck(reqAN.NewProxyBankID) && hp.Ck(reqAN.NewAccountID) && hp.Ck(reqAN.NewAccountType))
             {
@@ -178,7 +181,8 @@ namespace BIFastWebAPI.Controllers
         {
             RespAliasSysNotification respSN = new RespAliasSysNotification();
             string jsonRequest, jsonResponse;
-            jsonResponse = hp.GenerateReq(reqSN, "localhost:44350/jsonAPI/adm004");
+            //jsonResponse = hp.GenerateReq(reqSN, "localhost:44350/jsonAPI/adm004");
+            jsonResponse = hp.GenerateReq(reqSN, "http://172.18.99.30:4343/jsonAPI/adm004");
 
             if (hp.Ck(reqSN.SendingSystemBIC) && hp.Ck(reqSN.ReceivingSystemBIC) && hp.Ck(reqSN.BizMsgIdr) && hp.Ck(reqSN.MsgDefIdr) && hp.Ck(reqSN.CreationDateTime) && hp.Ck(reqSN.EventCode))
             {
