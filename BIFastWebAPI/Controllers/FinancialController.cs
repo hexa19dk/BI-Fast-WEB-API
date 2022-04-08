@@ -16,7 +16,9 @@ namespace BIFastWebAPI.Controllers
     public class FinancialController : ApiController
     {
         Helper Hp = new Helper();
-        string chan, st = "";
+        string chan, st = "" ;
+        DateTime cd;
+
 
         #region AccountEnquiry
         [HttpPost]
@@ -29,27 +31,35 @@ namespace BIFastWebAPI.Controllers
             RespErrAccEnquiry errAcc = new RespErrAccEnquiry();
 
             string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
-            string jsonResponse = Hp.GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");                  
+            string jsonResponse = Hp.GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
+            if (reqAcc.MsgCreationDate == null)
+            {
+                cd = DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind);
+            }
+            else
+            {
+                cd = DateTime.Parse(rejcAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind);
+            }
 
-            if (Hp.Ck(reqAcc.EndToEndId) && Hp.Ck(reqAcc.MsgDefIdr) && Hp.Ck(reqAcc.TranRefNUM) && Hp.Ck(reqAcc.RecipentParticipantID) && Hp.Ck(reqAcc.CreditorAccountNo) && Hp.Ck(reqAcc.Amount) && Hp.Ck(reqAcc.Currency) && Hp.Ck(reqAcc.MsgCreationDate))
+            if (Hp.Ck(reqAcc.EndToEndId) && Hp.Ck(reqAcc.MsgDefIdr) && Hp.Ck(reqAcc.TranRefNUM) && Hp.Ck(reqAcc.RecipentParticipantID) && Hp.Ck(reqAcc.CreditorAccountNo) && Hp.Ck(reqAcc.Amount) && Hp.Ck(reqAcc.Currency) && Hp.Ck(reqAcc.MsgCreationDate) && jsonResponse.Contains("pacs.008.001.08"))
             {
                 respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
                 st = "Success";
                 Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                 return Ok(respAcc);         
             } 
-            else if(jsonResponse.Contains("ErrorLocation"))
+            else if(jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("pacs.008.001.08"))
             {
                 errAcc = JsonConvert.DeserializeObject<RespErrAccEnquiry>(jsonResponse);
                 st = "Error";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, cd, DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
                 return Ok(errAcc);
             }
             else
             {
                 rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
                 st = "Reject";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejcAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, cd, DateTime.Parse(rejcAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                 return Ok(rejcAcc);
             }
         }

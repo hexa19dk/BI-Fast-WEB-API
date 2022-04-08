@@ -31,9 +31,11 @@ namespace BIFastWebAPI.Controllers
             RespErrAliasManagement errAM = new RespErrAliasManagement();
             string jsonRequest = JsonConvert.SerializeObject(reqAM), jsonResponse, num = reqAM.TranRefNUM, idr = reqAM.BizMsgIdr;
             jsonResponse = hp.GenerateReq(reqAM, "http://10.99.0.72:8355/jsonAPI/prxy001");
+
+            
             
 
-            if ( hp.Ck(reqAM.SendingSystemBIC) && hp.Ck(reqAM.ReceivingSystemBIC) &&  hp.Ck(reqAM.BizMsgIdr) && hp.Ck(reqAM.CreationDateTime) && hp.Ck(reqAM.TranRefNUM) && hp.Ck(reqAM.MsgCreationDate) && hp.Ck(reqAM.SendingParticipantID) && hp.Ck(reqAM.MsgSenderAccountId) && hp.Ck(reqAM.OperationType) && hp.Ck(reqAM.ProxyType) && hp.Ck(reqAM.ProxyValue) && hp.Ck(reqAM.ProxyBankID) && hp.Ck(reqAM.AccountID) && hp.Ck(reqAM.AccountType) && hp.Ck(reqAM.SecondaryIDType) && hp.Ck(reqAM.SecondaryIDValue) && hp.Ck(reqAM.SendingSystemBIC))
+            if ( hp.Ck(reqAM.SendingSystemBIC) && hp.Ck(reqAM.ReceivingSystemBIC) &&  hp.Ck(reqAM.BizMsgIdr) && hp.Ck(reqAM.CreationDateTime) && hp.Ck(reqAM.TranRefNUM) && hp.Ck(reqAM.MsgCreationDate) && hp.Ck(reqAM.SendingParticipantID) && hp.Ck(reqAM.MsgSenderAccountId) && hp.Ck(reqAM.OperationType) && hp.Ck(reqAM.ProxyType) && hp.Ck(reqAM.ProxyValue) && hp.Ck(reqAM.ProxyBankID) && hp.Ck(reqAM.AccountID) && hp.Ck(reqAM.AccountType) && hp.Ck(reqAM.SecondaryIDType) && hp.Ck(reqAM.SecondaryIDValue) && hp.Ck(reqAM.SendingSystemBIC) && jsonResponse.Contains("prxy.002.001.01"))
             {
 
                 //success
@@ -44,7 +46,7 @@ namespace BIFastWebAPI.Controllers
 
                 
             }
-            else if(jsonResponse.Contains("ErrorLocation"))
+            else if(jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("prxy.002.001.01"))
             {
                 //error
                 st = "Error";
@@ -53,12 +55,12 @@ namespace BIFastWebAPI.Controllers
                 return Ok(errAM);
 
             }
-            else
+            else 
             {
                 //reject
                 st = "Reject";
                 rejAM = JsonConvert.DeserializeObject<RespRejectAliasManagement>(jsonResponse);
-                hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                 return Ok(rejAM);
                
             }
@@ -79,7 +81,7 @@ namespace BIFastWebAPI.Controllers
             jsonResponse = hp.GenerateReq(reqAR, "http://10.99.0.72:8355/jsonAPI/prxy003");
          
 
-            if (hp.Ck(reqAR.SendingSystemBIC) && hp.Ck(reqAR.ReceivingSystemBIC) && hp.Ck(reqAR.BizMsgIdr) && hp.Ck(reqAR.MsgDefIdr) && hp.Ck(reqAR.CreationDateTime) && hp.Ck(reqAR.TranRefNUM) && hp.Ck(reqAR.MsgCreationDate) && hp.Ck(reqAR.SendingParticipantID) && hp.Ck(reqAR.MsgSenderAccountId) && hp.Ck(reqAR.AlisaResolutionLookup) && hp.Ck(reqAR.UniqueRequestID) && hp.Ck(reqAR.ProxyType) && hp.Ck(reqAR.ProxyValue))
+            if (hp.Ck(reqAR.SendingSystemBIC) && hp.Ck(reqAR.ReceivingSystemBIC) && hp.Ck(reqAR.BizMsgIdr) && hp.Ck(reqAR.MsgDefIdr) && hp.Ck(reqAR.CreationDateTime) && hp.Ck(reqAR.TranRefNUM) && hp.Ck(reqAR.MsgCreationDate) && hp.Ck(reqAR.SendingParticipantID) && hp.Ck(reqAR.MsgSenderAccountId) && hp.Ck(reqAR.AlisaResolutionLookup) && hp.Ck(reqAR.UniqueRequestID) && hp.Ck(reqAR.ProxyType) && hp.Ck(reqAR.ProxyValue) && jsonResponse.Contains("prxy.004.001.01"))
             {
                 //success
                 st = "Success";
@@ -88,7 +90,7 @@ namespace BIFastWebAPI.Controllers
                 return Ok(respAR);
 
             }
-            else if (errAR.ErrorLocation != null)
+            else if (errAR.ErrorLocation != null && jsonResponse.Contains("prxy.004.001.01"))
             {
                 //error
                 st = "Error";
@@ -123,13 +125,13 @@ namespace BIFastWebAPI.Controllers
         
 
 
-            if (hp.Ck(reqARI.SendingSystemBIC) && hp.Ck(reqARI.ReceivingSystemBIC) && hp.Ck(reqARI.BizMsgIdr) && hp.Ck(reqARI.MsgDefIdr) && hp.Ck(reqARI.CreationDateTime) && hp.Ck(reqARI.TranRefNUM) && hp.Ck(reqARI.MsgCreationDate) && hp.Ck(reqARI.SendingParticipantID) && hp.Ck(reqARI.MsgSenderAccountId))
+            if (hp.Ck(reqARI.SendingSystemBIC) && hp.Ck(reqARI.ReceivingSystemBIC) && hp.Ck(reqARI.BizMsgIdr) && hp.Ck(reqARI.MsgDefIdr) && hp.Ck(reqARI.CreationDateTime) && hp.Ck(reqARI.TranRefNUM) && hp.Ck(reqARI.MsgCreationDate) && hp.Ck(reqARI.SendingParticipantID) && hp.Ck(reqARI.MsgSenderAccountId) && jsonResponse.Contains("prxy.006.001.01"))
             {
                 //success
                 respARI = JsonConvert.DeserializeObject<RespAliasRegInquiry>(jsonResponse);
                 return Ok(respARI);
             }
-            else if (errARI.ErrorLocation != null)
+            else if (errARI.ErrorLocation != null && jsonResponse.Contains("prxy.006.001.01"))
             {
                 //error
                 errARI = JsonConvert.DeserializeObject<RespErrAliasRegInquiry>(jsonResponse);
@@ -152,7 +154,7 @@ namespace BIFastWebAPI.Controllers
 
             string jsonRequest,jsonResponse;
             //jsonResponse = hp.GenerateReq(reqAN, "localhost:44350/jsonAPI/prxy901");
-            jsonResponse = hp.GenerateReq(reqAN, "http://172.18.99.30:4343/jsonAPI/prxy901");
+            jsonResponse = hp.GenerateReq(reqAN, "https://localhost:44350/jsonAPI/prxy901");
 
             if (hp.Ck(reqAN.SendingSystemBIC) && hp.Ck(reqAN.ReceivingSystemBIC) && hp.Ck(reqAN.BizMsgIdr) && hp.Ck(reqAN.MsgDefIdr) && hp.Ck(reqAN.CreationDateTime) && hp.Ck(reqAN.TranRefNUM) && hp.Ck(reqAN.MsgCreationDate) && hp.Ck(reqAN.SendingParticipantID) && hp.Ck(reqAN.OrigUniqueRequestID) && hp.Ck(reqAN.ProxyType) && hp.Ck(reqAN.ProxyValue) && hp.Ck(reqAN.OriginRegistrationID) && hp.Ck(reqAN.OriginDisplayName) && hp.Ck(reqAN.OriginProxyBankID) && hp.Ck(reqAN.OriginAccountID) && hp.Ck(reqAN.OriginAccountType) && hp.Ck(reqAN.NewRegistrationID) && hp.Ck(reqAN.NewDisplayName) && hp.Ck(reqAN.NewProxyBankID) && hp.Ck(reqAN.NewAccountID) && hp.Ck(reqAN.NewAccountType))
             {
