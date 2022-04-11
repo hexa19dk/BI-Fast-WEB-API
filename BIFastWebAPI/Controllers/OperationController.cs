@@ -46,7 +46,7 @@ namespace BIFastWebAPI.Controllers
 
                 
             }
-            else if(jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("prxy.002.001.01"))
+            else if(jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
             {
                 //error
                 st = "Error";
@@ -60,7 +60,7 @@ namespace BIFastWebAPI.Controllers
                 //reject
                 st = "Reject";
                 rejAM = JsonConvert.DeserializeObject<RespRejectAliasManagement>(jsonResponse);
-                hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                 return Ok(rejAM);
                
             }
@@ -90,14 +90,13 @@ namespace BIFastWebAPI.Controllers
                 return Ok(respAR);
 
             }
-            else if (errAR.ErrorLocation != null && jsonResponse.Contains("prxy.004.001.01"))
+            else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
             {
                 //error
                 st = "Error";
                 errAR = JsonConvert.DeserializeObject<RespErrAliasResolution>(jsonResponse);
                 hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                 return Ok(errAR);
-               
             }
             else
             {
@@ -106,7 +105,6 @@ namespace BIFastWebAPI.Controllers
                 rejAR = JsonConvert.DeserializeObject<RespRejectAliasResolution>(jsonResponse);
                 hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                 return Ok(rejAR);
-
             }
         }
         #endregion
@@ -119,28 +117,34 @@ namespace BIFastWebAPI.Controllers
             RespAliasRegInquiry respARI = new RespAliasRegInquiry();
             RespRejectAliasRegInquiry rejARI = new RespRejectAliasRegInquiry();
             RespErrAliasRegInquiry errARI = new RespErrAliasRegInquiry();
-            string jsonRequest, jsonResponse;
-            //jsonResponse = hp.GenerateReq(reqARI, "localhost:44350/jsonAPI/prxy005");
-            jsonResponse = hp.GenerateReq(reqARI, "http://172.18.99.30:4343/jsonAPI/prxy005");
-        
+            string jsonRequest = JsonConvert.SerializeObject(reqARI), jsonResponse, num = reqARI.TranRefNUM, idr = reqARI.BizMsgIdr; ;
+            jsonResponse = hp.GenerateReq(reqARI, "http://10.99.0.72:8355/jsonAPI/prxy005");
+            //jsonResponse = hp.GenerateReq(reqARI, "http://172.18.99.30:4343/jsonAPI/prxy005");
+
 
 
             if (hp.Ck(reqARI.SendingSystemBIC) && hp.Ck(reqARI.ReceivingSystemBIC) && hp.Ck(reqARI.BizMsgIdr) && hp.Ck(reqARI.MsgDefIdr) && hp.Ck(reqARI.CreationDateTime) && hp.Ck(reqARI.TranRefNUM) && hp.Ck(reqARI.MsgCreationDate) && hp.Ck(reqARI.SendingParticipantID) && hp.Ck(reqARI.MsgSenderAccountId) && jsonResponse.Contains("prxy.006.001.01"))
             {
                 //success
+                st = "Success";
                 respARI = JsonConvert.DeserializeObject<RespAliasRegInquiry>(jsonResponse);
+                hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                 return Ok(respARI);
             }
-            else if (errARI.ErrorLocation != null && jsonResponse.Contains("prxy.006.001.01"))
+            else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
             {
                 //error
+                st = "Error";
                 errARI = JsonConvert.DeserializeObject<RespErrAliasRegInquiry>(jsonResponse);
+                hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                 return Ok(errARI);
             }
             else
             {
-                //error
+                //reject
+                st = "Reject";
                 rejARI = JsonConvert.DeserializeObject<RespRejectAliasRegInquiry>(jsonResponse);
+                hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                 return Ok(rejARI);
             }
         }
