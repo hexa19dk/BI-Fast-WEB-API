@@ -57,14 +57,15 @@ public class RespRejectAccEnquiry
 
 public class RespErrAccEnquiry
 {
-    public string SendingSystemBIC { get; set; }
-    public string ReceivingSystemBIC { get; set; }
-    public string BizMsgIdr { get; set; }
-    public string MsgDefIdr { get; set; }
-    public string Reference { get; set; }
-    public string RejectReason { get; set; }
-    public string RejectDateTime { get; set; }
-    public string ErrorLocation { get; set; }
-    public string ReasonDesc { get; set; }
-}
+        public string SendingSystemBIC { get; set; }
+        public string ReceivingSystemBIC { get; set; }
+        public string BizMsgIdr { get; set; }
+        public string MsgDefIdr { get; set; }
+        public string CreationDateTime { get; set; }
+        public string Reference { get; set; }
+        public string RejectReason { get; set; }
+        public string RejectDateTime { get; set; }
+        public string ErrorLocation { get; set; }
+        public string ReasonDesc { get; set; }
+    }
 }
