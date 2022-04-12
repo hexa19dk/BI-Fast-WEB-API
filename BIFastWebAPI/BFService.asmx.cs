@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BIFastWebAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,30 +15,17 @@ namespace BIFastWebAPI
     [System.ComponentModel.ToolboxItem(false)]
     
     public class BFService : System.Web.Services.WebService
-    {
-
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
+    {       
 
         [WebMethod(MessageName = "Transaction", Description = "Transaction ATM & HP")]
-        public string Transaction(string input)
+        public ViewModelTransaction Transaction(ViewModelTransaction data)
         {
             string rekSbr, BankDest, NoTuj, NoRekTuj, NomTf, Desk;
             string result = "";
-            ReqCreditTransfer req = new ReqCreditTransfer();
-            RespCreditTransfer resp = new RespCreditTransfer();
-            RejectCreditTransfer rejCt = new RejectCreditTransfer();
-            ErrorCreditTransfer errCt = new ErrorCreditTransfer();
-            RespCreditTrfAll respall = new RespCreditTrfAll();
-            
-
-            //respall = CreditTransferAll(VmTrx);
 
 
-            return "testing";
+
+            return vmTf;
         }
 
     }
