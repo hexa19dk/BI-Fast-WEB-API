@@ -17,18 +17,68 @@ namespace BIFastWebAPI.Controllers
     {
 
         private readonly Helper hp = new Helper();
-        string st = "", chan;
-        
+        string st = "", ss = "",chan, Date = DateTime.Now.ToString("yyyyMMdd");   
         ApplicationDbContext _db = new ApplicationDbContext();
+
 
         #region AliasManagement
         [HttpPost]
         [Route("jsonAPI/prxy001")]
-        public IHttpActionResult AliasManagement([FromBody] ReqAliasManagement reqAM)
+        public IHttpActionResult AliasManagement([FromBody] AliasManagementVM data)
         {
+            ReqAliasManagement reqAM = new ReqAliasManagement();
             RespAliasManagement respAM = new RespAliasManagement();
             RespRejectAliasManagement rejAM = new RespRejectAliasManagement();
             RespErrAliasManagement errAM = new RespErrAliasManagement();
+
+            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+
+            try
+            {
+                if (String.IsNullOrEmpty(lastID))
+                {
+                    var numInt = int.Parse(lastID) + 1;
+                    var LastNo = numInt.ToString();
+                    ss = LastNo.PadLeft(8, '0');
+                }
+                else
+                {
+                    ss = lastID.PadLeft(8, '0');
+                }
+
+                reqAM.SendingSystemBIC = data.SBIC;
+                reqAM.ReceivingSystemBIC = data.RBIC;
+                reqAM.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;
+                reqAM.MsgDefIdr = data.MsgDefIdr;
+                reqAM.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
+                reqAM.TranRefNUM = Date + data.SBIC + data.TransactionType + ss;
+                reqAM.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:sss");
+                reqAM.SendingParticipantID = data.SendingParticipantID;
+                reqAM.MsgSenderAccountId = data.MsgSenderAccountId;
+                reqAM.OperationType = data.OperationType;
+                reqAM.ProxyType = data.ProxyType;
+                reqAM.ProxyValue = data.ProxyValue;
+                reqAM.RegistrationID = data.RegistrationID;
+                reqAM.DisplayName = data.DisplayName;
+                reqAM.ProxyBankID = data.ProxyBankID;
+                reqAM.AccountID = data.AccountID;
+                reqAM.AccountType = data.AccountType;
+                reqAM.AccountName = data.AccountName;
+                reqAM.SecondaryIDType = data.SecondaryIDType;
+                reqAM.SecondaryIDValue = data.SecondaryIDValue;
+                reqAM.RegistrationStatus = data.RegistrationStatus;
+                reqAM.CustomerType = data.CustomerType;
+                reqAM.CustomerID = data.CustomerID;
+                reqAM.CustomerResidentStatus = data.CustomerResidentStatus;
+                reqAM.CustomerTownName = data.CustomerTownName;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
             string jsonRequest = JsonConvert.SerializeObject(reqAM), jsonResponse, num = reqAM.TranRefNUM, idr = reqAM.BizMsgIdr;
             jsonResponse = hp.GenerateReq(reqAM, "http://10.99.0.72:8355/jsonAPI/prxy001");
 
@@ -72,11 +122,49 @@ namespace BIFastWebAPI.Controllers
         #region AliasResolution
         [HttpPost]
         [Route("jsonAPI/prxy003")]
-        public IHttpActionResult AliasResolution([FromBody] ReqAliasResolution reqAR)
+        public IHttpActionResult AliasResolution([FromBody] AliasResolutionVM data)
         {
+            ReqAliasResolution reqAR = new ReqAliasResolution();
             RespAliasResolution respAR = new RespAliasResolution();
             RespRejectAliasResolution rejAR = new RespRejectAliasResolution();
             RespErrAliasResolution errAR = new RespErrAliasResolution();
+
+            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+
+            try
+            {
+                if (String.IsNullOrEmpty(lastID))
+                {
+                    var numInt = int.Parse(lastID) + 1;
+                    var LastNo = numInt.ToString();
+                    ss = LastNo.PadLeft(8, '0');
+                }
+                else
+                {
+                    ss = lastID.PadLeft(8, '0');
+                }
+
+                reqAR.SendingSystemBIC = data.SBIC;
+                reqAR.ReceivingSystemBIC = data.RBIC;
+                reqAR.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;
+                reqAR.MsgDefIdr = data.MsgDefIdr;
+                reqAR.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
+                reqAR.TranRefNUM = Date + data.SBIC + data.TransactionType + ss;
+                reqAR.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:sss");
+                reqAR.SendingParticipantID = data.SendingParticipantID;
+                reqAR.MsgSenderAccountId = data.MsgSenderAccountId;
+                reqAR.AlisaResolutionLookup = data.AlisaResolutionLookup;
+                reqAR.UniqueRequestID = Date + data.SBIC + data.Originator + ss;
+                reqAR.ProxyType = data.ProxyType;
+                reqAR.ProxyValue = data.ProxyValue;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             string jsonRequest  = JsonConvert.SerializeObject(reqAR), jsonResponse, num = reqAR.TranRefNUM, idr = reqAR.BizMsgIdr;
             jsonResponse = hp.GenerateReq(reqAR, "http://10.99.0.72:8355/jsonAPI/prxy003");
          
@@ -112,11 +200,48 @@ namespace BIFastWebAPI.Controllers
         #region AliasRegistrationInquiry
         [HttpPost]
         [Route("jsonAPI/prxy005")]
-        public IHttpActionResult AliasRegistrationInquiry([FromBody] ReqAliasRegInquiry reqARI)
+        public IHttpActionResult AliasRegistrationInquiry([FromBody] AliasRegInquiryVM data)
         {
+            ReqAliasRegInquiry reqARI = new ReqAliasRegInquiry();
             RespAliasRegInquiry respARI = new RespAliasRegInquiry();
             RespRejectAliasRegInquiry rejARI = new RespRejectAliasRegInquiry();
             RespErrAliasRegInquiry errARI = new RespErrAliasRegInquiry();
+
+            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+
+            try
+            {
+                if (String.IsNullOrEmpty(lastID))
+                {
+                    var numInt = int.Parse(lastID) + 1;
+                    var LastNo = numInt.ToString();
+                    ss = LastNo.PadLeft(8, '0');
+                }
+                else
+                {
+                    ss = lastID.PadLeft(8, '0');
+                }
+
+                reqARI.SendingSystemBIC = data.SBIC;
+                reqARI.ReceivingSystemBIC = data.RBIC;
+                reqARI.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;
+                reqARI.MsgDefIdr = data.MsgDefIdr;
+                reqARI.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
+                reqARI.TranRefNUM = Date + data.SBIC + data.TransactionType + ss;
+                reqARI.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:sss");
+                reqARI.SendingParticipantID = data.SendingParticipantID;
+                reqARI.MsgSenderAccountId = data.MsgSenderAccountId;
+                reqARI.RegistrationID = data.RegistrationID;
+                reqARI.SecondaryIDType = data.SecondaryIDType;
+                reqARI.SecondaryIDValue = data.SecondaryIDValue;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             string jsonRequest = JsonConvert.SerializeObject(reqARI), jsonResponse, num = reqARI.TranRefNUM, idr = reqARI.BizMsgIdr; ;
             jsonResponse = hp.GenerateReq(reqARI, "http://10.99.0.72:8355/jsonAPI/prxy005");
             //jsonResponse = hp.GenerateReq(reqARI, "http://172.18.99.30:4343/jsonAPI/prxy005");

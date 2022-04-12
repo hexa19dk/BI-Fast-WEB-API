@@ -12,6 +12,7 @@ namespace BIFastWebAPI.Utility
     public class Helper
     {
         ApplicationDbContext _db = new ApplicationDbContext();
+
         public bool Ck(string str)
         {
             if (!String.IsNullOrEmpty(str))
@@ -50,6 +51,25 @@ namespace BIFastWebAPI.Utility
             string jsonResponse = response.Content;
             return jsonResponse;
         }
+
+
+        //public int GenerateSn(string lastID)
+        //{
+        //    string ss = "";
+        //    var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+        //    lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+
+        //    if (String.IsNullOrEmpty(lastID))
+        //    {
+        //        var numInt = int.Parse(lastID) + 1;
+        //        var LastNo = numInt.ToString();
+        //        ss = LastNo.PadLeft(8, '0');
+        //    }
+        //    else
+        //    {
+        //        ss = lastID.PadLeft(8, '0');
+        //    }
+        //}
 
         public string swCh(string Ch) //Channel
         {
