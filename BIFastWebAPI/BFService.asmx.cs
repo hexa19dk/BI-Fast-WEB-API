@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using BIFastWebAPI.Data;
+using BIFastWebAPI.Models;
+using BIFastWebAPI.Controllers;
 
 namespace BIFastWebAPI
 {
@@ -24,7 +27,14 @@ namespace BIFastWebAPI
         {
             string rekSbr, BankDest, NoTuj, NoRekTuj, NomTf, Desk;
             string result = "";
+            ReqCreditTransfer req = new ReqCreditTransfer();
+            RespCreditTransfer resp = new RespCreditTransfer();
+            RejectCreditTransfer rejCt = new RejectCreditTransfer();
+            ErrorCreditTransfer errCt = new ErrorCreditTransfer();
+            RespCreditTrfAll respall = new RespCreditTrfAll();
+            
 
+            //respall = CreditTransferAll(VmTrx);
 
 
             return "testing";
