@@ -97,5 +97,6 @@ namespace BIFastWebAPI.Models
         public string CreditorType { get; set; }
         public string CreditorID { get; set; }
         public string CreditorResidentStatus { get; set; }
+        public string PaymentInformation { get; set; }
     }
 }

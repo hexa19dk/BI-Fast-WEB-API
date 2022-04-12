@@ -105,7 +105,7 @@ namespace BIFastWebAPI.Controllers
             req.Amount = VmTrx.Amount;
             req.Currency = "IDR";
             req.PurposeType = VmTrx.PurpposeType;
-            req.PaymentInformation = "Payment for housing";
+            req.PaymentInformation = VmTrx.PaymentInformation;
             req.SendingParticipantID = "AGTBIDJA";
             req.DebitorAccountNo = VmTrx.DebitorAccountNo;
             req.DebitorAccountType = VmTrx.DebitorAccountType;
