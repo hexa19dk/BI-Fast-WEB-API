@@ -10,6 +10,7 @@ using System.Web.Http;
 using RestSharp;
 using AngleSharp.Io;
 using System.Globalization;
+using BIFastWebAPI.Data;
 
 namespace BIFastWebAPI.Controllers
 {
@@ -18,7 +19,7 @@ namespace BIFastWebAPI.Controllers
         Helper Hp = new Helper();
         string chan, st = "" ;
         DateTime cd;
-
+        ApplicationDbContext db = new ApplicationDbContext();
 
         #region AccountEnquiry
         [HttpPost]
@@ -69,12 +70,58 @@ namespace BIFastWebAPI.Controllers
         #region CreditTransfer
         [HttpPost]
         [Route("jsonAPI/CreditTransfer")]
-        public IHttpActionResult CreditTransfer([FromBody] ReqCreditTransfer req)
+        public IHttpActionResult CreditTransfer([FromBody] ViewModelTransaction VmTrx)
         {
-            //ReqCreditTransfer req = new ReqCreditTransfer();
+            ReqCreditTransfer req = new ReqCreditTransfer();
             RespCreditTransfer resp = new RespCreditTransfer();
             RejectCreditTransfer rejCt = new RejectCreditTransfer();
             ErrorCreditTransfer errCt = new ErrorCreditTransfer();
+
+            string Date = DateTime.Now.ToString("yyyyMMdd");
+            string bic = "AGTBIDJA"; //BIC Code
+            string TrxTp = "010"; // Transaction Type
+            string ori = "O"; // Originator
+            string ct = VmTrx.ChannelType; // Channel Type
+            string ss = ""; // Serial Number
+
+            var ToInt = int.Parse(db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+            var lastID = db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+
+            if (String.IsNullOrEmpty(lastID))
+            {
+                var numInt = int.Parse(lastID) + 1;
+                var LastNo = numInt.ToString();
+                ss = LastNo.PadLeft(8, '0');
+            }
+            else
+            {
+                ss = lastID.PadLeft(8, '0');
+            }
+
+            req.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
+            req.MsgDefIdr = "pacs.008.001.08";
+            req.TranRefNUM = Date + bic + TrxTp + ss;
+            req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+            req.Amount = VmTrx.Amount;
+            req.Currency = "IDR";
+            req.PurposeType = VmTrx.PurpposeType;
+            req.PaymentInformation = "Payment for housing";
+            req.SendingParticipantID = "AGTBIDJA";
+            req.DebitorAccountNo = VmTrx.DebitorAccountNo;
+            req.DebitorAccountType = VmTrx.DebitorAccountType;
+            req.DebitorAccountName = VmTrx.DebitorAccountName;
+            req.DebitorType = VmTrx.DebitorType;
+            req.DebitorID = VmTrx.DebitorID;
+            req.DebitorResidentStatus = "01";
+            req.DebitorTownName = "0300";
+            req.RecipentParticipantID = "BRINIDJA";
+            req.CreditorAccountNo = VmTrx.CreditorAccountNo;
+            req.CreditorAccountType = VmTrx.CreditorAccountType;
+            req.CreditorAccountName = VmTrx.CreditorAccountName;
+            req.CreditorType = VmTrx.CreditorType;
+            req.CreditorID = VmTrx.CreditorID;
+            req.CreditorResidentStatus = VmTrx.CreditorResidentStatus;
+            req.CreditorTownName = "0300";
 
             string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
             string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
@@ -97,7 +144,7 @@ namespace BIFastWebAPI.Controllers
             {
                 rejCt = JsonConvert.DeserializeObject<RejectCreditTransfer>(jsonResponse);
                 st = "Reject";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                Hp.SaveLog(ct, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                 return Ok(rejCt);
             }
         }

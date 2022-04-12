@@ -24,7 +24,6 @@ namespace BIFastWebAPI.Models
         public string RecipentParticipantID { get; set; }
         public string DebitorResidentStatus { get; set; }
         public string DebitorTownName { get; set; }
-        public string RecipientParticipantID { get; set; }
         public string CreditorAccountNo { get; set; }
         public string CreditorAccountType { get; set; }
         public string CreditorAccountName { get; set; }
@@ -79,5 +78,24 @@ namespace BIFastWebAPI.Models
         public string RejectDateTime { get; set; }
         public string ErrorLocation { get; set; }
         public string ReasonDesc { get; set; }
+    }
+
+    public class ViewModelTransaction
+    {
+        public string ChannelType { get; set; }
+        public string Amount { get; set; }
+        public string PurpposeType { get; set; }
+        public string DebitorAccountNo { get; set; }
+        public string DebitorAccountType { get; set; }
+        public string DebitorAccountName { get; set; }
+        public string DebitorType { get; set; }
+        public string DebitorID { get; set; }
+        public string DebitorResidentStatus { get; set; }
+        public string CreditorAccountNo { get; set; }
+        public string CreditorAccountType { get; set; }
+        public string CreditorAccountName { get; set; }
+        public string CreditorType { get; set; }
+        public string CreditorID { get; set; }
+        public string CreditorResidentStatus { get; set; }
     }
 }
