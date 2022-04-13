@@ -100,36 +100,33 @@ namespace BIFastWebAPI.Controllers
                 ss = lastID.PadLeft(8, '0');
             }
 
-            #region old
-            //req.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
-            //req.MsgDefIdr = "pacs.008.001.08";
-            //req.TranRefNUM = Date + bic + TrxTp + ss;
-            //req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
-            //req.Amount = VmTrx.Amount;
-            //req.Currency = "IDR";
-            //req.PurposeType = VmTrx.PurpposeType;
-            //req.PaymentInformation = "Payment for housing";
-            //req.SendingParticipantID = "AGTBIDJA";
-            //req.DebitorAccountNo = VmTrx.DebitorAccountNo;
-            //req.DebitorAccountType = VmTrx.DebitorAccountType;
-            //req.DebitorAccountName = VmTrx.DebitorAccountName;
-            //req.DebitorType = VmTrx.DebitorType;
-            //req.DebitorID = VmTrx.DebitorID;
-            //req.DebitorResidentStatus = "01";
-            //req.DebitorTownName = "0300";
-            //req.RecipentParticipantID = "BRINIDJA";
-            //req.CreditorAccountNo = VmTrx.CreditorAccountNo;
-            //req.CreditorAccountType = VmTrx.CreditorAccountType;
-            //req.CreditorAccountName = VmTrx.CreditorAccountName;
-            //req.CreditorType = VmTrx.CreditorType;
-            //req.CreditorID = VmTrx.CreditorID;
-            //req.CreditorResidentStatus = VmTrx.CreditorResidentStatus;
-            //req.CreditorTownName = "0300";
+            req.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
+            req.MsgDefIdr = "pacs.008.001.08";
+            req.TranRefNUM = Date + bic + TrxTp + ss;
+            req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+            req.Amount = VmTrx.Amount;
+            req.Currency = "IDR";
+            req.PurposeType = VmTrx.PurpposeType;
+            req.PaymentInformation = "Payment for housing";
+            req.SendingParticipantID = "AGTBIDJA";
+            req.DebitorAccountNo = VmTrx.DebitorAccountNo;
+            req.DebitorAccountType = VmTrx.DebitorAccountType;
+            req.DebitorAccountName = VmTrx.DebitorAccountName;
+            req.DebitorType = VmTrx.DebitorType;
+            req.DebitorID = VmTrx.DebitorID;
+            req.DebitorResidentStatus = "01";
+            req.DebitorTownName = "0300";
+            req.RecipentParticipantID = "BRINIDJA";
+            req.CreditorAccountNo = VmTrx.CreditorAccountNo;
+            req.CreditorAccountType = VmTrx.CreditorAccountType;
+            req.CreditorAccountName = VmTrx.CreditorAccountName;
+            req.CreditorType = VmTrx.CreditorType;
+            req.CreditorID = VmTrx.CreditorID;
+            req.CreditorResidentStatus = VmTrx.CreditorResidentStatus;
+            req.CreditorTownName = "0300";
 
-            //string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
-            //string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
-            #endregion
-
+            string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
+            string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
 
             respall = CreditTransferAll(VmTrx);
 
@@ -161,7 +158,6 @@ namespace BIFastWebAPI.Controllers
                 return Ok(rejCt);
             }
         }
-
 
         public RespCreditTrfAll CreditTransferAll(ViewModelTransaction VmTrx)
         {
