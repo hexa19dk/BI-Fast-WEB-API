@@ -2,16 +2,9 @@
 using BIFastWebAPI.Utility;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using RestSharp;
-using AngleSharp.Io;
 using System.Globalization;
 using BIFastWebAPI.Data;
-using BIFastWebAPI.Utility;
 
 
 namespace BIFastWebAPI.Controllers
@@ -22,7 +15,6 @@ namespace BIFastWebAPI.Controllers
         string chan, st = "" ;
         DateTime cd;
         ApplicationDbContext db = new ApplicationDbContext();
-        FunctionUtility ut = new FunctionUtility(); 
 
         #region AccountEnquiry
         [HttpPost]
@@ -77,7 +69,7 @@ namespace BIFastWebAPI.Controllers
         {
             RespCreditTrfAll respall = new RespCreditTrfAll();
 
-            respall = ut.CreditTransferAll(VmTrx);
+            respall = Hp.CreditTransferAll(VmTrx);
 
             return Ok(respall);
         }
