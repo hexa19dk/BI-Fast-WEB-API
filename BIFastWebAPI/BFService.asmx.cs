@@ -11,7 +11,6 @@ namespace BIFastWebAPI
     
     public class BFService : System.Web.Services.WebService
     {
-        FunctionUtility ut = new FunctionUtility();
         Helper hp = new Helper();
 
         [WebMethod(MessageName = "Transaction", Description = "Transaction ATM & HP")]
