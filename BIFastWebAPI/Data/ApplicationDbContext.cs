@@ -15,6 +15,6 @@ namespace BIFastWebAPI.Data
         }
 
         public DbSet<ActivityLog> ActivityLogs { get; set; }
-        public DbSet<SequenceNum> SequenceNumbers { get; set; }
+        //public DbSet<SequenceNum> SequenceNumbers { get; set; }
     }
 }

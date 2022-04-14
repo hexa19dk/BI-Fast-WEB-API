@@ -1,5 +1,7 @@
 ﻿using BIFastWebAPI.Models;
 using System.Web.Services;
+using BIFastWebAPI.Controllers;
+using BIFastWebAPI.Utility;
 
 namespace BIFastWebAPI
 {
@@ -8,15 +10,17 @@ namespace BIFastWebAPI
     [System.ComponentModel.ToolboxItem(false)]
     
     public class BFService : System.Web.Services.WebService
-    {       
+    {
+        FunctionUtility ut = new FunctionUtility();
 
         [WebMethod(MessageName = "Transaction", Description = "Transaction ATM & HP")]
-        public ViewModelTransaction Transaction(ViewModelTransaction data)
+        public RespCreditTrfAll Transaction(ViewModelTransaction vmTrx)
         {
-            ViewModelTransaction vmTrx = new ViewModelTransaction();
-            vmTrx = data;
+            RespCreditTrfAll resp = new RespCreditTrfAll();
 
-            return vmTrx;
+            resp = ut.CreditTransferAll(vmTrx);
+
+            return resp;
         }
 
     }

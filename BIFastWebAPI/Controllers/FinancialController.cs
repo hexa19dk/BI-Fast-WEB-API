@@ -11,6 +11,7 @@ using RestSharp;
 using AngleSharp.Io;
 using System.Globalization;
 using BIFastWebAPI.Data;
+using BIFastWebAPI.Utility;
 
 
 namespace BIFastWebAPI.Controllers
@@ -21,6 +22,7 @@ namespace BIFastWebAPI.Controllers
         string chan, st = "" ;
         DateTime cd;
         ApplicationDbContext db = new ApplicationDbContext();
+        FunctionUtility ut = new FunctionUtility(); 
 
         #region AccountEnquiry
         [HttpPost]
@@ -73,184 +75,11 @@ namespace BIFastWebAPI.Controllers
         [Route("jsonAPI/CreditTransfer")]
         public IHttpActionResult CreditTransfer([FromBody] ViewModelTransaction VmTrx)
         {
-            ReqCreditTransfer req = new ReqCreditTransfer();
-            RespCreditTransfer resp = new RespCreditTransfer();
-            RejectCreditTransfer rejCt = new RejectCreditTransfer();
-            ErrorCreditTransfer errCt = new ErrorCreditTransfer();
             RespCreditTrfAll respall = new RespCreditTrfAll();
 
-            string Date = DateTime.Now.ToString("yyyyMMdd");
-            string bic = "AGTBIDJA"; //BIC Code
-            string TrxTp = "010"; // Transaction Type
-            string ori = "O"; // Originator
-            string ct = VmTrx.ChannelType; // Channel Type
-            string ss = ""; // Serial Number
+            respall = ut.CreditTransferAll(VmTrx);
 
-            var ToInt = int.Parse(db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-            var lastID = db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
-
-            if (String.IsNullOrEmpty(lastID))
-            {
-                var numInt = int.Parse(lastID) + 1;
-                var LastNo = numInt.ToString();
-                ss = LastNo.PadLeft(8, '0');
-            }
-            else
-            {
-                ss = lastID.PadLeft(8, '0');
-            }
-
-            req.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
-            req.MsgDefIdr = "pacs.008.001.08";
-            req.TranRefNUM = Date + bic + TrxTp + ss;
-            req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
-            req.Amount = VmTrx.Amount;
-            req.Currency = "IDR";
-            req.PurposeType = VmTrx.PurpposeType;
-            req.PaymentInformation = "Payment for housing";
-            req.SendingParticipantID = "AGTBIDJA";
-            req.DebitorAccountNo = VmTrx.DebitorAccountNo;
-            req.DebitorAccountType = VmTrx.DebitorAccountType;
-            req.DebitorAccountName = VmTrx.DebitorAccountName;
-            req.DebitorType = VmTrx.DebitorType;
-            req.DebitorID = VmTrx.DebitorID;
-            req.DebitorResidentStatus = "01";
-            req.DebitorTownName = "0300";
-            req.RecipentParticipantID = "BRINIDJA";
-            req.CreditorAccountNo = VmTrx.CreditorAccountNo;
-            req.CreditorAccountType = VmTrx.CreditorAccountType;
-            req.CreditorAccountName = VmTrx.CreditorAccountName;
-            req.CreditorType = VmTrx.CreditorType;
-            req.CreditorID = VmTrx.CreditorID;
-            req.CreditorResidentStatus = VmTrx.CreditorResidentStatus;
-            req.CreditorTownName = "0300";
-
-            string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
-            string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
-
-            respall = CreditTransferAll(VmTrx);
-
-            if (Hp.Ck(req.EndToEndId) && Hp.Ck(req.MsgDefIdr) && Hp.Ck(req.TranRefNUM) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.Amount) && Hp.Ck(req.Currency) && Hp.Ck(req.MsgCreationDate) && Hp.Ck(req.PurposeType) && Hp.Ck(req.SendingParticipantID) && Hp.Ck(req.DebitorAccountNo) && Hp.Ck(req.DebitorAccountType) && Hp.Ck(req.DebitorAccountName) && Hp.Ck(req.DebitorID) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.CreditorAccountName) && respall.ToString().Contains("pacs.002.001.10"))
-            {
-                //resp = JsonConvert.DeserializeObject<RespCreditTransfer>(jsonResponse);
-                resp.CreditorResidentStatus = respall.CreditorResidentStatus;
-                //dilanjutin..
-                st = "Success";
-                //Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resp.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                return Ok(resp);
-            }
-            else if (respall.ToString().Contains("ErrorLocation") && respall.ToString().Contains("admi.002.001.01"))
-            {
-                //errCt = JsonConvert.DeserializeObject<ErrorCreditTransfer>(jsonResponse);
-                errCt.SendingSystemBIC = respall.SendingSystemBIC;
-                //dilanjutin..
-                st = "Error";
-                //Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCt.CreationDateTime, null, DateTimeStyles.RoundtripKind));
-                return Ok(errCt);
-            }
-            else
-            {
-                //rejCt = JsonConvert.DeserializeObject<RejectCreditTransfer>(jsonResponse);
-                rejCt.OriginalMsgdefIdr = respall.OriginalMsgdefIdr;
-                //dilanjutin..
-                st = "Reject";
-                //Hp.SaveLog(ct, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                return Ok(rejCt);
-            }
-        }
-
-        public RespCreditTrfAll CreditTransferAll(ViewModelTransaction VmTrx)
-        {
-            RespCreditTrfAll respall = new RespCreditTrfAll();
-
-            ReqCreditTransfer req = new ReqCreditTransfer();
-            RespCreditTransfer resp = new RespCreditTransfer();
-            RejectCreditTransfer rejCt = new RejectCreditTransfer();
-            ErrorCreditTransfer errCt = new ErrorCreditTransfer();
-
-            string Date = DateTime.Now.ToString("yyyyMMdd");
-            string bic = "AGTBIDJA"; //BIC Code
-            string TrxTp = "010"; // Transaction Type
-            string ori = "O"; // Originator
-            string ct = VmTrx.ChannelType; // Channel Type
-            string ss = ""; // Serial Number
-
-            var ToInt = int.Parse(db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-            var lastID = db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
-
-            try
-            {
-                if (String.IsNullOrEmpty(lastID))
-                {
-                    var numInt = int.Parse(lastID) + 1;
-                    var LastNo = numInt.ToString();
-                    ss = LastNo.PadLeft(8, '0');
-                }
-                else
-                {
-                    ss = lastID.PadLeft(8, '0');
-                }
-
-                req.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
-                req.MsgDefIdr = "pacs.008.001.08";
-                req.TranRefNUM = Date + bic + TrxTp + ss;
-                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
-                req.Amount = VmTrx.Amount;
-                req.Currency = "IDR";
-                req.PurposeType = VmTrx.PurpposeType;
-                req.PaymentInformation = "Payment for housing";
-                req.SendingParticipantID = "AGTBIDJA";
-                req.DebitorAccountNo = VmTrx.DebitorAccountNo;
-                req.DebitorAccountType = VmTrx.DebitorAccountType;
-                req.DebitorAccountName = VmTrx.DebitorAccountName;
-                req.DebitorType = VmTrx.DebitorType;
-                req.DebitorID = VmTrx.DebitorID;
-                req.DebitorResidentStatus = "01";
-                req.DebitorTownName = "0300";
-                req.RecipentParticipantID = "BRINIDJA";
-                req.CreditorAccountNo = VmTrx.CreditorAccountNo;
-                req.CreditorAccountType = VmTrx.CreditorAccountType;
-                req.CreditorAccountName = VmTrx.CreditorAccountName;
-                req.CreditorType = VmTrx.CreditorType;
-                req.CreditorID = VmTrx.CreditorID;
-                req.CreditorResidentStatus = VmTrx.CreditorResidentStatus;
-                req.CreditorTownName = "0300";
-
-                string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
-                string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
-
-                if (Hp.Ck(req.EndToEndId) && Hp.Ck(req.MsgDefIdr) && Hp.Ck(req.TranRefNUM) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.Amount) && Hp.Ck(req.Currency) && Hp.Ck(req.MsgCreationDate) && Hp.Ck(req.PurposeType) && Hp.Ck(req.SendingParticipantID) && Hp.Ck(req.DebitorAccountNo) && Hp.Ck(req.DebitorAccountType) && Hp.Ck(req.DebitorAccountName) && Hp.Ck(req.DebitorID) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.CreditorAccountName) && jsonResponse.Contains("pacs.002.001.10"))
-                {
-                    resp = JsonConvert.DeserializeObject<RespCreditTransfer>(jsonResponse);
-                    st = "Success";
-                    Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resp.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                    respall.MsgCreationDate = resp.MsgCreationDate;
-                    ///dilanjutin ...
-
-                }
-                else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
-                {
-                    errCt = JsonConvert.DeserializeObject<ErrorCreditTransfer>(jsonResponse);
-                    st = "Error";
-                    Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCt.CreationDateTime, null, DateTimeStyles.RoundtripKind));
-                    respall.SendingSystemBIC = errCt.SendingSystemBIC;
-                    ///dilanjutin ...
-                }
-                else
-                {
-                    rejCt = JsonConvert.DeserializeObject<RejectCreditTransfer>(jsonResponse);
-                    st = "Reject";
-                    Hp.SaveLog(ct, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                    respall.OriginalMsgdefIdr = rejCt.OriginalMsgdefIdr;
-                    ///dilanjutin ...
-                }
-            }
-            catch (Exception ex)
-            {
-                //error log
-            }
-
-            return respall;
+            return Ok(respall);
         }
         #endregion
 

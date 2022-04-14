@@ -52,7 +52,6 @@ namespace BIFastWebAPI.Utility
             return jsonResponse;
         }
 
-
         //public int GenerateSn(string lastID)
         //{
         //    string ss = "";

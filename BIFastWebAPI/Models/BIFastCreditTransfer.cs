@@ -38,7 +38,7 @@ namespace BIFastWebAPI.Models
         public string MsgDefIdr { get; set; }
         public string TranRefNUM { get; set; }
         public string MsgCreationDate { get; set; }
-        public string OriginalMsgDefIdr { get; set; }
+        public string OriginalMsgdefIdr { get; set; }
         public string OrigEndToEndId { get; set; }
         public string OrigTranRefNUM { get; set; }
         public string TransactionStatus { get; set; }
