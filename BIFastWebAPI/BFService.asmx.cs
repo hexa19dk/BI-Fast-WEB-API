@@ -11,14 +11,14 @@ namespace BIFastWebAPI
     
     public class BFService : System.Web.Services.WebService
     {
-        FunctionUtility ut = new FunctionUtility();
+        Helper hp = new Helper();
 
         [WebMethod(MessageName = "Transaction", Description = "Transaction ATM & HP")]
         public RespCreditTrfAll Transaction(ViewModelTransaction vmTrx)
         {
             RespCreditTrfAll resp = new RespCreditTrfAll();
 
-            resp = ut.CreditTransferAll(vmTrx);
+            resp = hp.CreditTransferAll(vmTrx);
 
             return resp;
         }
