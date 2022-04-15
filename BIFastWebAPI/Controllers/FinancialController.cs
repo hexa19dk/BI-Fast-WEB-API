@@ -68,9 +68,7 @@ namespace BIFastWebAPI.Controllers
         public IHttpActionResult CreditTransfer([FromBody] ViewModelTransaction VmTrx)
         {
             RespCreditTrfAll respall = new RespCreditTrfAll();
-
             respall = Hp.CreditTransferAll(VmTrx);
-
             return Ok(respall);
         }
         #endregion

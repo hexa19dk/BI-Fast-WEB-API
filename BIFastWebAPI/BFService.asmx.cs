@@ -13,13 +13,11 @@ namespace BIFastWebAPI
     {
         Helper hp = new Helper();
 
-        [WebMethod(MessageName = "Transaction", Description = "Transaction ATM & HP")]
+        [WebMethod(MessageName = "CreditTransfer", Description = "for CreditTransfer and CreditTransferToProxy")]
         public RespCreditTrfAll Transaction(ViewModelTransaction vmTrx)
         {
             RespCreditTrfAll resp = new RespCreditTrfAll();
-
             resp = hp.CreditTransferAll(vmTrx);
-
             return resp;
         }
 

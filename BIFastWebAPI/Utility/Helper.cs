@@ -489,14 +489,14 @@ namespace BIFastWebAPI.Utility
                 req.Amount = VmTrx.Amount;
                 req.Currency = "IDR";
                 req.PurposeType = VmTrx.PurpposeType;
-                req.PaymentInformation = "Payment for housing";
+                req.PaymentInformation = VmTrx.PaymentInformation;
                 req.SendingParticipantID = "AGTBIDJA";
                 req.DebitorAccountNo = VmTrx.DebitorAccountNo;
                 req.DebitorAccountType = VmTrx.DebitorAccountType;
                 req.DebitorAccountName = VmTrx.DebitorAccountName;
                 req.DebitorType = VmTrx.DebitorType;
                 req.DebitorID = VmTrx.DebitorID;
-                req.DebitorResidentStatus = "01";
+                req.DebitorResidentStatus = VmTrx.DebitorResidentStatus;
                 req.DebitorTownName = "0300";
                 req.RecipentParticipantID = "BRINIDJA";
                 req.CreditorAccountNo = VmTrx.CreditorAccountNo;
@@ -516,7 +516,7 @@ namespace BIFastWebAPI.Utility
                     resp = JsonConvert.DeserializeObject<RespCreditTransfer>(jsonResponse);
                     st = "Success";
 
-                    SaveLog(ct, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respall.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(ct, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resp.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                     respall.MsgDefIdr = resp.MsgDefIdr;
                     respall.TranRefNUM = resp.TranRefNUM;
