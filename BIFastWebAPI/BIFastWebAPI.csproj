@@ -287,7 +287,6 @@
     <Compile Include="Models\BIFastReversalCreditTransfer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\AutoMapperProfile.cs" />
-    <Compile Include="Utility\FunctionUtility.cs" />
     <Compile Include="Utility\Helper.cs" />
   </ItemGroup>
   <ItemGroup>
