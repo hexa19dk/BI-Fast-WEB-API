@@ -23,5 +23,28 @@ namespace BIFastWebAPI
             return resp;
         }
 
+        [WebMethod(MessageName ="Alias_Management" , Description ="Alias Management")]
+        public AliasManagementResponses AliasManagement(AliasManagementVM data)
+        {
+            AliasManagementResponses respAll = new AliasManagementResponses();
+            respAll = hp.AliasManagement(data);
+            return respAll;
+        }
+
+        [WebMethod(MessageName = "Alias_Resolution", Description = "Alias Resolution")]
+        public AliasResolutionResponses AliasResolution(AliasResolutionVM data)
+        {
+            AliasResolutionResponses respAll = new AliasResolutionResponses();
+            respAll = hp.AliasResolution(data);
+            return respAll;
+        }
+
+        [WebMethod(MessageName = "Alias_Registration_inquiry", Description = "Alias Registration Inquiry")]
+        public AliasRegInquiryResponses AliasRegInquiry(AliasRegInquiryVM data)
+        {
+            AliasRegInquiryResponses respAll = new AliasRegInquiryResponses();
+            respAll = hp.AliasRegInquiry(data);
+            return respAll;
+        }
     }
 }

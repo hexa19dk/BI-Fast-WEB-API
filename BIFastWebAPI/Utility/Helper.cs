@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -580,8 +581,6 @@ namespace BIFastWebAPI.Utility
         }
         #endregion
 
-        #endregion
-
         #region Credit Transfer To Proxy
         //code
         #endregion
@@ -594,7 +593,7 @@ namespace BIFastWebAPI.Utility
         //code
         #endregion
 
-#endregion
+        #endregion
 
     }
 }
