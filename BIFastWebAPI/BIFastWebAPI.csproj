@@ -266,13 +266,17 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\Models\ActivityLog.cs" />
-    <Compile Include="Data\Models\SequenceNum.cs" />
+    <Compile Include="Data\Models\BankMaster.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202204121554364_AddSequenceNum.cs" />
     <Compile Include="Migrations\202204121554364_AddSequenceNum.designer.cs">
       <DependentUpon>202204121554364_AddSequenceNum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204220856178_AddbankMaster.cs" />
+    <Compile Include="Migrations\202204220856178_AddbankMaster.designer.cs">
+      <DependentUpon>202204220856178_AddbankMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BIFastAliasSysNotification.cs" />
@@ -516,6 +520,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202204220856178_AddbankMaster.resx">
+      <DependentUpon>202204220856178_AddbankMaster.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -85,6 +85,7 @@ namespace BIFastWebAPI.Models
     }
     public class AliasResolutionResponses
     {
+        public string ResponseType { get; set; }
         public string SendingSystemBIC { get; set; }
         public string ReceivingSystemBIC { get; set; }
         public string BizMsgIdr { get; set; }

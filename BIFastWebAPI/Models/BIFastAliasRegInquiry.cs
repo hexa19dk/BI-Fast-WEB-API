@@ -99,6 +99,7 @@ namespace BIFastWebAPI.Models
 
     public class AliasRegInquiryResponses
     {
+        public string ResponseType { get; set; }
         public string SendingSystemBIC { get; set; }
         public string ReceivingSystemBIC { get; set; }
         public string BizMsgIdr { get; set; }
