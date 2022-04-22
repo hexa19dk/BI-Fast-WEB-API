@@ -13,13 +13,30 @@ namespace BIFastWebAPI
     {
         Helper hp = new Helper();
 
-        [WebMethod(MessageName = "CreditTransfer", Description = "for CreditTransfer and CreditTransferToProxy")]
+        #region TransactionService
+        [WebMethod(MessageName = "CreditTransfer", Description = "for CreditTransfer")]
         public RespCreditTrfAll Transaction(ViewModelTransaction vmTrx)
         {
             RespCreditTrfAll resp = new RespCreditTrfAll();
             resp = hp.CreditTransferAll(vmTrx);
             return resp;
         }
+
+        [WebMethod(MessageName = "CreditProxy", Description = "Credit Transfer To Proxy")]
+        public RespAllCreditProxy TransactionProxy(ViewModelProxy vmProx)
+        {
+            RespAllCreditProxy resp = new RespAllCreditProxy();
+            resp = hp.CreditToProxy(vmProx);
+            return resp;
+        }
+
+        //Account Inquiry Service
+
+        //Get list bank code from DB service
+
+        #endregion
+
+        #region NonTransactionService
 
         [WebMethod(MessageName ="Alias_Management" , Description ="Alias Management")]
         public AliasManagementResponses AliasManagement(AliasManagementVM data)
@@ -44,5 +61,7 @@ namespace BIFastWebAPI
             respAll = hp.AliasRegInquiry(data);
             return respAll;
         }
+
+        #endregion
     }
 }

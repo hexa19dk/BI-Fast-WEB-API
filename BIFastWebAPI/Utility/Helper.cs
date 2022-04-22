@@ -447,7 +447,7 @@ namespace BIFastWebAPI.Utility
         #region Transaction Function Helper
 
         #region Account Enquiry
-        //code
+
         #endregion
 
         #region Credit Transfer
@@ -534,6 +534,8 @@ namespace BIFastWebAPI.Utility
                     respall.CreditorID = resp.CreditorID;
                     respall.CreditorResidentStatus = resp.CreditorResidentStatus;
                     respall.CreditorTownName = resp.CreditorTownName;
+                    respall.ResponseType = st;
+
                 }
                 else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
                 {
@@ -552,6 +554,7 @@ namespace BIFastWebAPI.Utility
                     respall.RejectDateTime = errCt.RejectDateTime;
                     respall.ErrorLocation = errCt.ErrorLocation;
                     respall.ReasonDesc = errCt.ReasonDesc;
+                    respall.ResponseType = st;
                 }
                 else
                 {
@@ -569,11 +572,11 @@ namespace BIFastWebAPI.Utility
                     respall.TransactionStatus = rejCt.TransactionStatus;
                     respall.ReasonCode = rejCt.ReasonCode;
                     respall.CreditorAccountNo = rejCt.CreditorAccountNo;
+                    respall.ResponseType = st;
                 }
             }
             catch (Exception ex)
             {
-                //throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
                 Console.WriteLine("Bad Request" + ex.Message);
             }
 
@@ -582,7 +585,127 @@ namespace BIFastWebAPI.Utility
         #endregion
 
         #region Credit Transfer To Proxy
-        //code
+        public RespAllCreditProxy CreditToProxy(ViewModelProxy vmProx) 
+        {
+            ReqCreditTransferToProxy reqCtPrx = new ReqCreditTransferToProxy();
+            RespCrediTransferToProxy resCtPrx = new RespCrediTransferToProxy();
+            RespRejectCreditTransferToProxy rejCtPrx = new RespRejectCreditTransferToProxy();
+            RespErrCreditTransferToProxy errCtPrx = new RespErrCreditTransferToProxy();
+            RespAllCreditProxy respAll = new RespAllCreditProxy();
+
+            string Date = DateTime.Now.ToString("yyyyMMdd");
+            string bic = "AGTBIDJA"; //BIC Code or bank tujuan berupa kode atau nama bank
+            string TrxTp = "010"; // Transaction Type
+            string ori = "O"; // Originator
+            string ct = vmProx.ChannelType; // Channel Type
+            string ss = ""; // Serial Number
+
+            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+
+            reqCtPrx.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
+            reqCtPrx.MsgDefIdr = "pacs.008.001.08";
+            reqCtPrx.TranRefNUM = Date + bic + TrxTp + ss;
+            reqCtPrx.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+            reqCtPrx.Amount = vmProx.Amount;
+            reqCtPrx.Currency = "IDR";
+            reqCtPrx.PurposeType = vmProx.PurposeType;
+            reqCtPrx.PaymentInformation = vmProx.PaymentInformation;
+            reqCtPrx.SendingParticipantID = "AGTBIDJA";
+            reqCtPrx.DebitorAccountNo = vmProx.DebitorAccountNo;
+            reqCtPrx.DebitorAccountType = vmProx.DebitorAccountType;
+            reqCtPrx.DebitorAccountName = vmProx.DebitorAccountName;
+            reqCtPrx.DebitorType = vmProx.DebitorType;
+            reqCtPrx.DebitorID = vmProx.DebitorID;
+            reqCtPrx.DebitorResidentStatus = vmProx.DebitorResidentStatus;
+            reqCtPrx.DebitorTownName = "0030";
+            reqCtPrx.RecipentParticipantID = "BRINIDJA";
+            reqCtPrx.CreditorAccountNo = vmProx.CreditorAccountNo;
+            reqCtPrx.CreditorAccountType = vmProx.CreditorAccountType;
+            reqCtPrx.CreditorAccountName = vmProx.CreditorAccountName;
+            reqCtPrx.ProxyType = "01";
+            reqCtPrx.ProxyValue = vmProx.ProxyValue;
+            reqCtPrx.CreditorType = vmProx.CreditorType;
+            reqCtPrx.CreditorID = vmProx.CreditorID;
+            reqCtPrx.CreditorResidentStatus = vmProx.CreditorResidentStatus;
+            reqCtPrx.CreditorTownName = "0300";
+
+            string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.EndToEndId, num = reqCtPrx.TranRefNUM;
+            string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.72:8355/jsonAPI/CreditTransferToProxy");
+
+            try
+            {
+                if (Ck(reqCtPrx.EndToEndId) && Ck(reqCtPrx.MsgDefIdr) && Ck(reqCtPrx.TranRefNUM) && Ck(reqCtPrx.RecipentParticipantID) && Ck(reqCtPrx.CreditorAccountNo) && Ck(reqCtPrx.Amount) && Ck(reqCtPrx.Currency) && Ck(reqCtPrx.MsgCreationDate) && Ck(reqCtPrx.PurposeType) && Ck(reqCtPrx.SendingParticipantID) && Ck(reqCtPrx.DebitorAccountNo) && Ck(reqCtPrx.DebitorAccountType) && Ck(reqCtPrx.DebitorAccountName) && Ck(reqCtPrx.DebitorID) && Ck(reqCtPrx.RecipentParticipantID) && Ck(reqCtPrx.CreditorAccountNo) && Ck(reqCtPrx.CreditorAccountName) && jsonResponse.Contains("Pacs.008.001.08"))
+                {
+                    resCtPrx = JsonConvert.DeserializeObject<RespCrediTransferToProxy>(jsonResponse);
+                    st = "Success";
+
+                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+
+                    respAll.MsgDefIdr = resCtPrx.MsgDefIdr;
+                    respAll.TranRefNUM = resCtPrx.TranRefNUM;
+                    respAll.MsgCreationDate = resCtPrx.MsgCreationDate;
+                    respAll.OriginalMsgdefIdr = resCtPrx.OriginalMsgdefIdr;
+                    respAll.OrigEndToEndId = resCtPrx.OrigEndToEndId;
+                    respAll.OrigTranRefNUM = resCtPrx.OrigTranRefNUM;
+                    respAll.TransactionStatus = resCtPrx.TransactionStatus;
+                    respAll.ReasonCode = resCtPrx.ReasonCode;
+                    respAll.AdditionalInfo = resCtPrx.AdditionalInfo;
+                    respAll.RecipentParticipantID = resCtPrx.RecipentParticipantID;
+                    respAll.CreditorAccountNo = resCtPrx.CreditorAccountNo;
+                    respAll.CreditorAccountType = resCtPrx.CreditorAccountType;
+                    respAll.CreditorAccountName = resCtPrx.CreditorAccountName;
+                    respAll.CreditorType = resCtPrx.CreditorType;
+                    respAll.CreditorID = resCtPrx.CreditorID;
+                    respAll.CreditorResidentStatus = resCtPrx.CreditorResidentStatus;
+                    respAll.CreditorTownName = resCtPrx.CreditorTownName;
+                    respAll.ResponseType = st;
+                }
+                else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
+                {
+                    errCtPrx = JsonConvert.DeserializeObject<RespErrCreditTransferToProxy>(jsonResponse);
+                    st = "Error";
+
+                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCtPrx.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+
+                    respAll.SendingSystemBIC = errCtPrx.SendingSystemBIC;
+                    respAll.ReceivingSystemBIC = errCtPrx.ReceivingSystemBIC;
+                    respAll.BizMsgIdr = errCtPrx.BizMsgIdr;
+                    respAll.MsgDefIdr = errCtPrx.MsgDefIdr;
+                    respAll.CreationDateTime = errCtPrx.CreationDateTime;
+                    respAll.Reference = errCtPrx.Reference;
+                    respAll.RejectReason = errCtPrx.RejectReason;
+                    respAll.RejectDateTime = errCtPrx.RejectDateTime;
+                    respAll.ErrorLocation = errCtPrx.ErrorLocation;
+                    respAll.ReasonDesc = errCtPrx.ReasonDesc;
+                    respAll.ResponseType = st;
+                }
+                else
+                {
+                    rejCtPrx = JsonConvert.DeserializeObject<RespRejectCreditTransferToProxy>(jsonResponse);
+                    st = "Reject";
+
+                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+
+                    respAll.MsgDefIdr = rejCtPrx.MsgDefIdr;
+                    respAll.TranRefNUM = rejCtPrx.TranRefNUM;
+                    respAll.MsgCreationDate = rejCtPrx.MsgCreationDate;
+                    respAll.OriginalMsgdefIdr = rejCtPrx.OriginalMsgdefIdr;
+                    respAll.OrigEndToEndId = rejCtPrx.OrigEndToEndId;
+                    respAll.OrigTranRefNUM = rejCtPrx.OrigTranRefNUM;
+                    respAll.TransactionStatus = rejCtPrx.TransactionStatus;
+                    respAll.ReasonCode = rejCtPrx.ReasonCode;
+                    respAll.CreditorAccountNo = rejCtPrx.CreditorAccountNo;
+                    respAll.ResponseType = st;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Bad Request" + ex.Message);
+            }
+
+            return respAll;
+        }
         #endregion
 
         #region Reversal Credit Transfer

@@ -55,6 +55,7 @@ namespace BIFastWebAPI.Models
 
     public class RespCreditTrfAll
     {
+        public string ResponseType { get; set; }
         public string MsgDefIdr { get; set; }
         public string TranRefNUM { get; set; }
         public string MsgCreationDate { get; set; }

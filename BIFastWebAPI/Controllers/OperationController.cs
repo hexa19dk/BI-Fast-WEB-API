@@ -22,14 +22,22 @@ namespace BIFastWebAPI.Controllers
 
 
         #region AliasManagement
+        //[HttpPost]
+        //[Route("jsonAPI/prxy001")]
+        //public IHttpActionResult AliasManagement([FromBody] AliasManagementVM data)
+        //{
+        //    AliasManagementResponses respAll = new AliasManagementResponses();
+        //    respAll = hp.AliasManagement(data);
+        //    return Ok(respAll);
+        //}
+
         [HttpPost]
         [Route("jsonAPI/prxy001")]
         public IHttpActionResult AliasManagement([FromBody] AliasManagementVM data)
         {
-            AliasManagementResponses respAll = new AliasManagementResponses();
-            respAll = hp.AliasManagement(data);
-            return Ok(respAll);
-
+            object a = "";
+            a = hp.AliasManagement(data);
+            return Ok(a);
         }
         #endregion
 

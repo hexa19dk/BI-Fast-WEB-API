@@ -76,37 +76,11 @@ namespace BIFastWebAPI.Controllers
         #region CreditTransferToProxy
         [HttpPost]
         [Route("jsonAPI/CreditTransferToProxy")]
-        public IHttpActionResult CreditTransferToProxy([FromBody] ReqCreditTransferToProxy reqCtPrx)
+        public IHttpActionResult CreditTransferToProxy([FromBody] ViewModelProxy vmProx)
         {
-            //ReqCreditTransferToProxy reqCtPrx = new ReqCreditTransferToProxy();
-            RespCrediTransferToProxy resCtPrx = new RespCrediTransferToProxy();
-            RespRejectCreditTransferToProxy rejCtPrx = new RespRejectCreditTransferToProxy();
-            RespErrCreditTransferToProxy errCtPrx = new RespErrCreditTransferToProxy();
-
-            string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.EndToEndId, num = reqCtPrx.TranRefNUM;
-            string jsonResponse = Hp.GenerateReq(reqCtPrx, "http://10.99.0.72:8355/jsonAPI/CreditTransferToProxy");
-
-            if (Hp.Ck(reqCtPrx.EndToEndId) && Hp.Ck(reqCtPrx.MsgDefIdr) && Hp.Ck(reqCtPrx.TranRefNUM) && Hp.Ck(reqCtPrx.RecipentParticipantID) && Hp.Ck(reqCtPrx.CreditorAccountNo) && Hp.Ck(reqCtPrx.Amount) && Hp.Ck(reqCtPrx.Currency) && Hp.Ck(reqCtPrx.MsgCreationDate) && Hp.Ck(reqCtPrx.PurposeType) && Hp.Ck(reqCtPrx.SendingParticipantID) && Hp.Ck(reqCtPrx.DebitorAccountNo) && Hp.Ck(reqCtPrx.DebitorAccountType) && Hp.Ck(reqCtPrx.DebitorAccountName) && Hp.Ck(reqCtPrx.DebitorID) && Hp.Ck(reqCtPrx.RecipentParticipantID) && Hp.Ck(reqCtPrx.CreditorAccountNo) && Hp.Ck(reqCtPrx.CreditorAccountName) && jsonResponse.Contains("Pacs.008.001.08"))
-            {
-                resCtPrx = JsonConvert.DeserializeObject<RespCrediTransferToProxy>(jsonResponse);
-                st = "Success";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                return Ok(resCtPrx);
-            }
-            else if(jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
-            {
-                errCtPrx = JsonConvert.DeserializeObject<RespErrCreditTransferToProxy>(jsonResponse);
-                st = "Error";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCtPrx.CreationDateTime, null, DateTimeStyles.RoundtripKind));
-                return Ok(errCtPrx);
-            }
-            else
-            {
-                rejCtPrx = JsonConvert.DeserializeObject<RespRejectCreditTransferToProxy>(jsonResponse);
-                st = "Reject";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                return Ok(rejCtPrx);
-            }
+            RespAllCreditProxy respAll = new RespAllCreditProxy();
+            respAll = Hp.CreditToProxy(vmProx);
+            return Ok(respAll);
         }
         #endregion
 
