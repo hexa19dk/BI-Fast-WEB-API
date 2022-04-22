@@ -19,46 +19,9 @@ namespace BIFastWebAPI.Controllers
         #region AccountEnquiry
         [HttpPost]
         [Route("jsonAPI/AccountEnquiry")]
-        public IHttpActionResult AccountEnquiry([FromBody] ReqAccountEnquiry reqAcc)
+        public IHttpActionResult AccountEnquiry(ViewModelAccount vmAcc)
         {
-            //ReqAccountEnquiry reqAcc = new ReqAccountEnquiry();
-            RespAccEnquiry respAcc = new RespAccEnquiry();
-            RespRejectAccEnquiry rejcAcc = new RespRejectAccEnquiry();
-            RespErrAccEnquiry errAcc = new RespErrAccEnquiry();
-
-            string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
-            string jsonResponse = Hp.GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
             
-
-            if (Hp.Ck(reqAcc.EndToEndId) && Hp.Ck(reqAcc.MsgDefIdr) && Hp.Ck(reqAcc.TranRefNUM) && Hp.Ck(reqAcc.RecipentParticipantID) && Hp.Ck(reqAcc.CreditorAccountNo) && Hp.Ck(reqAcc.Amount) && Hp.Ck(reqAcc.Currency) && Hp.Ck(reqAcc.MsgCreationDate) && jsonResponse.Contains("pacs.002.001.10"))
-            {
-                respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
-                st = "Success";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                return Ok(respAcc);
-            } 
-            else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
-            {
-                errAcc = JsonConvert.DeserializeObject<RespErrAccEnquiry>(jsonResponse);
-                st = "Error";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(errAcc.CreationDateTime, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
-                return Ok(errAcc);
-            }
-            else
-            {
-                rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
-                if (reqAcc.MsgCreationDate != null)
-                {
-                    cd = DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind);
-                }
-                else
-                {
-                    cd = DateTime.Now;
-                }
-                st = "Reject";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, cd, DateTime.Parse(rejcAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                return Ok(rejcAcc);
-            }
         }
         #endregion
 
