@@ -718,41 +718,53 @@ namespace BIFastWebAPI.Utility
             string ct = vmProx.ChannelType; // Channel Type
             string ss = ""; // Serial Number
 
-            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
-
-            reqCtPrx.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
-            reqCtPrx.MsgDefIdr = "pacs.008.001.08";
-            reqCtPrx.TranRefNUM = Date + bic + TrxTp + ss;
-            reqCtPrx.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
-            reqCtPrx.Amount = vmProx.Amount;
-            reqCtPrx.Currency = "IDR";
-            reqCtPrx.PurposeType = vmProx.PurposeType;
-            reqCtPrx.PaymentInformation = vmProx.PaymentInformation;
-            reqCtPrx.SendingParticipantID = "AGTBIDJA";
-            reqCtPrx.DebitorAccountNo = vmProx.DebitorAccountNo;
-            reqCtPrx.DebitorAccountType = vmProx.DebitorAccountType;
-            reqCtPrx.DebitorAccountName = vmProx.DebitorAccountName;
-            reqCtPrx.DebitorType = vmProx.DebitorType;
-            reqCtPrx.DebitorID = vmProx.DebitorID;
-            reqCtPrx.DebitorResidentStatus = vmProx.DebitorResidentStatus;
-            reqCtPrx.DebitorTownName = "0030";
-            reqCtPrx.RecipentParticipantID = "BRINIDJA";
-            reqCtPrx.CreditorAccountNo = vmProx.CreditorAccountNo;
-            reqCtPrx.CreditorAccountType = vmProx.CreditorAccountType;
-            reqCtPrx.CreditorAccountName = vmProx.CreditorAccountName;
-            reqCtPrx.ProxyType = "01";
-            reqCtPrx.ProxyValue = vmProx.ProxyValue;
-            reqCtPrx.CreditorType = vmProx.CreditorType;
-            reqCtPrx.CreditorID = vmProx.CreditorID;
-            reqCtPrx.CreditorResidentStatus = vmProx.CreditorResidentStatus;
-            reqCtPrx.CreditorTownName = "0300";
-
-            string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.EndToEndId, num = reqCtPrx.TranRefNUM;
-            string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.72:8355/jsonAPI/CreditTransferToProxy");
-
             try
             {
+                var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+                var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+
+                if (String.IsNullOrEmpty(lastID))
+                {
+                    var numInt = int.Parse(lastID) + 1;
+                    var LastNo = numInt.ToString();
+                    ss = LastNo.PadLeft(8, '0');
+                }
+                else
+                {
+                    ss = lastID.PadLeft(8, '0');
+                }
+
+                reqCtPrx.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
+                reqCtPrx.MsgDefIdr = "pacs.008.001.08";
+                reqCtPrx.TranRefNUM = Date + bic + TrxTp + ss;
+                reqCtPrx.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+                reqCtPrx.Amount = vmProx.Amount;
+                reqCtPrx.Currency = "IDR";
+                reqCtPrx.PurposeType = vmProx.PurposeType;
+                reqCtPrx.PaymentInformation = vmProx.PaymentInformation;
+                reqCtPrx.SendingParticipantID = vmProx.SendingParticipantID;
+                reqCtPrx.DebitorAccountNo = vmProx.DebitorAccountNo;
+                reqCtPrx.DebitorAccountType = vmProx.DebitorAccountType;
+                reqCtPrx.DebitorAccountName = vmProx.DebitorAccountName;
+                reqCtPrx.DebitorType = vmProx.DebitorType;
+                reqCtPrx.DebitorID = vmProx.DebitorID;
+                reqCtPrx.DebitorResidentStatus = vmProx.DebitorResidentStatus;
+                reqCtPrx.DebitorTownName = "0030";
+                reqCtPrx.RecipentParticipantID = vmProx.RecipentParticipantID;
+                reqCtPrx.CreditorAccountNo = vmProx.CreditorAccountNo;
+                reqCtPrx.CreditorAccountType = vmProx.CreditorAccountType;
+                reqCtPrx.CreditorAccountName = vmProx.CreditorAccountName;
+                reqCtPrx.ProxyType = "01";
+                reqCtPrx.ProxyValue = vmProx.ProxyValue;
+                reqCtPrx.CreditorType = vmProx.CreditorType;
+                reqCtPrx.CreditorID = vmProx.CreditorID;
+                reqCtPrx.CreditorResidentStatus = vmProx.CreditorResidentStatus;
+                reqCtPrx.CreditorTownName = "0300";
+
+                string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.EndToEndId, num = reqCtPrx.TranRefNUM;
+                string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.72:8355/jsonAPI/CreditTransferToProxy");
+
+            
                 if (Ck(reqCtPrx.EndToEndId) && Ck(reqCtPrx.MsgDefIdr) && Ck(reqCtPrx.TranRefNUM) && Ck(reqCtPrx.RecipentParticipantID) && Ck(reqCtPrx.CreditorAccountNo) && Ck(reqCtPrx.Amount) && Ck(reqCtPrx.Currency) && Ck(reqCtPrx.MsgCreationDate) && Ck(reqCtPrx.PurposeType) && Ck(reqCtPrx.SendingParticipantID) && Ck(reqCtPrx.DebitorAccountNo) && Ck(reqCtPrx.DebitorAccountType) && Ck(reqCtPrx.DebitorAccountName) && Ck(reqCtPrx.DebitorID) && Ck(reqCtPrx.RecipentParticipantID) && Ck(reqCtPrx.CreditorAccountNo) && Ck(reqCtPrx.CreditorAccountName) && jsonResponse.Contains("Pacs.008.001.08"))
                 {
                     resCtPrx = JsonConvert.DeserializeObject<RespCrediTransferToProxy>(jsonResponse);

@@ -133,5 +133,7 @@ namespace BIFastWebAPI.Models
         public string CreditorResidentStatus { get; set; }
         public string PaymentInformation { get; set; }
         public string ProxyValue { get; set; }
+        public string SendingParticipantID { get; set; }
+        public string RecipentParticipantID { get; set; }
     }
 }
