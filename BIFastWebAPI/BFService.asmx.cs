@@ -4,7 +4,7 @@ using BIFastWebAPI.Utility;
 using System.Collections.Generic;
 using BIFastWebAPI.Data;
 using System.Linq;
-using System.Collections;
+using BIFastWebAPI.Data.Models;
 
 namespace BIFastWebAPI
 {
@@ -15,15 +15,13 @@ namespace BIFastWebAPI
     public class BFService : System.Web.Services.WebService
     {
         Helper hp = new Helper();
+        ApplicationDbContext _db = new ApplicationDbContext();
+
 
         [WebMethod(MessageName = "GetBankMaster", Description = "Get Master Data")]
         public List<BankMaster> GetAllBank()
         {
-            ApplicationDbContext _db = new ApplicationDbContext();
-
-            IEnumerable data = _db.BankMasters.Select(b => b.KodeBank.ToString()).ToList();
-
-            return (List<BankMaster>)data;
+            return _db.BankMasters.ToList();
         }
 
 

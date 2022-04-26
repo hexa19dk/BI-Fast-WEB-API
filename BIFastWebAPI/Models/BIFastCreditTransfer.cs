@@ -133,9 +133,4 @@ namespace BIFastWebAPI.Models
         public string RecipentParticipantID { get; set; }
     }
 
-    public class BankMaster
-    {
-        public string KodeBank { get; set; }
-        public string NamaBank { get; set; }
-    }
 }
