@@ -473,79 +473,97 @@ namespace BIFastWebAPI.Utility
             var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
             var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
 
-            reqAcc.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
-            reqAcc.MsgDefIdr = "pacs.008.001.08";
-            reqAcc.TranRefNUM = Date + bic + TrxTp + ss;
-            reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
-            reqAcc.RecipentParticipantID = vmAcc.RecipentParticipantID;
-            reqAcc.CreditorAccountNo = vmAcc.CreditorAccountNo;
-            reqAcc.Amount = vmAcc.Amount;
-            reqAcc.Currency = "IDR";
-            reqAcc.PurposeType = vmAcc.PurposeType;            
-
-            string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
-            string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
-
-            if (Ck(reqAcc.EndToEndId) && Ck(reqAcc.MsgDefIdr) && Ck(reqAcc.TranRefNUM) && Ck(reqAcc.RecipentParticipantID) && Ck(reqAcc.CreditorAccountNo) && Ck(reqAcc.Amount) && Ck(reqAcc.Currency) && Ck(reqAcc.MsgCreationDate) && jsonResponse.Contains("pacs.002.001.10"))
+            try
             {
-                respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
-                st = "Success";
+                if (String.IsNullOrEmpty(lastID))
+                {
+                    var numInt = int.Parse(lastID) + 1;
+                    var LastNo = numInt.ToString();
+                    ss = LastNo.PadLeft(8, '0');
+                }
+                else
+                {
+                    ss = lastID.PadLeft(8, '0');
+                }
 
-                SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                reqAcc.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
+                reqAcc.MsgDefIdr = "pacs.008.001.08";
+                reqAcc.TranRefNUM = Date + bic + TrxTp + ss;
+                reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+                reqAcc.RecipentParticipantID = vmAcc.RecipentParticipantID;
+                reqAcc.CreditorAccountNo = vmAcc.CreditorAccountNo;
+                reqAcc.Amount = vmAcc.Amount;
+                reqAcc.Currency = "IDR";
+                reqAcc.PurposeType = vmAcc.PurposeType;
 
-                respAll.MsgDefIdr = respAcc.MsgDefIdr;
-                respAll.TranRefNUM = respAcc.TranRefNUM;
-                respAll.MsgCreationDate = respAcc.MsgCreationDate;
-                respAll.OriginalMsgdefIdr = respAcc.OriginalMsgdefIdr;
-                respAll.OrigEndToEndId = respAcc.OrigEndToEndId;
-                respAll.OrigTranRefNUM = respAcc.OrigTranRefNUM;
-                respAll.TransactionStatus = respAcc.TransactionStatus;
-                respAll.ReasonCode = respAcc.ReasonCode;
-                respAll.CreditorAccountNo = respAcc.CreditorAccountNo;
-                respAll.CreditorAccountType = respAcc.CreditorAccountType;
-                respAll.CreditorAccountName = respAcc.CreditorAccountName;
-                respAll.CreditorType = respAcc.CreditorType;
-                respAll.CreditorID = respAcc.CreditorID;
-                respAll.CreditorResidentStatus = respAcc.CreditorResidentStatus;
-                respAll.CreditorTownName = respAcc.CreditorTownName;
-                respAll.ResponseType = st;
+                string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
+                string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
+
+                if (Ck(reqAcc.EndToEndId) && Ck(reqAcc.MsgDefIdr) && Ck(reqAcc.TranRefNUM) && Ck(reqAcc.RecipentParticipantID) && Ck(reqAcc.CreditorAccountNo) && Ck(reqAcc.Amount) && Ck(reqAcc.Currency) && Ck(reqAcc.MsgCreationDate) && jsonResponse.Contains("pacs.002.001.10"))
+                {
+                    respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
+                    st = "Success";
+
+                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+
+                    respAll.MsgDefIdr = respAcc.MsgDefIdr;
+                    respAll.TranRefNUM = respAcc.TranRefNUM;
+                    respAll.MsgCreationDate = respAcc.MsgCreationDate;
+                    respAll.OriginalMsgdefIdr = respAcc.OriginalMsgdefIdr;
+                    respAll.OrigEndToEndId = respAcc.OrigEndToEndId;
+                    respAll.OrigTranRefNUM = respAcc.OrigTranRefNUM;
+                    respAll.TransactionStatus = respAcc.TransactionStatus;
+                    respAll.ReasonCode = respAcc.ReasonCode;
+                    respAll.CreditorAccountNo = respAcc.CreditorAccountNo;
+                    respAll.CreditorAccountType = respAcc.CreditorAccountType;
+                    respAll.CreditorAccountName = respAcc.CreditorAccountName;
+                    respAll.CreditorType = respAcc.CreditorType;
+                    respAll.CreditorID = respAcc.CreditorID;
+                    respAll.CreditorResidentStatus = respAcc.CreditorResidentStatus;
+                    respAll.CreditorTownName = respAcc.CreditorTownName;
+                    respAll.ResponseType = st;
+                }
+                else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
+                {
+                    errAcc = JsonConvert.DeserializeObject<RespErrAccEnquiry>(jsonResponse);
+                    st = "Error";
+
+                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(errAcc.CreationDateTime, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+
+                    respAll.SendingSystemBIC = errAcc.SendingSystemBIC;
+                    respAll.ReceivingSystemBIC = errAcc.ReceivingSystemBIC;
+                    respAll.BizMsgIdr = errAcc.BizMsgIdr;
+                    respAll.MsgDefIdr = errAcc.MsgDefIdr;
+                    respAll.CreationDateTime = errAcc.CreationDateTime;
+                    respAll.Reference = errAcc.Reference;
+                    respAll.RejectReason = errAcc.RejectReason;
+                    respAll.RejectDateTime = errAcc.RejectDateTime;
+                    respAll.ErrorLocation = errAcc.ErrorLocation;
+                    respAll.ReasonDesc = errAcc.ReasonDesc;
+                    respAll.ResponseType = st;
+                }
+                else
+                {
+                    rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
+                    st = "Reject";
+
+                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(errAcc.CreationDateTime, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+
+                    respAll.MsgDefIdr = rejcAcc.MsgDefIdr;
+                    respAll.TranRefNUM = rejcAcc.TranRefNUM;
+                    respAll.MsgCreationDate = rejcAcc.MsgCreationDate;
+                    respAll.OriginalMsgdefIdr = rejcAcc.OriginalMsgdefIdr;
+                    respAll.OrigEndToEndId = rejcAcc.OrigEndToEndId;
+                    respAll.OrigTranRefNUM = rejcAcc.OrigTranRefNUM;
+                    respAll.TransactionStatus = rejcAcc.TransactionStatus;
+                    respAll.ReasonCode = rejcAcc.ReasonCode;
+                    respAll.CreditorAccountNo = rejcAcc.CreditorAccountNo;
+                }
             }
-            else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
+            catch (Exception ex)
             {
-                errAcc = JsonConvert.DeserializeObject<RespErrAccEnquiry>(jsonResponse);
-                st = "Error";
-
-                SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(errAcc.CreationDateTime, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
-
-                respAll.SendingSystemBIC = errAcc.SendingSystemBIC;
-                respAll.ReceivingSystemBIC = errAcc.ReceivingSystemBIC;
-                respAll.BizMsgIdr = errAcc.BizMsgIdr;
-                respAll.MsgDefIdr = errAcc.MsgDefIdr;
-                respAll.CreationDateTime = errAcc.CreationDateTime;
-                respAll.Reference = errAcc.Reference;
-                respAll.RejectReason = errAcc.RejectReason;
-                respAll.RejectDateTime = errAcc.RejectDateTime;
-                respAll.ErrorLocation = errAcc.ErrorLocation;
-                respAll.ReasonDesc = errAcc.ReasonDesc;
-                respAll.ResponseType = st;
-            }
-            else
-            {
-                rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
-                st = "Reject";
-
-                SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(errAcc.CreationDateTime, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
-
-                respAll.MsgDefIdr = rejcAcc.MsgDefIdr;
-                respAll.TranRefNUM = rejcAcc.TranRefNUM;
-                respAll.MsgCreationDate = rejcAcc.MsgCreationDate;
-                respAll.OriginalMsgdefIdr = rejcAcc.OriginalMsgdefIdr;
-                respAll.OrigEndToEndId = rejcAcc.OrigEndToEndId;
-                respAll.OrigTranRefNUM = rejcAcc.OrigTranRefNUM;
-                respAll.TransactionStatus = rejcAcc.TransactionStatus;
-                respAll.ReasonCode = rejcAcc.ReasonCode;
-                respAll.CreditorAccountNo = rejcAcc.CreditorAccountNo;
-            }
+                Console.WriteLine("Bad Request" + ex.Message);
+            }            
 
             return respAll;
         }

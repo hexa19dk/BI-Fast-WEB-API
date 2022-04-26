@@ -104,7 +104,6 @@ namespace BIFastWebAPI.Models
         public string RecipentParticipantID { get; set; }
         public string CreditorAccountNo { get; set; }
         public string Amount { get; set; }
-        public string Currency { get; set; }
         public string PurposeType { get; set; }
     }
 }
