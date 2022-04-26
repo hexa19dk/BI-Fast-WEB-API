@@ -1,7 +1,10 @@
 ﻿using BIFastWebAPI.Models;
 using System.Web.Services;
-using BIFastWebAPI.Controllers;
 using BIFastWebAPI.Utility;
+using System.Collections.Generic;
+using BIFastWebAPI.Data;
+using System.Linq;
+using System.Collections;
 
 namespace BIFastWebAPI
 {
@@ -12,6 +15,17 @@ namespace BIFastWebAPI
     public class BFService : System.Web.Services.WebService
     {
         Helper hp = new Helper();
+
+        [WebMethod(MessageName = "GetBankMaster", Description = "Get Master Data")]
+        public List<BankMaster> GetAllBank()
+        {
+            ApplicationDbContext _db = new ApplicationDbContext();
+
+            IEnumerable data = _db.BankMasters.Select(b => b.KodeBank.ToString()).ToList();
+
+            return (List<BankMaster>)data;
+        }
+
 
         #region TransactionService
         [WebMethod(MessageName = "CreditTransfer", Description = "for CreditTransfer")]
@@ -30,10 +44,13 @@ namespace BIFastWebAPI
             return resp;
         }
 
-        //Account Inquiry Service
-
-        //Get list bank code from DB service
-
+        [WebMethod(MessageName = "AccountInquiry", Description = "Account Inquiry")]
+        public RespAllAccount Inquiry(ViewModelAccount vmAcc)
+        {
+            RespAllAccount resp = new RespAllAccount();
+            resp = hp.AccountEnquiry(vmAcc);
+            return resp;
+        }
         #endregion
 
         #region NonTransactionService

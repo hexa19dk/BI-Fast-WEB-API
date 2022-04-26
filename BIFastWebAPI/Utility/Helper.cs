@@ -62,6 +62,9 @@ namespace BIFastWebAPI.Utility
         }
         #endregion
 
+
+
+
         #region Non Transaction Function Helper
 
         #region Alias Management
@@ -531,7 +534,7 @@ namespace BIFastWebAPI.Utility
                 rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
                 st = "Reject";
 
-                SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, cd, DateTime.Parse(rejcAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(errAcc.CreationDateTime, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
 
                 respAll.MsgDefIdr = rejcAcc.MsgDefIdr;
                 respAll.TranRefNUM = rejcAcc.TranRefNUM;
@@ -588,7 +591,7 @@ namespace BIFastWebAPI.Utility
                 req.Currency = "IDR";
                 req.PurposeType = VmTrx.PurpposeType;
                 req.PaymentInformation = VmTrx.PaymentInformation;
-                req.SendingParticipantID = "AGTBIDJA";
+                req.SendingParticipantID = VmTrx.SendingParticipantID;
                 req.DebitorAccountNo = VmTrx.DebitorAccountNo;
                 req.DebitorAccountType = VmTrx.DebitorAccountType;
                 req.DebitorAccountName = VmTrx.DebitorAccountName;
@@ -596,7 +599,7 @@ namespace BIFastWebAPI.Utility
                 req.DebitorID = VmTrx.DebitorID;
                 req.DebitorResidentStatus = VmTrx.DebitorResidentStatus;
                 req.DebitorTownName = "0300";
-                req.RecipentParticipantID = "BRINIDJA";
+                req.RecipentParticipantID = VmTrx.RecipentParticipantID;
                 req.CreditorAccountNo = VmTrx.CreditorAccountNo;
                 req.CreditorAccountType = VmTrx.CreditorAccountType;
                 req.CreditorAccountName = VmTrx.CreditorAccountName;
@@ -633,7 +636,6 @@ namespace BIFastWebAPI.Utility
                     respall.CreditorResidentStatus = resp.CreditorResidentStatus;
                     respall.CreditorTownName = resp.CreditorTownName;
                     respall.ResponseType = st;
-
                 }
                 else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
                 {

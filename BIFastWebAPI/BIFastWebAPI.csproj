@@ -270,10 +270,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202204121554364_AddSequenceNum.cs" />
-    <Compile Include="Migrations\202204121554364_AddSequenceNum.designer.cs">
-      <DependentUpon>202204121554364_AddSequenceNum.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202204220856178_AddbankMaster.cs" />
     <Compile Include="Migrations\202204220856178_AddbankMaster.designer.cs">
       <DependentUpon>202204220856178_AddbankMaster.cs</DependentUpon>

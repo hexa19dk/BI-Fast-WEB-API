@@ -21,14 +21,16 @@ namespace BIFastWebAPI.Controllers
         [Route("jsonAPI/AccountEnquiry")]
         public IHttpActionResult AccountEnquiry(ViewModelAccount vmAcc)
         {
-            
+            RespAllAccount resp = new RespAllAccount();
+            resp = Hp.AccountEnquiry(vmAcc);
+            return Ok(resp);
         }
         #endregion
 
         #region CreditTransfer
         [HttpPost]
         [Route("jsonAPI/CreditTransfer")]
-        public IHttpActionResult CreditTransfer([FromBody] ViewModelTransaction VmTrx)
+        public IHttpActionResult CreditTransfer(ViewModelTransaction VmTrx)
         {
             RespCreditTrfAll respall = new RespCreditTrfAll();
             respall = Hp.CreditTransferAll(VmTrx);

@@ -129,5 +129,13 @@ namespace BIFastWebAPI.Models
         public string CreditorID { get; set; }
         public string CreditorResidentStatus { get; set; }
         public string PaymentInformation { get; set; }
+        public string SendingParticipantID { get; set; }
+        public string RecipentParticipantID { get; set; }
+    }
+
+    public class BankMaster
+    {
+        public string KodeBank { get; set; }
+        public string NamaBank { get; set; }
     }
 }
