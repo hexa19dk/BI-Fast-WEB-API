@@ -270,9 +270,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202204220856178_AddbankMaster.cs" />
-    <Compile Include="Migrations\202204220856178_AddbankMaster.designer.cs">
-      <DependentUpon>202204220856178_AddbankMaster.cs</DependentUpon>
+    <Compile Include="Migrations\202204270228303_changedevive.cs" />
+    <Compile Include="Migrations\202204270228303_changedevive.designer.cs">
+      <DependentUpon>202204270228303_changedevive.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BIFastAliasSysNotification.cs" />
@@ -518,8 +518,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202204220856178_AddbankMaster.resx">
-      <DependentUpon>202204220856178_AddbankMaster.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202204270228303_changedevive.resx">
+      <DependentUpon>202204270228303_changedevive.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
