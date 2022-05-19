@@ -63,8 +63,6 @@ namespace BIFastWebAPI.Utility
         #endregion
 
 
-
-
         #region Non Transaction Function Helper
 
         #region Alias Management
@@ -77,6 +75,7 @@ namespace BIFastWebAPI.Utility
             RespErrAliasManagement errAM = new RespErrAliasManagement();
 
             var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+            //var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id)).Count();
             var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
 
             try
