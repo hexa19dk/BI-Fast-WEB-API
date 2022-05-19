@@ -582,23 +582,23 @@ namespace BIFastWebAPI.Utility
             string TrxTp = "010"; // Transaction Type
             string ori = "O"; // Originator
             string ct = VmTrx.ChannelType; // Channel Type
-            string ss = ""; // Serial Number
-
-            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+            string ss = VmTrx.Sequence; // Serial Number
 
             try
             {
-                if (String.IsNullOrEmpty(lastID))
-                {
-                    var numInt = int.Parse(lastID) + 1;
-                    var LastNo = numInt.ToString();
-                    ss = LastNo.PadLeft(8, '0');
-                }
-                else
-                {
-                    ss = lastID.PadLeft(8, '0');
-                }
+                //var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+                //var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+
+                //if (String.IsNullOrEmpty(lastID))
+                //{
+                //    var numInt = int.Parse(lastID) + 1;
+                //    var LastNo = numInt.ToString();
+                //    ss = LastNo.PadLeft(8, '0');
+                //}
+                //else
+                //{
+                //    ss = lastID.PadLeft(8, '0');
+                //}
 
                 req.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
                 req.MsgDefIdr = "pacs.008.001.08";
@@ -715,23 +715,23 @@ namespace BIFastWebAPI.Utility
             string TrxTp = "010"; // Transaction Type
             string ori = "O"; // Originator
             string ct = vmProx.ChannelType; // Channel Type
-            string ss = ""; // Serial Number
+            string ss = vmProx.Sequence;
 
             try
             {
-                var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-                var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+                //var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
+                //var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
 
-                if (String.IsNullOrEmpty(lastID))
-                {
-                    var numInt = int.Parse(lastID) + 1;
-                    var LastNo = numInt.ToString();
-                    ss = LastNo.PadLeft(8, '0');
-                }
-                else
-                {
-                    ss = lastID.PadLeft(8, '0');
-                }
+                //if (String.IsNullOrEmpty(lastID))
+                //{
+                //    var numInt = int.Parse(lastID) + 1;
+                //    var LastNo = numInt.ToString();
+                //    ss = LastNo.PadLeft(8, '0');
+                //}
+                //else
+                //{
+                //    ss = lastID.PadLeft(8, '0');
+                //}
 
                 reqCtPrx.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
                 reqCtPrx.MsgDefIdr = "pacs.008.001.08";

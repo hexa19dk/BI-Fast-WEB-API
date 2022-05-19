@@ -114,6 +114,7 @@ namespace BIFastWebAPI.Models
     public class ViewModelTransaction
     {
         public string ChannelType { get; set; }
+        public string Sequence { get; set; }
         public string Amount { get; set; }
         public string PurpposeType { get; set; }
         public string DebitorAccountNo { get; set; }
