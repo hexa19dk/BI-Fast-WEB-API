@@ -11,10 +11,13 @@ namespace BIFastWebAPI.Data
     {
         public ApplicationDbContext() : base("DefaultConnection")
         {
-
         }
+
+
 
         public DbSet<ActivityLog> ActivityLogs { get; set; }
         public DbSet<BankMaster> BankMasters { get; set; }
     }
+
+    
 }

@@ -1,5 +1,6 @@
 ﻿namespace BIFastWebAPI.Migrations
 {
+    using BIFastWebAPI.Data.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,10 +15,9 @@
 
         protected override void Seed(BIFastWebAPI.Data.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+            context.ActivityLogs.AddOrUpdate(x => x.Id,
+            new ActivityLog() { Channel = "INIT or MIGRATION", EndPoint = "INIT or MIGRATION", BizMsgIdr = "INIT or MIGRATION", OrigTranRefNUM = "INIT or MIGRATION", Type = "INIT or MIGRATION", UserId = "INIT or MIGRATION", ReqMessage = "INIT or MIGRATION", RespMessage = "INIT or MIGRATION", Status = "INIT or MIGRATION", LogDate = DateTime.Now, ReqDate = DateTime.Now, RespDate = DateTime.Now }
+            );
         }
     }
 }
