@@ -123,6 +123,7 @@ namespace BIFastWebAPI.Models
 
     public class AliasManagementVM
     {
+        public string Sequence { get; set; }
         public string SBIC { get; set; }
         public string RBIC { get; set; }
         public string TransactionType { get; set; }

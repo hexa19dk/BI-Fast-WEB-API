@@ -74,22 +74,20 @@ namespace BIFastWebAPI.Utility
             RespRejectAliasManagement rejAM = new RespRejectAliasManagement();
             RespErrAliasManagement errAM = new RespErrAliasManagement();
 
-            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-            //var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id)).Count();
-            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
-
+            ss = data.Sequence;
             try
             {
-                if (String.IsNullOrEmpty(lastID))
-                {
-                    var numInt = int.Parse(lastID) + 1;
-                    var LastNo = numInt.ToString();
-                    ss = LastNo.PadLeft(8, '0');
-                }
-                else
-                {
-                    ss = lastID.PadLeft(8, '0');
-                }
+                //if (String.IsNullOrEmpty(lastID))
+                //{
+                //    var numInt = int.Parse(lastID) + 1;
+                //    var LastNo = numInt.ToString();
+                //    ss = LastNo.PadLeft(8, '0');
+                //}
+                //else
+                //{
+                //    ss = lastID.PadLeft(8, '0');
+                //}
+
 
                 reqAM.SendingSystemBIC = data.SBIC;
                 reqAM.ReceivingSystemBIC = data.RBIC;
@@ -209,22 +207,10 @@ namespace BIFastWebAPI.Utility
             RespRejectAliasResolution rejAR = new RespRejectAliasResolution();
             RespErrAliasResolution errAR = new RespErrAliasResolution();
 
-            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
-
+            ss = data.Sequence;
+            
             try
             {
-                if (String.IsNullOrEmpty(lastID))
-                {
-                    var numInt = int.Parse(lastID) + 1;
-                    var LastNo = numInt.ToString();
-                    ss = LastNo.PadLeft(8, '0');
-                }
-                else
-                {
-                    ss = lastID.PadLeft(8, '0');
-                }
-
                 reqAR.SendingSystemBIC = data.SBIC;
                 reqAR.ReceivingSystemBIC = data.RBIC;
                 reqAR.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;
@@ -334,22 +320,11 @@ namespace BIFastWebAPI.Utility
             RespRejectAliasRegInquiry rejARI = new RespRejectAliasRegInquiry();
             RespErrAliasRegInquiry errARI = new RespErrAliasRegInquiry();
 
-            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
+            ss = data.Sequence;
 
             try
             {
-                if (String.IsNullOrEmpty(lastID))
-                {
-                    var numInt = int.Parse(lastID) + 1;
-                    var LastNo = numInt.ToString();
-                    ss = LastNo.PadLeft(8, '0');
-                }
-                else
-                {
-                    ss = lastID.PadLeft(8, '0');
-                }
-
+                
                 reqARI.SendingSystemBIC = data.SBIC;
                 reqARI.ReceivingSystemBIC = data.RBIC;
                 reqARI.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;

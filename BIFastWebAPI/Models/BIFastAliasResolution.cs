@@ -122,6 +122,7 @@ namespace BIFastWebAPI.Models
     }
     public class AliasResolutionVM
     {
+        public string Sequence { get; set; }
         public string SBIC { get; set; }
         public string RBIC { get; set; }
         public string TransactionType { get; set; }
