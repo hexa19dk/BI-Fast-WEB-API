@@ -469,22 +469,8 @@ namespace BIFastWebAPI.Utility
             string ss = vmAcc.Sequence; // Serial Number
             DateTime cd;
 
-            var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-            var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
-
             try
             {
-                if (String.IsNullOrEmpty(lastID))
-                {
-                    var numInt = int.Parse(lastID) + 1;
-                    var LastNo = numInt.ToString();
-                    ss = LastNo.PadLeft(8, '0');
-                }
-                else
-                {
-                    ss = lastID.PadLeft(8, '0');
-                }
-
                 reqAcc.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
                 reqAcc.MsgDefIdr = "pacs.008.001.08";
                 reqAcc.TranRefNUM = Date + bic + TrxTp + ss;
