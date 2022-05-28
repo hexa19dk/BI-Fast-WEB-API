@@ -466,7 +466,7 @@ namespace BIFastWebAPI.Utility
             string TrxTp = "010"; // Transaction Type
             string ori = "O"; // Originator
             string ct = vmAcc.ChannelType; // Channel Type
-            string ss = ""; // Serial Number
+            string ss = vmAcc.Sequence; // Serial Number
             DateTime cd;
 
             var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
@@ -582,7 +582,7 @@ namespace BIFastWebAPI.Utility
             string TrxTp = "010"; // Transaction Type
             string ori = "O"; // Originator
             string ct = VmTrx.ChannelType; // Channel Type
-            string ss = VmTrx.Sequence; // Serial Number
+            string ss = VmTrx.Sequence; // Serial Number 8 digit
 
             try
             {
