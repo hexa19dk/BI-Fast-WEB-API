@@ -438,7 +438,7 @@ namespace BIFastWebAPI.Utility
 
             string Date = DateTime.Now.ToString("yyyyMMdd");
             string bic = "AGTBIDJA"; //BIC Code
-            string TrxTp = "010"; // Transaction Type
+            string TrxTp = "510"; // Transaction Type
             string ori = "O"; // Originator
             string ct = vmAcc.ChannelType; // Channel Type
             string ss = vmAcc.Sequence; // Serial Number
