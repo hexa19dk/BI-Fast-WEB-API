@@ -547,20 +547,6 @@ namespace BIFastWebAPI.Utility
 
             try
             {
-                //var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-                //var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
-
-                //if (String.IsNullOrEmpty(lastID))
-                //{
-                //    var numInt = int.Parse(lastID) + 1;
-                //    var LastNo = numInt.ToString();
-                //    ss = LastNo.PadLeft(8, '0');
-                //}
-                //else
-                //{
-                //    ss = lastID.PadLeft(8, '0');
-                //}
-
                 req.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
                 req.MsgDefIdr = "pacs.008.001.08";
                 req.TranRefNUM = Date + bic + TrxTp + ss;
@@ -673,7 +659,7 @@ namespace BIFastWebAPI.Utility
 
             string Date = DateTime.Now.ToString("yyyyMMdd");
             string bic = "AGTBIDJA"; //BIC Code or bank tujuan berupa kode atau nama bank
-            string TrxTp = "010"; // Transaction Type
+            string TrxTp = "110"; // Transaction Type
             string ori = "O"; // Originator
             string ct = vmProx.ChannelType; // Channel Type
             string ss = vmProx.Sequence;
