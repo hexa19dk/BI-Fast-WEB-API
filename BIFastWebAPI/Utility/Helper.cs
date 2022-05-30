@@ -567,7 +567,7 @@ namespace BIFastWebAPI.Utility
                 req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 req.Amount = VmTrx.Amount;
                 req.Currency = "IDR";
-                req.PurposeType = VmTrx.PurpposeType;
+                req.PurposeType = VmTrx.PurposeType;
                 req.PaymentInformation = VmTrx.PaymentInformation;
                 req.SendingParticipantID = VmTrx.SendingParticipantID;
                 req.DebitorAccountNo = VmTrx.DebitorAccountNo;
