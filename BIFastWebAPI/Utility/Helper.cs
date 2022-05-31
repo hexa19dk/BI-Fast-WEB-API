@@ -443,7 +443,9 @@ namespace BIFastWebAPI.Utility
                 string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
                 string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
 
-                if (Ck(reqAcc.EndToEndId) && Ck(reqAcc.MsgDefIdr) && Ck(reqAcc.TranRefNUM) && Ck(reqAcc.RecipentParticipantID) && Ck(reqAcc.CreditorAccountNo) && Ck(reqAcc.Amount) && Ck(reqAcc.Currency) && Ck(reqAcc.MsgCreationDate) && jsonResponse.Contains("pacs.002.001.10") && jsonResponse.Contains("U000"))
+                respAll = JsonConvert.DeserializeObject<RespAllAccount>(jsonResponse);
+
+                if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
                 {
                     respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
                     st = "Success";
@@ -467,7 +469,7 @@ namespace BIFastWebAPI.Utility
                     respAll.CreditorTownName = respAcc.CreditorTownName;
                     respAll.ResponseType = st;
                 }
-                else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
+                else if (respAll.MsgDefIdr == "admi.002.001.01" && respAll.ErrorLocation == "ErrorLocation")
                 {
                     errAcc = JsonConvert.DeserializeObject<RespErrAccEnquiry>(jsonResponse);
                     st = "Error";
@@ -560,8 +562,9 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
                 string jsonResponse = GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
+                respall = JsonConvert.DeserializeObject<RespCreditTrfAll>(jsonResponse);
 
-                if (Ck(req.EndToEndId) && Ck(req.MsgDefIdr) && Ck(req.TranRefNUM) && Ck(req.RecipentParticipantID) && Ck(req.CreditorAccountNo) && Ck(req.Amount) && Ck(req.Currency) && Ck(req.MsgCreationDate) && Ck(req.PurposeType) && Ck(req.SendingParticipantID) && Ck(req.DebitorAccountNo) && Ck(req.DebitorAccountType) && Ck(req.DebitorAccountName) && Ck(req.DebitorID) && Ck(req.RecipentParticipantID) && Ck(req.CreditorAccountNo) && Ck(req.CreditorAccountName) && jsonResponse.Contains("pacs.002.001.10"))
+                if (respall.MsgDefIdr == "pacs.002.001.10" && respall.ReasonCode == "U000")
                 {
                     resp = JsonConvert.DeserializeObject<RespCreditTransfer>(jsonResponse);
                     st = "Success";
@@ -586,7 +589,7 @@ namespace BIFastWebAPI.Utility
                     respall.CreditorTownName = resp.CreditorTownName;
                     respall.ResponseType = st;
                 }
-                else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
+                else if (respall.MsgDefIdr == "admi.002.001.01")
                 {
                     errCt = JsonConvert.DeserializeObject<ErrorCreditTransfer>(jsonResponse);
                     st = "Error";

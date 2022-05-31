@@ -268,9 +268,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205302335110_removeBankMaster.cs" />
-    <Compile Include="Migrations\202205302335110_removeBankMaster.designer.cs">
-      <DependentUpon>202205302335110_removeBankMaster.cs</DependentUpon>
+    <Compile Include="Migrations\202205311214003_DeleteBaskList.cs" />
+    <Compile Include="Migrations\202205311214003_DeleteBaskList.designer.cs">
+      <DependentUpon>202205311214003_DeleteBaskList.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BIFastAliasSysNotification.cs" />
@@ -516,8 +516,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202205302335110_removeBankMaster.resx">
-      <DependentUpon>202205302335110_removeBankMaster.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202205311214003_DeleteBaskList.resx">
+      <DependentUpon>202205311214003_DeleteBaskList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
