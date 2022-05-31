@@ -77,18 +77,7 @@ namespace BIFastWebAPI.Utility
             ss = data.Sequence;
             try
             {
-                //if (String.IsNullOrEmpty(lastID))
-                //{
-                //    var numInt = int.Parse(lastID) + 1;
-                //    var LastNo = numInt.ToString();
-                //    ss = LastNo.PadLeft(8, '0');
-                //}
-                //else
-                //{
-                //    ss = lastID.PadLeft(8, '0');
-                //}
-
-
+                
                 reqAM.SendingSystemBIC = data.SBIC;
                 reqAM.ReceivingSystemBIC = data.RBIC;
                 reqAM.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;
@@ -118,16 +107,14 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqAM), jsonResponse, num = reqAM.TranRefNUM, idr = reqAM.BizMsgIdr;
                 jsonResponse = GenerateReq(reqAM, "http://10.99.0.72:8355/jsonAPI/prxy001");
+                respAll = JsonConvert.DeserializeObject<AliasManagementResponses>(jsonResponse);
 
-
-                if (Ck(reqAM.SendingSystemBIC) && Ck(reqAM.ReceivingSystemBIC) && Ck(reqAM.BizMsgIdr) && Ck(reqAM.CreationDateTime) && Ck(reqAM.TranRefNUM) && Ck(reqAM.MsgCreationDate) && Ck(reqAM.SendingParticipantID) && Ck(reqAM.MsgSenderAccountId) && Ck(reqAM.OperationType) && Ck(reqAM.ProxyType) && Ck(reqAM.ProxyValue) && Ck(reqAM.ProxyBankID) && Ck(reqAM.AccountID) && Ck(reqAM.AccountType) && Ck(reqAM.SecondaryIDType) && Ck(reqAM.SecondaryIDValue) && Ck(reqAM.SendingSystemBIC) && jsonResponse.Contains("prxy.002.001.01"))
+                if (respAll.MsgDefIdr == "prxy.002.001.01" && respAll.StatusReasonCode == "U000")
                 {
-
                     //success
                     respAM = JsonConvert.DeserializeObject<RespAliasManagement>(jsonResponse);
                     st = "Success";
                     SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
-                    //AutoMapper.Mapper.Map<RespAliasManagement, AliasManagementResponses>(respAM);
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = respAM.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = respAM.ReceivingSystemBIC;
@@ -151,13 +138,12 @@ namespace BIFastWebAPI.Utility
                     respAll.CustomerTownName = respAM.CustomerTownName;
 
                 }
-                else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
+                else if (respAll.MsgDefIdr == "admi.002.001.01" && respAll.ErrorLocation != null)
                 {
                     //error
                     st = "Error";
                     errAM = JsonConvert.DeserializeObject<RespErrAliasManagement>(jsonResponse);
                     SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
-                    //AutoMapper.Mapper.Map<AliasManagementResponses, RespErrAliasManagement>(respAll);
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = errAM.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = errAM.ReceivingSystemBIC;
@@ -177,7 +163,7 @@ namespace BIFastWebAPI.Utility
                     st = "Reject";
                     rejAM = JsonConvert.DeserializeObject<RespRejectAliasManagement>(jsonResponse);
                     SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
-                    //AutoMapper.Mapper.Map<AliasManagementResponses, RespRejectAliasManagement>(respAll);
+                    
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = rejAM.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = rejAM.ReceivingSystemBIC;
@@ -227,9 +213,9 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqAR), jsonResponse, num = reqAR.TranRefNUM, idr = reqAR.BizMsgIdr;
                 jsonResponse = GenerateReq(reqAR, "http://10.99.0.72:8355/jsonAPI/prxy003");
+                respAll = JsonConvert.DeserializeObject<AliasResolutionResponses>(jsonResponse);
 
-
-                if (Ck(reqAR.SendingSystemBIC) && Ck(reqAR.ReceivingSystemBIC) && Ck(reqAR.BizMsgIdr) && Ck(reqAR.MsgDefIdr) && Ck(reqAR.CreationDateTime) && Ck(reqAR.TranRefNUM) && Ck(reqAR.MsgCreationDate) && Ck(reqAR.SendingParticipantID) && Ck(reqAR.MsgSenderAccountId) && Ck(reqAR.AlisaResolutionLookup) && Ck(reqAR.UniqueRequestID) && Ck(reqAR.ProxyType) && Ck(reqAR.ProxyValue) && jsonResponse.Contains("prxy.004.001.01"))
+                if (respAll.MsgDefIdr == "prxy.004.001.01" && respAll.StatusReasonCode == "U000")
                 {
                     //success
                     st = "Success";
@@ -266,7 +252,7 @@ namespace BIFastWebAPI.Utility
                     respAll.CustomerTownName = respAR.CustomerTownName;
 
                 }
-                else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
+                else if (respAll.ErrorLocation != null || respAll.MsgDefIdr == "admi.002.001.01")
                 {
                     //error
                     st = "Error";
@@ -324,7 +310,7 @@ namespace BIFastWebAPI.Utility
 
             try
             {
-                
+
                 reqARI.SendingSystemBIC = data.SBIC;
                 reqARI.ReceivingSystemBIC = data.RBIC;
                 reqARI.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;
@@ -340,11 +326,9 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqARI), jsonResponse, num = reqARI.TranRefNUM, idr = reqARI.BizMsgIdr; ;
                 jsonResponse = GenerateReq(reqARI, "http://10.99.0.72:8355/jsonAPI/prxy005");
-                //jsonResponse = GenerateReq(reqARI, "http://172.18.99.30:4343/jsonAPI/prxy005");
+                respAll = JsonConvert.DeserializeObject<AliasRegInquiryResponses>(jsonResponse);
 
-
-
-                if (Ck(reqARI.SendingSystemBIC) && Ck(reqARI.ReceivingSystemBIC) && Ck(reqARI.BizMsgIdr) && Ck(reqARI.MsgDefIdr) && Ck(reqARI.CreationDateTime) && Ck(reqARI.TranRefNUM) && Ck(reqARI.MsgCreationDate) && Ck(reqARI.SendingParticipantID) && Ck(reqARI.MsgSenderAccountId) && jsonResponse.Contains("prxy.006.001.01"))
+                if (respAll.MsgDefIdr == "prxy.006.001.01" && respAll.StatusReasonCode == "U000")
                 {
                     //success
                     st = "Success";
@@ -371,7 +355,7 @@ namespace BIFastWebAPI.Utility
                     respAll.CustomerTownName = respARI.CustomerTownName;
 
                 }
-                else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
+                else if (respAll.ErrorLocation != null || respAll.BizMsgIdr == "admi.002.001.01")
                 {
                     //error
                     st = "Error";
@@ -459,7 +443,7 @@ namespace BIFastWebAPI.Utility
                 string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
                 string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
 
-                if (Ck(reqAcc.EndToEndId) && Ck(reqAcc.MsgDefIdr) && Ck(reqAcc.TranRefNUM) && Ck(reqAcc.RecipentParticipantID) && Ck(reqAcc.CreditorAccountNo) && Ck(reqAcc.Amount) && Ck(reqAcc.Currency) && Ck(reqAcc.MsgCreationDate) && jsonResponse.Contains("pacs.002.001.10"))
+                if (Ck(reqAcc.EndToEndId) && Ck(reqAcc.MsgDefIdr) && Ck(reqAcc.TranRefNUM) && Ck(reqAcc.RecipentParticipantID) && Ck(reqAcc.CreditorAccountNo) && Ck(reqAcc.Amount) && Ck(reqAcc.Currency) && Ck(reqAcc.MsgCreationDate) && jsonResponse.Contains("pacs.002.001.10") && jsonResponse.Contains("U000"))
                 {
                     respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
                     st = "Success";
@@ -507,7 +491,7 @@ namespace BIFastWebAPI.Utility
                     rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
                     st = "Reject";
 
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+                    //SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
 
                     respAll.MsgDefIdr = rejcAcc.MsgDefIdr;
                     respAll.TranRefNUM = rejcAcc.TranRefNUM;
@@ -518,6 +502,7 @@ namespace BIFastWebAPI.Utility
                     respAll.TransactionStatus = rejcAcc.TransactionStatus;
                     respAll.ReasonCode = rejcAcc.ReasonCode;
                     respAll.CreditorAccountNo = rejcAcc.CreditorAccountNo;
+                    respAll.ResponseType = st;
                 }
             }
             catch (Exception ex)

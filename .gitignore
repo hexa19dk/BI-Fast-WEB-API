@@ -370,3 +370,6 @@ FodyWeavers.xsd
 /BIFastWebAPI/Migrations/202204270228303_changedevive.resx
 /BIFastWebAPI/Migrations/202204270228303_changedevive.Designer.cs
 /BIFastWebAPI/Migrations/202204270228303_changedevive.cs
+/BIFastWebAPI/Migrations/202205302335110_removeBankMaster.Designer.cs
+/BIFastWebAPI/Migrations/202205302335110_removeBankMaster.cs
+/BIFastWebAPI/Migrations/202205302335110_removeBankMaster.resx

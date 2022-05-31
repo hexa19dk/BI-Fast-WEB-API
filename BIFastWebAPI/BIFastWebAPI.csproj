@@ -263,12 +263,14 @@
     <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Controllers\FinancialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\Models\ActivityLog.cs" />
-    <Compile Include="Data\Models\BankMaster.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205302335110_removeBankMaster.cs" />
+    <Compile Include="Migrations\202205302335110_removeBankMaster.designer.cs">
+      <DependentUpon>202205302335110_removeBankMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BIFastAliasSysNotification.cs" />
@@ -512,6 +514,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202205302335110_removeBankMaster.resx">
+      <DependentUpon>202205302335110_removeBankMaster.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

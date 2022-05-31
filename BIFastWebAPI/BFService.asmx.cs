@@ -18,11 +18,7 @@ namespace BIFastWebAPI
         ApplicationDbContext _db = new ApplicationDbContext();
 
 
-        [WebMethod(MessageName = "GetBankMaster", Description = "Get Master Data")]
-        public List<BankMaster> GetAllBank()
-        {
-            return _db.BankMasters.ToList();
-        }
+        
 
 
         #region TransactionService

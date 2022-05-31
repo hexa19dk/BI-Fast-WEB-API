@@ -16,7 +16,7 @@ namespace BIFastWebAPI.Data
 
 
         public DbSet<ActivityLog> ActivityLogs { get; set; }
-        public DbSet<BankMaster> BankMasters { get; set; }
+        
     }
 
     
