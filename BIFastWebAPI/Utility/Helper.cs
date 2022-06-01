@@ -654,20 +654,6 @@ namespace BIFastWebAPI.Utility
 
             try
             {
-                //var ToInt = int.Parse(_db.ActivityLogs.Select(i => i.Id).Count().ToString()) + 1;
-                //var lastID = _db.ActivityLogs.Select(x => x.Id).Any() ? ToInt.ToString() : null;
-
-                //if (String.IsNullOrEmpty(lastID))
-                //{
-                //    var numInt = int.Parse(lastID) + 1;
-                //    var LastNo = numInt.ToString();
-                //    ss = LastNo.PadLeft(8, '0');
-                //}
-                //else
-                //{
-                //    ss = lastID.PadLeft(8, '0');
-                //}
-
                 reqCtPrx.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
                 reqCtPrx.MsgDefIdr = "pacs.008.001.08";
                 reqCtPrx.TranRefNUM = Date + bic + TrxTp + ss;
@@ -688,8 +674,15 @@ namespace BIFastWebAPI.Utility
                 reqCtPrx.CreditorAccountNo = vmProx.CreditorAccountNo;
                 reqCtPrx.CreditorAccountType = vmProx.CreditorAccountType;
                 reqCtPrx.CreditorAccountName = vmProx.CreditorAccountName;
-                reqCtPrx.ProxyType = "01";
                 reqCtPrx.ProxyValue = vmProx.ProxyValue;
+                if(vmProx.ProxyValue.Contains("@"))
+                {
+                    reqCtPrx.ProxyType = "02";
+                }
+                else
+                {
+                    reqCtPrx.ProxyType = "01";
+                }
                 reqCtPrx.CreditorType = vmProx.CreditorType;
                 reqCtPrx.CreditorID = vmProx.CreditorID;
                 reqCtPrx.CreditorResidentStatus = vmProx.CreditorResidentStatus;
@@ -697,9 +690,9 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.EndToEndId, num = reqCtPrx.TranRefNUM;
                 string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.72:8355/jsonAPI/CreditTransferToProxy");
+                respAll = JsonConvert.DeserializeObject<RespAllCreditProxy>(jsonResponse);
 
-            
-                if (Ck(reqCtPrx.EndToEndId) && Ck(reqCtPrx.MsgDefIdr) && Ck(reqCtPrx.TranRefNUM) && Ck(reqCtPrx.RecipentParticipantID) && Ck(reqCtPrx.CreditorAccountNo) && Ck(reqCtPrx.Amount) && Ck(reqCtPrx.Currency) && Ck(reqCtPrx.MsgCreationDate) && Ck(reqCtPrx.PurposeType) && Ck(reqCtPrx.SendingParticipantID) && Ck(reqCtPrx.DebitorAccountNo) && Ck(reqCtPrx.DebitorAccountType) && Ck(reqCtPrx.DebitorAccountName) && Ck(reqCtPrx.DebitorID) && Ck(reqCtPrx.RecipentParticipantID) && Ck(reqCtPrx.CreditorAccountNo) && Ck(reqCtPrx.CreditorAccountName) && jsonResponse.Contains("Pacs.008.001.08"))
+                if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
                 {
                     resCtPrx = JsonConvert.DeserializeObject<RespCrediTransferToProxy>(jsonResponse);
                     st = "Success";
@@ -725,7 +718,7 @@ namespace BIFastWebAPI.Utility
                     respAll.CreditorTownName = resCtPrx.CreditorTownName;
                     respAll.ResponseType = st;
                 }
-                else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
+                else if (respAll.MsgDefIdr == "admi.002.001.01")
                 {
                     errCtPrx = JsonConvert.DeserializeObject<RespErrCreditTransferToProxy>(jsonResponse);
                     st = "Error";
