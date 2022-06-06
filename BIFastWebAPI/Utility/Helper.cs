@@ -229,7 +229,7 @@ namespace BIFastWebAPI.Utility
                     respAll.CreationDateTime = respAR.CreationDateTime;
                     respAll.TranRefNUM = respAR.TranRefNUM;
                     respAll.MsgCreationDate = respAR.MsgCreationDate;
-                    respAll.RecipientParticipantID = respAR.RecipientParticipantID;
+                    respAll.RecipientParticipantID = respAR.RecipentParticipantID;
                     respAll.UniqueRequestID = respAR.UniqueRequestID;
                     respAll.OrigUniqueRequestID = respAR.OrigUniqueRequestID;
                     respAll.OriginalMsgdefIdr = respAR.OriginalMsgdefIdr;
