@@ -71,6 +71,7 @@ namespace BIFastWebAPI.Models
 
     public class RespAllAccount
     {
+        public string ResponseType { get; set; }
         public string MsgDefIdr { get; set; }
         public string TranRefNUM { get; set; }
         public string MsgCreationDate { get; set; }
@@ -95,7 +96,6 @@ namespace BIFastWebAPI.Models
         public string RejectDateTime { get; set; }
         public string ErrorLocation { get; set; }
         public string ReasonDesc { get; set; }
-        public string ResponseType { get; set; }
     }
 
     public class ViewModelAccount

@@ -669,7 +669,7 @@ namespace BIFastWebAPI.Utility
                 reqCtPrx.DebitorType = vmProx.DebitorType;
                 reqCtPrx.DebitorID = vmProx.DebitorID;
                 reqCtPrx.DebitorResidentStatus = vmProx.DebitorResidentStatus;
-                reqCtPrx.DebitorTownName = "0030";
+                reqCtPrx.DebitorTownName = "0300";
                 reqCtPrx.RecipentParticipantID = vmProx.RecipentParticipantID;
                 reqCtPrx.CreditorAccountNo = vmProx.CreditorAccountNo;
                 reqCtPrx.CreditorAccountType = vmProx.CreditorAccountType;
@@ -699,6 +699,7 @@ namespace BIFastWebAPI.Utility
 
                     SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
+                    respAll.ResponseType = st;
                     respAll.MsgDefIdr = resCtPrx.MsgDefIdr;
                     respAll.TranRefNUM = resCtPrx.TranRefNUM;
                     respAll.MsgCreationDate = resCtPrx.MsgCreationDate;
@@ -716,7 +717,6 @@ namespace BIFastWebAPI.Utility
                     respAll.CreditorID = resCtPrx.CreditorID;
                     respAll.CreditorResidentStatus = resCtPrx.CreditorResidentStatus;
                     respAll.CreditorTownName = resCtPrx.CreditorTownName;
-                    respAll.ResponseType = st;
                 }
                 else if (respAll.MsgDefIdr == "admi.002.001.01")
                 {
@@ -725,6 +725,7 @@ namespace BIFastWebAPI.Utility
 
                     SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCtPrx.CreationDateTime, null, DateTimeStyles.RoundtripKind));
 
+                    respAll.ResponseType = st;
                     respAll.SendingSystemBIC = errCtPrx.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = errCtPrx.ReceivingSystemBIC;
                     respAll.BizMsgIdr = errCtPrx.BizMsgIdr;
@@ -735,7 +736,6 @@ namespace BIFastWebAPI.Utility
                     respAll.RejectDateTime = errCtPrx.RejectDateTime;
                     respAll.ErrorLocation = errCtPrx.ErrorLocation;
                     respAll.ReasonDesc = errCtPrx.ReasonDesc;
-                    respAll.ResponseType = st;
                 }
                 else
                 {
@@ -744,6 +744,7 @@ namespace BIFastWebAPI.Utility
 
                     SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
+                    respAll.ResponseType = st;
                     respAll.MsgDefIdr = rejCtPrx.MsgDefIdr;
                     respAll.TranRefNUM = rejCtPrx.TranRefNUM;
                     respAll.MsgCreationDate = rejCtPrx.MsgCreationDate;
@@ -753,7 +754,6 @@ namespace BIFastWebAPI.Utility
                     respAll.TransactionStatus = rejCtPrx.TransactionStatus;
                     respAll.ReasonCode = rejCtPrx.ReasonCode;
                     respAll.CreditorAccountNo = rejCtPrx.CreditorAccountNo;
-                    respAll.ResponseType = st;
                 }
             }
             catch(Exception ex)
