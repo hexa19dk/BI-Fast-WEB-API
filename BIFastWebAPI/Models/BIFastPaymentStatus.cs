@@ -68,4 +68,13 @@ namespace BIFastWebAPI.Models
         public string ErrorLocation { get; set; }
         public string ReasonDesc { get; set; }
     }
+
+
+    public class VmPayStat
+    {
+        //public string ChannelType { get; set; }
+        //public string Sequence { get; set; }
+        public string TranRefNUM { get; set; }
+        public string OrigEndToEndId { get; set; }
+    }
 }

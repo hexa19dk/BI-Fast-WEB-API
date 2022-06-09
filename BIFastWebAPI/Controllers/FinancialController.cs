@@ -89,35 +89,52 @@ namespace BIFastWebAPI.Controllers
         #region PaymentStatus
         [HttpPost]
         [Route("jsonAPI/PaymentStatus")]
-        public IHttpActionResult PaymentStatus([FromBody] ReqPaymentStatus req)
+        public IHttpActionResult PaymentStatus(VmPayStat vmSt)
         {
-            //ReqPaymentStatus req = new ReqPaymentStatus();
+            ReqPaymentStatus req = new ReqPaymentStatus();
             RespPaymentStatus res = new RespPaymentStatus();
             RespRejectPaymentStatus rej = new RespRejectPaymentStatus();
             RespErrPaymentStatus err = new RespErrPaymentStatus();
 
+            string Date = DateTime.Now.ToString("yyyyMMdd");
+            string bic = "AGTBIDJA"; //BIC Code
+            string TrxTp = "010"; // Transaction Type
+            string ori = "O"; // Originator
+            //string ct = vmSt.ChannelType; // Channel Type
+            //string ss = vmSt.Sequence; // Serial Number 8 digit
+
+            req.TranRefNUM = vmSt.TranRefNUM; // inputan dari request CT
+            req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+            req.OrigEndToEndId = vmSt.OrigEndToEndId; // inputan dari request CT
+
             string jsonRequest = JsonConvert.SerializeObject(req), idr = req.OrigEndToEndId, num = req.TranRefNUM;
             string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/PaymentStatus");
-
+            
             if (Hp.Ck(req.TranRefNUM) && Hp.Ck(req.OrigEndToEndId) && jsonResponse.Contains("pacs.002.001.10"))
             {
                 res = JsonConvert.DeserializeObject<RespPaymentStatus>(jsonResponse);
                 st = "Success";
-                Hp.SaveLog(chan, num, res.MsgDefIdr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+
+                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+
                 return Ok(res);
             }
             else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
             {
                 err = JsonConvert.DeserializeObject<RespErrPaymentStatus>(jsonResponse);
                 st = "Error";
-                Hp.SaveLog(chan, num, err.BizMsgIdr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(err.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+
+                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(err.CreationDateTime, null, DateTimeStyles.RoundtripKind), DateTime.Parse(err.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+
                 return Ok(err);
             }
             else
             {
                 rej = JsonConvert.DeserializeObject<RespRejectPaymentStatus>(jsonResponse);
                 st = "Reject";
-                Hp.SaveLog(chan, num, rej.MsgDefIdr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rej.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+
+                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(rej.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rej.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+
                 return Ok(rej);
             }          
         }
