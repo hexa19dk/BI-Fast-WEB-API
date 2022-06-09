@@ -229,7 +229,7 @@ namespace BIFastWebAPI.Utility
                     respAll.CreationDateTime = respAR.CreationDateTime;
                     respAll.TranRefNUM = respAR.TranRefNUM;
                     respAll.MsgCreationDate = respAR.MsgCreationDate;
-                    respAll.RecipientParticipantID = respAR.RecipientParticipantID;
+                    respAll.RecipientParticipantID = respAR.RecipentParticipantID;
                     respAll.UniqueRequestID = respAR.UniqueRequestID;
                     respAll.OrigUniqueRequestID = respAR.OrigUniqueRequestID;
                     respAll.OriginalMsgdefIdr = respAR.OriginalMsgdefIdr;
@@ -349,10 +349,7 @@ namespace BIFastWebAPI.Utility
                     respAll.ProxyInqRespStatusCode = respARI.ProxyInqRespStatusCode;
                     respAll.StatusReasonCode = respARI.StatusReasonCode;
                     respAll.RspnData = respARI.RspnData;
-                    respAll.CustomerType = respARI.CustomerType;
-                    respAll.CustomerID = respARI.CustomerID;
-                    respAll.CustomerResidentStatus = respARI.CustomerResidentStatus;
-                    respAll.CustomerTownName = respARI.CustomerTownName;
+                   
 
                 }
                 else if (respAll.ErrorLocation != null || respAll.BizMsgIdr == "admi.002.001.01")

@@ -65,10 +65,6 @@ namespace BIFastWebAPI.Models
         public string ProxyInqRespStatusCode { get; set; }
         public string StatusReasonCode { get; set; }
         public AccountData[] RspnData { get; set; }
-        public string CustomerType { get; set; }
-        public string CustomerID { get; set; }
-        public string CustomerResidentStatus { get; set; }
-        public string CustomerTownName { get; set; }
     }
 
     public class RespRejectAliasRegInquiry { 
@@ -114,10 +110,6 @@ namespace BIFastWebAPI.Models
         public string ProxyInqRespStatusCode { get; set; }
         public string StatusReasonCode { get; set; }
         public AccountData[] RspnData { get; set; }
-        public string CustomerType { get; set; }
-        public string CustomerID { get; set; }
-        public string CustomerResidentStatus { get; set; }
-        public string CustomerTownName { get; set; }
         public string Reference { get; set; }
         public string RejectReason { get; set; }
         public string RejectDateTime { get; set; }
