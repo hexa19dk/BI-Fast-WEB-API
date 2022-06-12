@@ -27,6 +27,35 @@ namespace BIFastWebAPI.Utility
         }
         #endregion
 
+        public void SaveRegID(string regID, string proxyValue, string proxyType)
+        {
+            var dt = new RegistrationData();
+            dt.RegistrationID = regID;
+            dt.ProxyValue = proxyValue;
+            dt.ProxyType = proxyType;
+            dt.CreatedDate = DateTime.Now;
+            if (dt.RegistrationID == null)
+            {
+                _db.RegistrationDatas.Add(dt);
+                _db.SaveChanges();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        #region GetRegId
+
+        public RegistrationData GetRegID(string pv)
+        {
+            return _db.RegistrationDatas.FirstOrDefault(o => o.ProxyValue == pv);
+        }
+        
+
+        #endregion
+
+
         #region Savelog
         public void SaveLog(string chan, string num, string idr, object jsonRequest, object jsonResponse, string st, DateTime reqModel, DateTime respModel)
         {
@@ -115,6 +144,7 @@ namespace BIFastWebAPI.Utility
                     respAM = JsonConvert.DeserializeObject<RespAliasManagement>(jsonResponse);
                     st = "Success";
                     SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveRegID(respAll.RegistrationID, reqAM.ProxyValue, reqAM.ProxyType);
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = respAM.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = respAM.ReceivingSystemBIC;

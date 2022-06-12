@@ -16,7 +16,8 @@ namespace BIFastWebAPI.Data
 
 
         public DbSet<ActivityLog> ActivityLogs { get; set; }
-        
+        public DbSet<RegistrationData> RegistrationDatas { get; set; }
+
     }
 
     
