@@ -34,7 +34,10 @@ namespace BIFastWebAPI.Utility
             dt.ProxyValue = proxyValue;
             dt.ProxyType = proxyType;
             dt.CreatedDate = DateTime.Now;
-            if (dt.RegistrationID == null)
+            RegistrationData dtb = _db.RegistrationDatas.FirstOrDefault(
+                   m => m.RegistrationID == regID);
+
+            if (dtb == null)
             {
                 _db.RegistrationDatas.Add(dt);
                 _db.SaveChanges();
