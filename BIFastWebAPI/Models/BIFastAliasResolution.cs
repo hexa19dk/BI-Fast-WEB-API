@@ -123,13 +123,7 @@ namespace BIFastWebAPI.Models
     public class AliasResolutionVM
     {
         public string Sequence { get; set; }
-        public string SBIC { get; set; }
-        public string RBIC { get; set; }
-        public string TransactionType { get; set; }
-        public string Originator { get; set; }
         public string ChannelType { get; set; }
-        public string MsgDefIdr { get; set; }
-        public string SendingParticipantID { get; set; }
         public string MsgSenderAccountId { get; set; }
         public string AlisaResolutionLookup { get; set; }
         public string ProxyType { get; set; }

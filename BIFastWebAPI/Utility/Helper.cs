@@ -110,14 +110,14 @@ namespace BIFastWebAPI.Utility
             try
             {
                 
-                reqAM.SendingSystemBIC = data.SBIC;
-                reqAM.ReceivingSystemBIC = data.RBIC;
-                reqAM.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;
-                reqAM.MsgDefIdr = data.MsgDefIdr;
+                reqAM.SendingSystemBIC = "AGTBIDJA";
+                reqAM.ReceivingSystemBIC = "FASTIDJA";
+                reqAM.BizMsgIdr = Date + "AGTBIDJA" + data.TransactionType + "O" + data.ChannelType + ss;
+                reqAM.MsgDefIdr = "prxy.001.001.01";
                 reqAM.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
-                reqAM.TranRefNUM = Date + data.SBIC + data.TransactionType + ss;
+                reqAM.TranRefNUM = Date + "AGTBIDJA" + data.TransactionType + ss;
                 reqAM.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:sss");
-                reqAM.SendingParticipantID = data.SendingParticipantID;
+                reqAM.SendingParticipantID = "AGTBIDJA";
                 reqAM.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqAM.OperationType = data.OperationType;
                 reqAM.ProxyType = data.ProxyType;
@@ -232,17 +232,17 @@ namespace BIFastWebAPI.Utility
             
             try
             {
-                reqAR.SendingSystemBIC = data.SBIC;
-                reqAR.ReceivingSystemBIC = data.RBIC;
-                reqAR.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;
-                reqAR.MsgDefIdr = data.MsgDefIdr;
+                reqAR.SendingSystemBIC = "AGTBIDJA";
+                reqAR.ReceivingSystemBIC = "FASTIDJA";
+                reqAR.BizMsgIdr = Date + "AGTBIDJA610O" + data.ChannelType + ss;
+                reqAR.MsgDefIdr = "prxy.003.001.01";
                 reqAR.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
-                reqAR.TranRefNUM = Date + data.SBIC + data.TransactionType + ss;
+                reqAR.TranRefNUM = Date + "AGTBIDJA610" + ss;
                 reqAR.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:sss");
-                reqAR.SendingParticipantID = data.SendingParticipantID;
+                reqAR.SendingParticipantID = "AGTBIDJA";
                 reqAR.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqAR.AlisaResolutionLookup = data.AlisaResolutionLookup;
-                reqAR.UniqueRequestID = Date + data.SBIC + data.Originator + ss;
+                reqAR.UniqueRequestID = Date + "AGTBIDJAO" + ss;
                 reqAR.ProxyType = data.ProxyType;
                 reqAR.ProxyValue = data.ProxyValue;
 
@@ -348,14 +348,14 @@ namespace BIFastWebAPI.Utility
             try
             {
 
-                reqARI.SendingSystemBIC = data.SBIC;
-                reqARI.ReceivingSystemBIC = data.RBIC;
-                reqARI.BizMsgIdr = Date + data.SBIC + data.TransactionType + data.Originator + data.ChannelType + ss;
-                reqARI.MsgDefIdr = data.MsgDefIdr;
+                reqARI.SendingSystemBIC = "AGTBIDJA";
+                reqARI.ReceivingSystemBIC = "FASTIDJA";
+                reqARI.BizMsgIdr = Date + "AGTBIDJA620O" + data.ChannelType + ss;
+                reqARI.MsgDefIdr = "prxy.005.001.01";
                 reqARI.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
-                reqARI.TranRefNUM = Date + data.SBIC + data.TransactionType + ss;
+                reqARI.TranRefNUM = Date + "AGTBIDJA620" + ss;
                 reqARI.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:sss");
-                reqARI.SendingParticipantID = data.SendingParticipantID;
+                reqARI.SendingParticipantID = "AGTBIDJA";
                 reqARI.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqARI.RegistrationID = data.RegistrationID;
                 reqARI.SecondaryIDType = data.SecondaryIDType;

@@ -120,13 +120,7 @@ namespace BIFastWebAPI.Models
     public class AliasRegInquiryVM
     {
         public string Sequence { get; set; }
-        public string SBIC { get; set; }
-        public string RBIC { get; set; }
-        public string TransactionType { get; set; }
-        public string Originator { get; set; }
         public string ChannelType { get; set; }
-        public string MsgDefIdr { get; set; }
-        public string SendingParticipantID { get; set; }
         public string MsgSenderAccountId { get; set; }
         public string RegistrationID { get; set; }
         public string SecondaryIDType { get; set; }
