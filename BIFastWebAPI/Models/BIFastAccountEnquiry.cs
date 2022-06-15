@@ -106,5 +106,7 @@ namespace BIFastWebAPI.Models
         public string CreditorAccountNo { get; set; }
         public string Amount { get; set; }
         public string PurposeType { get; set; }
+        public string UserId { get; set; }
+        public string Channel { get; set; }
     }
 }

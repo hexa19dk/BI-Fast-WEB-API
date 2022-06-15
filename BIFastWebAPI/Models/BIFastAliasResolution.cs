@@ -128,5 +128,7 @@ namespace BIFastWebAPI.Models
         public string AlisaResolutionLookup { get; set; }
         public string ProxyType { get; set; }
         public string ProxyValue { get; set; }
+        public string UserId { get; set; }
+        public string Channel { get; set; }
     }
 }

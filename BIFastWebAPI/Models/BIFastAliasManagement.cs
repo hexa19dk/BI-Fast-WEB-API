@@ -143,5 +143,7 @@ namespace BIFastWebAPI.Models
         public string CustomerID { get; set; }
         public string CustomerResidentStatus { get; set; }
         public string CustomerTownName { get; set; }
+        public string UserId { get; set; }
+        public string Channel { get; set; }
     }
 }

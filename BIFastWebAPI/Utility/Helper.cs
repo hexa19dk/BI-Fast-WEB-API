@@ -60,7 +60,7 @@ namespace BIFastWebAPI.Utility
 
 
         #region Savelog
-        public void SaveLog(string chan, string num, string idr, object jsonRequest, object jsonResponse, string st, DateTime reqModel, DateTime respModel)
+        public void SaveLog(string userId, string chan, string num, string idr, object jsonRequest, object jsonResponse, string st, DateTime reqModel, DateTime respModel)
         {
             var log = new ActivityLog();
             log.Channel = chan;
@@ -68,7 +68,7 @@ namespace BIFastWebAPI.Utility
             log.BizMsgIdr = idr;
             log.EndPoint = HttpContext.Current.Request.Url.AbsolutePath.ToString();
             log.Type = "POST";
-            log.UserId = "Ngadmin";
+            log.UserId = userId;
             log.ReqMessage = jsonRequest.ToString();
             log.RespMessage = jsonResponse.ToString();
             log.Status = st;
@@ -148,7 +148,7 @@ namespace BIFastWebAPI.Utility
                     //success
                     respAM = JsonConvert.DeserializeObject<RespAliasManagement>(jsonResponse);
                     st = "Success";
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.UserId,data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     SaveRegID(respAll.RegistrationID, reqAM.ProxyValue, reqAM.ProxyType);
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = respAM.SendingSystemBIC;
@@ -178,7 +178,7 @@ namespace BIFastWebAPI.Utility
                     //error
                     st = "Error";
                     errAM = JsonConvert.DeserializeObject<RespErrAliasManagement>(jsonResponse);
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.UserId, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = errAM.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = errAM.ReceivingSystemBIC;
@@ -197,7 +197,7 @@ namespace BIFastWebAPI.Utility
                     //reject
                     st = "Reject";
                     rejAM = JsonConvert.DeserializeObject<RespRejectAliasManagement>(jsonResponse);
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.UserId, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = rejAM.SendingSystemBIC;
@@ -257,7 +257,7 @@ namespace BIFastWebAPI.Utility
                     //success
                     st = "Success";
                     respAR = JsonConvert.DeserializeObject<RespAliasResolution>(jsonResponse);
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.UserId,data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = respAR.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = respAR.ReceivingSystemBIC;
@@ -294,7 +294,7 @@ namespace BIFastWebAPI.Utility
                     //error
                     st = "Error";
                     errAR = JsonConvert.DeserializeObject<RespErrAliasResolution>(jsonResponse);
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.UserId, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = errAR.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = errAR.ReceivingSystemBIC;
@@ -313,7 +313,7 @@ namespace BIFastWebAPI.Utility
                     //reject
                     st = "Reject";
                     rejAR = JsonConvert.DeserializeObject<RespRejectAliasResolution>(jsonResponse);
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.UserId, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = rejAR.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = rejAR.ReceivingSystemBIC;
@@ -371,7 +371,7 @@ namespace BIFastWebAPI.Utility
                     //success
                     st = "Success";
                     respARI = JsonConvert.DeserializeObject<RespAliasRegInquiry>(jsonResponse);
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.UserId, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = respARI.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = respARI.ReceivingSystemBIC;
@@ -395,7 +395,7 @@ namespace BIFastWebAPI.Utility
                     //error
                     st = "Error";
                     errARI = JsonConvert.DeserializeObject<RespErrAliasRegInquiry>(jsonResponse);
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.UserId, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = errARI.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = errARI.ReceivingSystemBIC;
@@ -413,7 +413,7 @@ namespace BIFastWebAPI.Utility
                     //reject
                     st = "Reject";
                     rejARI = JsonConvert.DeserializeObject<RespRejectAliasRegInquiry>(jsonResponse);
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.UserId,data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = rejARI.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = rejARI.ReceivingSystemBIC;
@@ -486,7 +486,7 @@ namespace BIFastWebAPI.Utility
                     respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
                     st = "Success";
 
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmAcc.UserId, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                     respAll.MsgDefIdr = respAcc.MsgDefIdr;
                     respAll.TranRefNUM = respAcc.TranRefNUM;
@@ -510,7 +510,7 @@ namespace BIFastWebAPI.Utility
                     errAcc = JsonConvert.DeserializeObject<RespErrAccEnquiry>(jsonResponse);
                     st = "Error";
 
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmAcc.UserId, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
 
                     respAll.SendingSystemBIC = errAcc.SendingSystemBIC;
                     respAll.ReceivingSystemBIC = errAcc.ReceivingSystemBIC;
@@ -529,7 +529,7 @@ namespace BIFastWebAPI.Utility
                     rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
                     st = "Reject";
 
-                    //SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+                    //SaveLog(vmAcc.UserId, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
 
                     respAll.MsgDefIdr = rejcAcc.MsgDefIdr;
                     respAll.TranRefNUM = rejcAcc.TranRefNUM;
@@ -606,7 +606,7 @@ namespace BIFastWebAPI.Utility
                     resp = JsonConvert.DeserializeObject<RespCreditTransfer>(jsonResponse);
                     st = "Success";
 
-                    SaveLog(ct, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resp.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(VmTrx.UserId,VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resp.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                     respall.MsgDefIdr = resp.MsgDefIdr;
                     respall.TranRefNUM = resp.TranRefNUM;
@@ -631,7 +631,7 @@ namespace BIFastWebAPI.Utility
                     errCt = JsonConvert.DeserializeObject<ErrorCreditTransfer>(jsonResponse);
                     st = "Error";
 
-                    SaveLog(ct, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCt.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(VmTrx.UserId, VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCt.CreationDateTime, null, DateTimeStyles.RoundtripKind));
 
                     respall.SendingSystemBIC = errCt.SendingSystemBIC;
                     respall.ReceivingSystemBIC = errCt.ReceivingSystemBIC;
@@ -650,7 +650,7 @@ namespace BIFastWebAPI.Utility
                     rejCt = JsonConvert.DeserializeObject<RejectCreditTransfer>(jsonResponse);
                     st = "Reject";
 
-                    SaveLog(ct, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(VmTrx.UserId, VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                     respall.MsgDefIdr = rejCt.MsgDefIdr;
                     respall.TranRefNUM = rejCt.TranRefNUM;
@@ -735,7 +735,7 @@ namespace BIFastWebAPI.Utility
                     resCtPrx = JsonConvert.DeserializeObject<RespCrediTransferToProxy>(jsonResponse);
                     st = "Success";
 
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmProx.UserId, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                     respAll.ResponseType = st;
                     respAll.MsgDefIdr = resCtPrx.MsgDefIdr;
@@ -761,7 +761,7 @@ namespace BIFastWebAPI.Utility
                     errCtPrx = JsonConvert.DeserializeObject<RespErrCreditTransferToProxy>(jsonResponse);
                     st = "Error";
 
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCtPrx.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmProx.UserId, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCtPrx.CreationDateTime, null, DateTimeStyles.RoundtripKind));
 
                     respAll.ResponseType = st;
                     respAll.SendingSystemBIC = errCtPrx.SendingSystemBIC;
@@ -780,7 +780,7 @@ namespace BIFastWebAPI.Utility
                     rejCtPrx = JsonConvert.DeserializeObject<RespRejectCreditTransferToProxy>(jsonResponse);
                     st = "Reject";
 
-                    SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmProx.UserId, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                     respAll.ResponseType = st;
                     respAll.MsgDefIdr = rejCtPrx.MsgDefIdr;

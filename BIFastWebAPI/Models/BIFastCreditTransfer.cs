@@ -131,6 +131,8 @@ namespace BIFastWebAPI.Models
         public string PaymentInformation { get; set; }
         public string SendingParticipantID { get; set; }
         public string RecipentParticipantID { get; set; }
+        public string UserId { get; set; }
+        public string Channel { get; set; }
     }
 
 }
