@@ -66,21 +66,21 @@ namespace BIFastWebAPI.Controllers
             {
                 res = JsonConvert.DeserializeObject<RespReversalCreditTransfer>(jsonResponse);
                 st = "Success";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                //Hp.SaveLog(vmAcc.UserId, Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                 return Ok(res);
             }
             else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
             {
                 err = JsonConvert.DeserializeObject<RespErrRCT>(jsonResponse);
                 st = "Error";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(err.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+                //Hp.SaveLog(vmAcc.UserId, Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                 return Ok(err);
             }
             else
             {
                 rej = JsonConvert.DeserializeObject<RespRejectRCT>(jsonResponse);
                 st = "Reject";
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rej.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                //Hp.SaveLog(vmAcc.UserId, Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                 return Ok(rej);
             }
         }
@@ -96,13 +96,6 @@ namespace BIFastWebAPI.Controllers
             RespRejectPaymentStatus rej = new RespRejectPaymentStatus();
             RespErrPaymentStatus err = new RespErrPaymentStatus();
 
-            string Date = DateTime.Now.ToString("yyyyMMdd");
-            string bic = "AGTBIDJA"; //BIC Code
-            string TrxTp = "010"; // Transaction Type
-            string ori = "O"; // Originator
-            //string ct = vmSt.ChannelType; // Channel Type
-            //string ss = vmSt.Sequence; // Serial Number 8 digit
-
             req.TranRefNUM = vmSt.TranRefNUM; // inputan dari request CT
             req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
             req.OrigEndToEndId = vmSt.OrigEndToEndId; // inputan dari request CT
@@ -115,7 +108,7 @@ namespace BIFastWebAPI.Controllers
                 res = JsonConvert.DeserializeObject<RespPaymentStatus>(jsonResponse);
                 st = "Success";
 
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                Hp.SaveLog("Admin", "01", num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                 return Ok(res);
             }
@@ -124,7 +117,7 @@ namespace BIFastWebAPI.Controllers
                 err = JsonConvert.DeserializeObject<RespErrPaymentStatus>(jsonResponse);
                 st = "Error";
 
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(err.CreationDateTime, null, DateTimeStyles.RoundtripKind), DateTime.Parse(err.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+                Hp.SaveLog("Admin", "01", num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                 return Ok(err);
             }
@@ -133,7 +126,7 @@ namespace BIFastWebAPI.Controllers
                 rej = JsonConvert.DeserializeObject<RespRejectPaymentStatus>(jsonResponse);
                 st = "Reject";
 
-                Hp.SaveLog(chan, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(rej.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rej.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                Hp.SaveLog("Admin", "01", num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                 return Ok(rej);
             }          

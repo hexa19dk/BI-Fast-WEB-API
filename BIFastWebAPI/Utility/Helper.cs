@@ -455,19 +455,11 @@ namespace BIFastWebAPI.Utility
             RespRejectAccEnquiry rejcAcc = new RespRejectAccEnquiry();
             RespErrAccEnquiry errAcc = new RespErrAccEnquiry();
 
-            string Date = DateTime.Now.ToString("yyyyMMdd");
-            string bic = "AGTBIDJA"; //BIC Code
-            string TrxTp = "510"; // Transaction Type
-            string ori = "O"; // Originator
-            string ct = vmAcc.ChannelType; // Channel Type
-            string ss = vmAcc.Sequence; // Serial Number
-            DateTime cd;
-
             try
             {
-                reqAcc.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
+                reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + vmAcc.Sequence;
                 reqAcc.MsgDefIdr = "pacs.008.001.08";
-                reqAcc.TranRefNUM = Date + bic + TrxTp + ss;
+                reqAcc.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + vmAcc.Sequence;
                 reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 reqAcc.RecipentParticipantID = vmAcc.RecipentParticipantID;
                 reqAcc.CreditorAccountNo = vmAcc.CreditorAccountNo;
@@ -561,18 +553,11 @@ namespace BIFastWebAPI.Utility
             RejectCreditTransfer rejCt = new RejectCreditTransfer();
             ErrorCreditTransfer errCt = new ErrorCreditTransfer();
 
-            string Date = DateTime.Now.ToString("yyyyMMdd");
-            string bic = "AGTBIDJA"; //BIC Code
-            string TrxTp = "010"; // Transaction Type
-            string ori = "O"; // Originator
-            string ct = VmTrx.ChannelType; // Channel Type
-            string ss = VmTrx.Sequence; // Serial Number 8 digit
-
             try
             {
-                req.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
+                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + VmTrx.Sequence;
                 req.MsgDefIdr = "pacs.008.001.08";
-                req.TranRefNUM = Date + bic + TrxTp + ss;
+                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + VmTrx.Sequence;
                 req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 req.Amount = VmTrx.Amount;
                 req.Currency = "IDR";
@@ -682,18 +667,11 @@ namespace BIFastWebAPI.Utility
             RespErrCreditTransferToProxy errCtPrx = new RespErrCreditTransferToProxy();
             RespAllCreditProxy respAll = new RespAllCreditProxy();
 
-            string Date = DateTime.Now.ToString("yyyyMMdd");
-            string bic = "AGTBIDJA"; //BIC Code or bank tujuan berupa kode atau nama bank
-            string TrxTp = "110"; // Transaction Type
-            string ori = "O"; // Originator
-            string ct = vmProx.ChannelType; // Channel Type
-            string ss = vmProx.Sequence;
-
             try
             {
-                reqCtPrx.EndToEndId = Date + bic + TrxTp + ori + ct + ss;
+                reqCtPrx.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + "O" + vmProx.ChannelType + vmProx.Sequence;
                 reqCtPrx.MsgDefIdr = "pacs.008.001.08";
-                reqCtPrx.TranRefNUM = Date + bic + TrxTp + ss;
+                reqCtPrx.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + vmProx.Sequence;
                 reqCtPrx.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 reqCtPrx.Amount = vmProx.Amount;
                 reqCtPrx.Currency = "IDR";
