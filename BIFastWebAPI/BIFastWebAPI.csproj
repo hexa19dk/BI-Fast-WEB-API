@@ -266,10 +266,12 @@
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\Models\ActivityLog.cs" />
     <Compile Include="Data\Models\RegistrationData.cs" />
+    <Compile Include="Data\RegDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\ConfigurationB.cs" />
+    <Compile Include="Migrations\ConfigurationA.cs" />
     <Compile Include="Models\BIFastAliasSysNotification.cs" />
     <Compile Include="Models\BIFastAliasManagement.cs" />
     <Compile Include="Models\BIFastAliasNotification.cs" />

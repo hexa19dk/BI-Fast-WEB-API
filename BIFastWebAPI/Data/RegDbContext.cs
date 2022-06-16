@@ -7,19 +7,14 @@ using System.Web;
 
 namespace BIFastWebAPI.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class RegDbContext : DbContext
     {
-        public ApplicationDbContext() : base("DevSaveLog")
+        public RegDbContext() : base("DevSaveRegis")
         {
         }
 
+        public DbSet<RegistrationData> RegistrationDatas { get; set; }
 
-
-
-        public DbSet<ActivityLog> ActivityLogs { get; set; }
-        
 
     }
-
-    
 }

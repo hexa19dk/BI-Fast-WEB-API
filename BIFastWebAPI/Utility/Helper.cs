@@ -14,6 +14,7 @@ namespace BIFastWebAPI.Utility
     public class Helper
     {
         ApplicationDbContext _db = new ApplicationDbContext();
+        RegDbContext _dbr = new RegDbContext();
         string st = "", ss = "", chan, Date = DateTime.Now.ToString("yyyyMMdd");
 
         #region Check Isnull?
@@ -34,12 +35,12 @@ namespace BIFastWebAPI.Utility
             dt.ProxyValue = proxyValue;
             dt.ProxyType = proxyType;
             dt.CreatedDate = DateTime.Now;
-            RegistrationData dtb = _db.RegistrationDatas.FirstOrDefault(
+            RegistrationData dtb = _dbr.RegistrationDatas.FirstOrDefault(
                    m => m.RegistrationID == regID);
 
             if (dtb == null)
             {
-                _db.RegistrationDatas.Add(dt);
+                _dbr.RegistrationDatas.Add(dt);
                 _db.SaveChanges();
             }
             else
@@ -52,7 +53,7 @@ namespace BIFastWebAPI.Utility
 
         public RegistrationData GetRegID(string pv)
         {
-            return _db.RegistrationDatas.FirstOrDefault(o => o.ProxyValue == pv);
+            return _dbr.RegistrationDatas.FirstOrDefault(o => o.ProxyValue == pv);
         }
         
 
