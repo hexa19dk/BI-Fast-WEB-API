@@ -265,12 +265,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\Models\ActivityLog.cs" />
+    <Compile Include="Data\Models\RegistrationData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205311214003_DeleteBaskList.cs" />
-    <Compile Include="Migrations\202205311214003_DeleteBaskList.designer.cs">
-      <DependentUpon>202205311214003_DeleteBaskList.cs</DependentUpon>
+    <Compile Include="Migrations\202206120335044_UpdateRegistrationData.cs" />
+    <Compile Include="Migrations\202206120335044_UpdateRegistrationData.designer.cs">
+      <DependentUpon>202206120335044_UpdateRegistrationData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BIFastAliasSysNotification.cs" />
@@ -516,8 +517,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202205311214003_DeleteBaskList.resx">
-      <DependentUpon>202205311214003_DeleteBaskList.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206120335044_UpdateRegistrationData.resx">
+      <DependentUpon>202206120335044_UpdateRegistrationData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

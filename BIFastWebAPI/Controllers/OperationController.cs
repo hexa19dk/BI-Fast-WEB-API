@@ -109,5 +109,25 @@ namespace BIFastWebAPI.Controllers
             }
         }
         #endregion
+
+        #region GetRegistrationID
+
+        [Route("jsonAPI/getReqID")]
+        public IHttpActionResult GetRegID(string pv)
+        {
+            var regId = hp.GetRegID(pv);
+            if (regId != null)
+            {
+                return Ok(regId);
+            }
+            else
+            {
+                return Ok("RegId Tidak ditemukan");
+            }
+            
+        }
+
+        #endregion
     }
+
 }
