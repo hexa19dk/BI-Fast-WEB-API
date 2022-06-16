@@ -438,7 +438,8 @@ namespace BIFastWebAPI.Utility
                 reqAcc.PurposeType = vmAcc.PurposeType;
 
                 string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
-                string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
+                //string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
+                string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.3:8355/jsonAPI/AccountEnquiry");
 
                 respAll = JsonConvert.DeserializeObject<RespAllAccount>(jsonResponse);
 
