@@ -463,7 +463,7 @@ namespace BIFastWebAPI.Utility
                 reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 reqAcc.RecipentParticipantID = vmAcc.RecipentParticipantID;
                 reqAcc.CreditorAccountNo = vmAcc.CreditorAccountNo;
-                reqAcc.Amount = vmAcc.Amount;
+                reqAcc.Amount = vmAcc.Amount + ".00";
                 reqAcc.Currency = "IDR";
                 reqAcc.PurposeType = vmAcc.PurposeType;
 
@@ -559,7 +559,7 @@ namespace BIFastWebAPI.Utility
                 req.MsgDefIdr = "pacs.008.001.08";
                 req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + VmTrx.Sequence;
                 req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
-                req.Amount = VmTrx.Amount;
+                req.Amount = VmTrx.Amount + ".00";
                 req.Currency = "IDR";
                 req.PurposeType = VmTrx.PurposeType;
                 req.PaymentInformation = VmTrx.PaymentInformation;
@@ -673,7 +673,7 @@ namespace BIFastWebAPI.Utility
                 reqCtPrx.MsgDefIdr = "pacs.008.001.08";
                 reqCtPrx.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + vmProx.Sequence;
                 reqCtPrx.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
-                reqCtPrx.Amount = vmProx.Amount;
+                reqCtPrx.Amount = vmProx.Amount + ".00";
                 reqCtPrx.Currency = "IDR";
                 reqCtPrx.PurposeType = vmProx.PurposeType;
                 reqCtPrx.PaymentInformation = vmProx.PaymentInformation;
