@@ -469,9 +469,9 @@ namespace BIFastWebAPI.Utility
 
             try
             {
-                reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + vmAcc.Sequence;
+                reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + ss;
                 reqAcc.MsgDefIdr = "pacs.008.001.08";
-                reqAcc.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + vmAcc.Sequence;
+                reqAcc.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + ss;
                 reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 reqAcc.RecipentParticipantID = vmAcc.RecipentParticipantID;
                 reqAcc.CreditorAccountNo = vmAcc.CreditorAccountNo;
@@ -568,9 +568,9 @@ namespace BIFastWebAPI.Utility
             GetSeq();
             try
             {
-                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + VmTrx.Sequence;
+                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + ss;
                 req.MsgDefIdr = "pacs.008.001.08";
-                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + VmTrx.Sequence;
+                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + ss;
                 req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 req.Amount = VmTrx.Amount + ".00";
                 req.Currency = "IDR";
@@ -683,9 +683,9 @@ namespace BIFastWebAPI.Utility
             GetSeq();
             try
             {
-                reqCtPrx.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + "O" + vmProx.ChannelType + vmProx.Sequence;
+                reqCtPrx.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + "O" + vmProx.ChannelType + ss;
                 reqCtPrx.MsgDefIdr = "pacs.008.001.08";
-                reqCtPrx.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + vmProx.Sequence;
+                reqCtPrx.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + ss;
                 reqCtPrx.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 reqCtPrx.Amount = vmProx.Amount + ".00";
                 reqCtPrx.Currency = "IDR";
