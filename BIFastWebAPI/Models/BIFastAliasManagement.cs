@@ -123,7 +123,6 @@ namespace BIFastWebAPI.Models
 
     public class AliasManagementVM
     {
-        public string Sequence { get; set; }
         public string TransactionType { get; set; }
         public string ChannelType { get; set; }
         public string MsgSenderAccountId { get; set; }

@@ -122,7 +122,6 @@ namespace BIFastWebAPI.Models
     }
     public class AliasResolutionVM
     {
-        public string Sequence { get; set; }
         public string ChannelType { get; set; }
         public string MsgSenderAccountId { get; set; }
         public string AlisaResolutionLookup { get; set; }

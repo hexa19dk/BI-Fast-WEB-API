@@ -119,7 +119,6 @@ namespace BIFastWebAPI.Models
 
     public class AliasRegInquiryVM
     {
-        public string Sequence { get; set; }
         public string ChannelType { get; set; }
         public string MsgSenderAccountId { get; set; }
         public string RegistrationID { get; set; }

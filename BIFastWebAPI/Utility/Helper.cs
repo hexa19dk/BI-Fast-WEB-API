@@ -28,6 +28,13 @@ namespace BIFastWebAPI.Utility
         }
         #endregion
 
+        public string GetSeq()
+        {
+            var newSeq = (_db.ActivityLogs.Select(x => (int?)x.Id).Max() ?? 0) + 1;
+            ss = newSeq.ToString().PadLeft(8, '0');
+            return ss;
+        }
+
         public void SaveRegID(string regID, string proxyValue, string proxyType)
         {
             var dt = new RegistrationData();
@@ -107,7 +114,7 @@ namespace BIFastWebAPI.Utility
             RespRejectAliasManagement rejAM = new RespRejectAliasManagement();
             RespErrAliasManagement errAM = new RespErrAliasManagement();
 
-            ss = data.Sequence;
+            GetSeq();
             try
             {
                 
@@ -230,8 +237,8 @@ namespace BIFastWebAPI.Utility
             RespRejectAliasResolution rejAR = new RespRejectAliasResolution();
             RespErrAliasResolution errAR = new RespErrAliasResolution();
 
-            ss = data.Sequence;
-            
+            GetSeq();
+
             try
             {
                 reqAR.SendingSystemBIC = "AGTBIDJA";
@@ -346,7 +353,7 @@ namespace BIFastWebAPI.Utility
             RespRejectAliasRegInquiry rejARI = new RespRejectAliasRegInquiry();
             RespErrAliasRegInquiry errARI = new RespErrAliasRegInquiry();
 
-            ss = data.Sequence;
+            GetSeq();
 
             try
             {
@@ -458,6 +465,7 @@ namespace BIFastWebAPI.Utility
             RespAccEnquiry respAcc = new RespAccEnquiry();
             RespRejectAccEnquiry rejcAcc = new RespRejectAccEnquiry();
             RespErrAccEnquiry errAcc = new RespErrAccEnquiry();
+            GetSeq();
 
             try
             {
@@ -557,7 +565,7 @@ namespace BIFastWebAPI.Utility
             RespCreditTransfer resp = new RespCreditTransfer();
             RejectCreditTransfer rejCt = new RejectCreditTransfer();
             ErrorCreditTransfer errCt = new ErrorCreditTransfer();
-
+            GetSeq();
             try
             {
                 req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + VmTrx.Sequence;
@@ -672,7 +680,7 @@ namespace BIFastWebAPI.Utility
             RespRejectCreditTransferToProxy rejCtPrx = new RespRejectCreditTransferToProxy();
             RespErrCreditTransferToProxy errCtPrx = new RespErrCreditTransferToProxy();
             RespAllCreditProxy respAll = new RespAllCreditProxy();
-
+            GetSeq();
             try
             {
                 reqCtPrx.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + "O" + vmProx.ChannelType + vmProx.Sequence;

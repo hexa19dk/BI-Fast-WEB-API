@@ -117,7 +117,6 @@ namespace BIFastWebAPI.Models
     public class ViewModelProxy
     {
         public string ChannelType { get; set; }
-        public string Sequence { get; set; }
         public string Amount { get; set; }
         public string PurposeType { get; set; }
         public string DebitorAccountNo { get; set; }
