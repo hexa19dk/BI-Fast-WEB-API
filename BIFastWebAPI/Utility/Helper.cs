@@ -545,7 +545,7 @@ namespace BIFastWebAPI.Utility
                     rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
                     st = "Reject";
 
-                    //SaveLog(vmAcc.UserId, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmAcc.UserId, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
 
                     respAll.MsgDefIdr = rejcAcc.MsgDefIdr;
                     respAll.TranRefNUM = rejcAcc.TranRefNUM;

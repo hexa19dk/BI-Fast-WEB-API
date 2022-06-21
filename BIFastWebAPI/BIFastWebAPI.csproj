@@ -364,6 +364,7 @@
     <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings2.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings3.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings4.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\docs.js" />
     <Content Include="Scripts\highlight-custom.js" />
