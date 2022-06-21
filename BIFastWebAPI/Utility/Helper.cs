@@ -117,6 +117,17 @@ namespace BIFastWebAPI.Utility
             GetSeq();
             try
             {
+                if (data.OperationType == "NEWR")
+                {
+                    data.TransactionType = "710";
+                    data.RegistrationID = "";
+                }
+                else
+                {
+                    data.TransactionType = "720";
+                    data.RegistrationID = GetRegID(data.ProxyValue).ToString();
+                }
+                
                 
                 reqAM.SendingSystemBIC = "AGTBIDJA";
                 reqAM.ReceivingSystemBIC = "FASTIDJA";

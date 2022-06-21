@@ -270,6 +270,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206210729460_AddLogsTable.cs" />
+    <Compile Include="Migrations\202206210729460_AddLogsTable.designer.cs">
+      <DependentUpon>202206210729460_AddLogsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ConfigurationB.cs" />
     <Compile Include="Migrations\ConfigurationA.cs" />
     <Compile Include="Models\BIFastAliasSysNotification.cs" />
@@ -359,6 +363,7 @@
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings2.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings3.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\docs.js" />
     <Content Include="Scripts\highlight-custom.js" />
@@ -516,6 +521,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202206210729460_AddLogsTable.resx">
+      <DependentUpon>202206210729460_AddLogsTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
