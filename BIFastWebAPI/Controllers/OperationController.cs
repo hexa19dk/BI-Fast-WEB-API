@@ -17,8 +17,10 @@ namespace BIFastWebAPI.Controllers
     {
 
         private readonly Helper hp = new Helper();
-        string st = "", ss = "",chan, Date = DateTime.Now.ToString("yyyyMMdd");   
+        string st = "", ss = "",chan, Date = DateTime.Now.ToString("yyyyMMdd");
+        object a;
         ApplicationDbContext _db = new ApplicationDbContext();
+
 
 
         #region AliasManagement
@@ -28,7 +30,6 @@ namespace BIFastWebAPI.Controllers
         [Route("jsonAPI/prxy001")]
         public IHttpActionResult AliasManagement([FromBody] AliasManagementVM data)
         {
-            object a = "";
             a = hp.AliasManagement(data);
             return Ok(a);
         }
@@ -39,9 +40,8 @@ namespace BIFastWebAPI.Controllers
         [Route("jsonAPI/prxy003")]
         public IHttpActionResult AliasResolution([FromBody] AliasResolutionVM data)
         {
-            AliasResolutionResponses respAll = new AliasResolutionResponses();
-            respAll = hp.AliasResolution(data);
-            return Ok(respAll);
+            a = hp.AliasResolution(data);
+            return Ok(a);
         }
         #endregion
 
@@ -50,9 +50,8 @@ namespace BIFastWebAPI.Controllers
         [Route("jsonAPI/prxy005")]
         public IHttpActionResult AliasRegistrationInquiry([FromBody] AliasRegInquiryVM data)
         {
-            AliasRegInquiryResponses respAll = new AliasRegInquiryResponses();
-            respAll = hp.AliasRegInquiry(data);
-            return Ok(respAll);
+            a = hp.AliasRegInquiry(data);
+            return Ok(a);
         }
         #endregion
 

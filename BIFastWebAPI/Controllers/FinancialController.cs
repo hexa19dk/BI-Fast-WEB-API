@@ -12,8 +12,7 @@ namespace BIFastWebAPI.Controllers
     public class FinancialController : ApiController
     {
         Helper Hp = new Helper();
-        string chan, st = "" ;
-        DateTime cd;
+        string chan, st = "" ; DateTime cd; object a;
         ApplicationDbContext db = new ApplicationDbContext();
 
         #region AccountEnquiry
@@ -21,9 +20,8 @@ namespace BIFastWebAPI.Controllers
         [Route("jsonAPI/AccountEnquiry")]
         public IHttpActionResult AccountEnquiry(ViewModelAccount vmAcc)
         {
-            RespAllAccount resp = new RespAllAccount();
-            resp = Hp.AccountEnquiry(vmAcc);
-            return Ok(resp);
+            a = Hp.AccountEnquiry(vmAcc);
+            return Ok(a);
         }
         #endregion
 
@@ -32,9 +30,8 @@ namespace BIFastWebAPI.Controllers
         [Route("jsonAPI/CreditTransfer")]
         public IHttpActionResult CreditTransfer(ViewModelTransaction VmTrx)
         {
-            RespCreditTrfAll respall = new RespCreditTrfAll();
-            respall = Hp.CreditTransferAll(VmTrx);
-            return Ok(respall);
+            a = Hp.CreditTransferAll(VmTrx);
+            return Ok(a);
         }
         #endregion
 
@@ -43,9 +40,8 @@ namespace BIFastWebAPI.Controllers
         [Route("jsonAPI/CreditTransferToProxy")]
         public IHttpActionResult CreditTransferToProxy([FromBody] ViewModelProxy vmProx)
         {
-            RespAllCreditProxy respAll = new RespAllCreditProxy();
-            respAll = Hp.CreditToProxy(vmProx);
-            return Ok(respAll);
+            a = Hp.CreditToProxy(vmProx);
+            return Ok(a);
         }
         #endregion
 
