@@ -15,7 +15,7 @@ namespace BIFastWebAPI.Utility
     {
         ApplicationDbContext _db = new ApplicationDbContext();
         RegDbContext _dbr = new RegDbContext();
-        string st = "", ss = "", chan, Date = DateTime.Now.ToString("yyyyMMdd");
+        string st = "", ss = "", chan, Date = DateTime.Now.ToString("yyyyMMdd"), rID="";
         object rrr;
 
         #region Check Isnull?
@@ -49,7 +49,7 @@ namespace BIFastWebAPI.Utility
             if (dtb == null)
             {
                 _dbr.RegistrationDatas.Add(dt);
-                _db.SaveChanges();
+                _dbr.SaveChanges();
             }
             else
             {
@@ -59,9 +59,10 @@ namespace BIFastWebAPI.Utility
 
         #region GetRegId
 
-        public RegistrationData GetRegID(string pv)
+        public string GetRegID(string pv)
         {
-            return _dbr.RegistrationDatas.FirstOrDefault(o => o.ProxyValue == pv);
+            var rd = _dbr.RegistrationDatas.FirstOrDefault(o => o.ProxyValue == pv);
+            return rd.RegistrationID;
         }
         
 
@@ -121,12 +122,12 @@ namespace BIFastWebAPI.Utility
                 if (data.OperationType == "NEWR")
                 {
                     data.TransactionType = "710";
-                    data.RegistrationID = "";
+                    rID = "";
                 }
                 else
                 {
                     data.TransactionType = "720";
-                    data.RegistrationID = GetRegID(data.ProxyValue).ToString();
+                    rID = GetRegID(data.ProxyValue);
                 }
                 
                 
@@ -142,7 +143,7 @@ namespace BIFastWebAPI.Utility
                 reqAM.OperationType = data.OperationType;
                 reqAM.ProxyType = data.ProxyType;
                 reqAM.ProxyValue = data.ProxyValue;
-                reqAM.RegistrationID = data.RegistrationID;
+                reqAM.RegistrationID = rID;
                 reqAM.DisplayName = data.DisplayName;
                 reqAM.ProxyBankID = data.ProxyBankID;
                 reqAM.AccountID = data.AccountID;

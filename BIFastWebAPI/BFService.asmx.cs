@@ -74,12 +74,12 @@ namespace BIFastWebAPI
         //}
 
 
-        [WebMethod(MessageName = "Get_RegID", Description = "Get Registration ID")]
-        public RegistrationData GetRegID(string pv)
-        {
-            RegistrationData data = hp.GetRegID(pv);
-            return data;
-        }
+        //[WebMethod(MessageName = "Get_RegID", Description = "Get Registration ID")]
+        //public RegistrationData GetRegID(string pv)
+        //{
+        //    RegistrationData data = hp.GetRegID(pv);
+        //    return data;
+        //}
 
         #endregion
     }

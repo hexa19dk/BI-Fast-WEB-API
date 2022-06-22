@@ -129,7 +129,6 @@ namespace BIFastWebAPI.Models
         public string OperationType { get; set; }
         public string ProxyType { get; set; }
         public string ProxyValue { get; set; }
-        public string RegistrationID { get; set; }
         public string DisplayName { get; set; }
         public string ProxyBankID { get; set; }
         public string AccountID { get; set; }
