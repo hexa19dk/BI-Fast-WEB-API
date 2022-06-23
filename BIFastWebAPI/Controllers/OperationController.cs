@@ -112,9 +112,9 @@ namespace BIFastWebAPI.Controllers
         #region GetRegistrationID
 
         [Route("jsonAPI/getReqID")]
-        public IHttpActionResult GetRegID(string pv)
+        public IHttpActionResult GetRegID(string pv, string CIF, string KTP)
         {
-            var regId = hp.GetRegID(pv);
+            var regId = hp.GetRegID(pv, CIF, KTP);
             if (regId != null)
             {
                 return Ok(regId);
