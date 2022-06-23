@@ -395,14 +395,14 @@ namespace BIFastWebAPI.Utility
                 {
                     respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
                     st = "Success";
-                    SaveLog(vmAcc.UserId, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmAcc.CIF, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = respAcc;
                 }
                 else if (respAll.MsgDefIdr == "admi.002.001.01" && respAll.ErrorLocation == "ErrorLocation")
                 {
                     errAcc = JsonConvert.DeserializeObject<RespErrAccEnquiry>(jsonResponse);
                     st = "Error";
-                    SaveLog(vmAcc.UserId, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmAcc.CIF, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
                     rrr = errAcc;
                 }
                 else
@@ -410,7 +410,7 @@ namespace BIFastWebAPI.Utility
                     rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
                     st = "Reject";
 
-                    SaveLog(vmAcc.UserId, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmAcc.CIF, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
                     rrr = rejcAcc;
                 }
             }
@@ -470,21 +470,21 @@ namespace BIFastWebAPI.Utility
                 {
                     resp = JsonConvert.DeserializeObject<RespCreditTransfer>(jsonResponse);
                     st = "Success";
-                    SaveLog(VmTrx.UserId,VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resp.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(VmTrx.CIF,VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resp.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = resp;
                 }
                 else if (respall.MsgDefIdr == "admi.002.001.01")
                 {
                     errCt = JsonConvert.DeserializeObject<ErrorCreditTransfer>(jsonResponse);
                     st = "Error";
-                    SaveLog(VmTrx.UserId, VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCt.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(VmTrx.CIF, VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCt.CreationDateTime, null, DateTimeStyles.RoundtripKind));
                     rrr = errCt;
                 }
                 else
                 {
                     rejCt = JsonConvert.DeserializeObject<RejectCreditTransfer>(jsonResponse);
                     st = "Reject";
-                    SaveLog(VmTrx.UserId, VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(VmTrx.CIF, VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = rejCt;
                 }
             }
@@ -552,21 +552,21 @@ namespace BIFastWebAPI.Utility
                 {
                     resCtPrx = JsonConvert.DeserializeObject<RespCrediTransferToProxy>(jsonResponse);
                     st = "Success";
-                    SaveLog(vmProx.UserId, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmProx.CIF, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = resCtPrx;
                 }
                 else if (respAll.MsgDefIdr == "admi.002.001.01")
                 {
                     errCtPrx = JsonConvert.DeserializeObject<RespErrCreditTransferToProxy>(jsonResponse);
                     st = "Error";
-                    SaveLog(vmProx.UserId, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCtPrx.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmProx.CIF, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCtPrx.CreationDateTime, null, DateTimeStyles.RoundtripKind));
                     rrr = errCtPrx;
                 }
                 else
                 {
                     rejCtPrx = JsonConvert.DeserializeObject<RespRejectCreditTransferToProxy>(jsonResponse);
                     st = "Reject";
-                    SaveLog(vmProx.UserId, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmProx.CIF, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = rejCtPrx;
                 }
             }

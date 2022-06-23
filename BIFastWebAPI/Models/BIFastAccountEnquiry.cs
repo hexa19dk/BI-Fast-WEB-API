@@ -100,12 +100,12 @@ namespace BIFastWebAPI.Models
 
     public class ViewModelAccount
     {
+        public string CIF { get; set; }
         public string ChannelType { get; set; }
         public string RecipentParticipantID { get; set; }
         public string CreditorAccountNo { get; set; }
         public string Amount { get; set; }
         public string PurposeType { get; set; }
-        public string UserId { get; set; }
         public string Channel { get; set; }
     }
 }
