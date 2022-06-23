@@ -123,14 +123,13 @@ namespace BIFastWebAPI.Models
 
     public class AliasManagementVM
     {
-        public string TransactionType { get; set; }
+        public string CIF { get; set; }
         public string ChannelType { get; set; }
         public string MsgSenderAccountId { get; set; }
         public string OperationType { get; set; }
         public string ProxyType { get; set; }
         public string ProxyValue { get; set; }
         public string DisplayName { get; set; }
-        public string ProxyBankID { get; set; }
         public string AccountID { get; set; }
         public string AccountType { get; set; }
         public string AccountName { get; set; }
@@ -141,7 +140,6 @@ namespace BIFastWebAPI.Models
         public string CustomerID { get; set; }
         public string CustomerResidentStatus { get; set; }
         public string CustomerTownName { get; set; }
-        public string UserId { get; set; }
         public string Channel { get; set; }
     }
 }

@@ -122,12 +122,12 @@ namespace BIFastWebAPI.Models
     }
     public class AliasResolutionVM
     {
+        public string CIF { get; set; }
         public string ChannelType { get; set; }
         public string MsgSenderAccountId { get; set; }
         public string AlisaResolutionLookup { get; set; }
         public string ProxyType { get; set; }
         public string ProxyValue { get; set; }
-        public string UserId { get; set; }
         public string Channel { get; set; }
     }
 }

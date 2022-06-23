@@ -119,12 +119,11 @@ namespace BIFastWebAPI.Models
 
     public class AliasRegInquiryVM
     {
+        public string CIF { get; set; }
         public string ChannelType { get; set; }
         public string MsgSenderAccountId { get; set; }
-        public string RegistrationID { get; set; }
         public string SecondaryIDType { get; set; }
         public string SecondaryIDValue { get; set; }
-        public string UserId { get; set; }
         public string Channel { get; set; }
     }
 }

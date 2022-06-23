@@ -10,6 +10,8 @@ namespace BIFastWebAPI.Data.Models
     {
         [Key]
         public string RegistrationID { get; set; }
+        public string CIF { get; set; }
+        public string KTP { get; set; }
         public string ProxyValue { get; set; }
         public string ProxyType { get; set; }
         public DateTime CreatedDate { get; set; }

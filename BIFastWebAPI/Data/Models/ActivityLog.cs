@@ -13,7 +13,7 @@ namespace BIFastWebAPI.Data.Models
         public string BizMsgIdr { get; set; }
         public string OrigTranRefNUM { get; set; }
         public string Type { get; set; }
-        public string UserId { get; set; }
+        public string CIF { get; set; }
         public string ReqMessage { get; set; }
         public string RespMessage { get; set; }
         public string Status { get; set; }
