@@ -104,7 +104,7 @@ namespace BIFastWebAPI.Controllers
                 res = JsonConvert.DeserializeObject<RespPaymentStatus>(jsonResponse);
                 st = "Success";
 
-                Hp.SaveLog("Admin", "01", num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                Hp.SaveLog("Admin", "01", null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                 return Ok(res);
             }
@@ -113,7 +113,7 @@ namespace BIFastWebAPI.Controllers
                 err = JsonConvert.DeserializeObject<RespErrPaymentStatus>(jsonResponse);
                 st = "Error";
 
-                Hp.SaveLog("Admin", "01", num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                Hp.SaveLog("Admin", "01", null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                 return Ok(err);
             }
@@ -122,7 +122,7 @@ namespace BIFastWebAPI.Controllers
                 rej = JsonConvert.DeserializeObject<RespRejectPaymentStatus>(jsonResponse);
                 st = "Reject";
 
-                Hp.SaveLog("Admin", "01", num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                Hp.SaveLog("Admin", "01", null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
                 return Ok(rej);
             }          

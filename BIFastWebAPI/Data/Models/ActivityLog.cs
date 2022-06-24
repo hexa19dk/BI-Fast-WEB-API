@@ -12,6 +12,8 @@ namespace BIFastWebAPI.Data.Models
         public string EndPoint { get; set; }
         public string BizMsgIdr { get; set; }
         public string OrigTranRefNUM { get; set; }
+        public string AMActivity { get; set; }
+        public string ProxyValue { get; set; }
         public string Type { get; set; }
         public string CIF { get; set; }
         public string ReqMessage { get; set; }

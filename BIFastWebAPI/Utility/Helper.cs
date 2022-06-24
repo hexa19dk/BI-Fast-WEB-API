@@ -36,12 +36,13 @@ namespace BIFastWebAPI.Utility
             return ss;
         }
 
-        public void SaveRegID(string regID, string CIF, string KTP, string proxyValue, string proxyType)
+        public void SaveRegID(string regID, string CIF, string KTP,string Norek, string proxyValue, string proxyType)
         {
             var dt = new RegistrationData();
             dt.RegistrationID = regID;
             dt.CIF = CIF;
             dt.KTP = KTP;
+            dt.NoRek = Norek;
             dt.ProxyValue = proxyValue;
             dt.ProxyType = proxyType;
 
@@ -62,15 +63,15 @@ namespace BIFastWebAPI.Utility
 
         #region GetRegId
 
-        public string GetRegID(string pv, string CIF, string KTP)
+        public string GetRegID(string pv, string CIF, string KTP,string Norek)
         {
-            var rd = _dbr.RegistrationDatas.FirstOrDefault(o => o.ProxyValue == pv && o.CIF == CIF && o.KTP == KTP);
+            var rd = _dbr.RegistrationDatas.FirstOrDefault(o => o.ProxyValue == pv && o.CIF == CIF && o.KTP == KTP && o.NoRek == Norek);
             return rd.RegistrationID;
         }
 
-        public string GetRegIDKTP(string CIF, string KTP)
+        public string GetRegIDKTP(string CIF, string KTP, string Norek)
         {
-            var rdk = _dbr.RegistrationDatas.FirstOrDefault(o => o.CIF == CIF && o.KTP == KTP);
+            var rdk = _dbr.RegistrationDatas.FirstOrDefault(o => o.CIF == CIF && o.KTP == KTP && o.NoRek == Norek);
             return rdk.RegistrationID;
         }
 
@@ -80,10 +81,12 @@ namespace BIFastWebAPI.Utility
 
 
         #region Savelog
-        public void SaveLog(string CIF, string chan, string num, string idr, object jsonRequest, object jsonResponse, string st, DateTime reqModel, DateTime respModel)
+        public void SaveLog(string CIF, string chan, string act, string pv,string num, string idr, object jsonRequest, object jsonResponse, string st, DateTime reqModel, DateTime respModel)
         {
             var log = new ActivityLog();
             log.Channel = chan;
+            log.AMActivity = act;
+            log.ProxyValue = pv;
             log.OrigTranRefNUM = num;
             log.BizMsgIdr = idr;
             log.EndPoint = HttpContext.Current.Request.Url.AbsolutePath.ToString();
@@ -137,7 +140,7 @@ namespace BIFastWebAPI.Utility
                 else
                 {
                     tt = "720";
-                    rID = GetRegID(data.ProxyValue, data.CIF ,data.SecondaryIDValue);
+                    rID = GetRegID(data.ProxyValue, data.CIF ,data.SecondaryIDValue, data.MsgSenderAccountId);
                 }
                 
                 reqAM.SendingSystemBIC = "AGTBIDJA";
@@ -179,8 +182,8 @@ namespace BIFastWebAPI.Utility
                     //success
                     respAM = JsonConvert.DeserializeObject<RespAliasManagement>(jsonResponse);
                     st = "Success";
-                    SaveLog(data.CIF,data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
-                    SaveRegID(respAll.RegistrationID, data.CIF, reqAM.SecondaryIDValue,  reqAM.ProxyValue, reqAM.ProxyType);
+                    SaveLog(data.CIF,data.Channel,data.OperationType,data.ProxyValue , num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveRegID(respAll.RegistrationID, data.CIF, reqAM.SecondaryIDValue, reqAM.ProxyValue, reqAM.ProxyValue, reqAM.ProxyType);
                     rrr = respAM;
 
                 }
@@ -190,7 +193,7 @@ namespace BIFastWebAPI.Utility
                     //error
                     st = "Error";
                     errAM = JsonConvert.DeserializeObject<RespErrAliasManagement>(jsonResponse);
-                    SaveLog(data.CIF, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.CIF, data.Channel, data.OperationType, data.ProxyValue, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     rrr = errAM;
 
                 }
@@ -199,7 +202,7 @@ namespace BIFastWebAPI.Utility
                     //reject
                     st = "Reject";
                     rejAM = JsonConvert.DeserializeObject<RespRejectAliasManagement>(jsonResponse);
-                    SaveLog(data.CIF, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.CIF, data.Channel, data.OperationType, data.ProxyValue,num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     rrr=rejAM;
                 }
             }
@@ -252,7 +255,7 @@ namespace BIFastWebAPI.Utility
                     //success
                     st = "Success";
                     respAR = JsonConvert.DeserializeObject<RespAliasResolution>(jsonResponse);
-                    SaveLog(data.CIF,data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.CIF,data.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     rrr = respAR;
                 }
                 else if (respAll.ErrorLocation != null || respAll.MsgDefIdr == "admi.002.001.01")
@@ -260,7 +263,7 @@ namespace BIFastWebAPI.Utility
                     //error
                     st = "Error";
                     errAR = JsonConvert.DeserializeObject<RespErrAliasResolution>(jsonResponse);
-                    SaveLog(data.CIF, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.CIF, data.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     rrr = errAR;
                 }
                 else
@@ -268,7 +271,7 @@ namespace BIFastWebAPI.Utility
                     //reject
                     st = "Reject";
                     rejAR = JsonConvert.DeserializeObject<RespRejectAliasResolution>(jsonResponse);
-                    SaveLog(data.CIF, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.CIF, data.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejAR.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     rrr = rejAR;
                 }
             }
@@ -291,7 +294,7 @@ namespace BIFastWebAPI.Utility
             RespErrAliasRegInquiry errARI = new RespErrAliasRegInquiry();
 
             GetSeq();
-            rID = GetRegIDKTP(data.CIF, data.SecondaryIDValue);
+            rID = GetRegIDKTP(data.CIF, data.SecondaryIDValue, data.MsgSenderAccountId);
             
 
             try
@@ -321,7 +324,7 @@ namespace BIFastWebAPI.Utility
                     //success
                     st = "Success";
                     respARI = JsonConvert.DeserializeObject<RespAliasRegInquiry>(jsonResponse);
-                    SaveLog(data.CIF, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.CIF, data.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     rrr = respARI;
                 }
                 else if (respAll.ErrorLocation != null || respAll.BizMsgIdr == "admi.002.001.01")
@@ -329,7 +332,7 @@ namespace BIFastWebAPI.Utility
                     //error
                     st = "Error";
                     errARI = JsonConvert.DeserializeObject<RespErrAliasRegInquiry>(jsonResponse);
-                    SaveLog(data.CIF, data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.CIF, data.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(errARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     rrr = errARI;
                 }
                 else
@@ -337,7 +340,7 @@ namespace BIFastWebAPI.Utility
                     //reject
                     st = "Reject";
                     rejARI = JsonConvert.DeserializeObject<RespRejectAliasRegInquiry>(jsonResponse);
-                    SaveLog(data.CIF,data.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
+                    SaveLog(data.CIF,data.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(rejARI.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
                     rrr = rejARI;
                 }
             }
@@ -395,14 +398,14 @@ namespace BIFastWebAPI.Utility
                 {
                     respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
                     st = "Success";
-                    SaveLog(vmAcc.CIF, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmAcc.CIF, vmAcc.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = respAcc;
                 }
                 else if (respAll.MsgDefIdr == "admi.002.001.01" && respAll.ErrorLocation == "ErrorLocation")
                 {
                     errAcc = JsonConvert.DeserializeObject<RespErrAccEnquiry>(jsonResponse);
                     st = "Error";
-                    SaveLog(vmAcc.CIF, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmAcc.CIF, vmAcc.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
                     rrr = errAcc;
                 }
                 else
@@ -410,7 +413,7 @@ namespace BIFastWebAPI.Utility
                     rejcAcc = JsonConvert.DeserializeObject<RespRejectAccEnquiry>(jsonResponse);
                     st = "Reject";
 
-                    SaveLog(vmAcc.CIF, vmAcc.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmAcc.CIF, vmAcc.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errAcc.RejectDateTime, null, DateTimeStyles.RoundtripKind));
                     rrr = rejcAcc;
                 }
             }
@@ -470,21 +473,21 @@ namespace BIFastWebAPI.Utility
                 {
                     resp = JsonConvert.DeserializeObject<RespCreditTransfer>(jsonResponse);
                     st = "Success";
-                    SaveLog(VmTrx.CIF,VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resp.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(VmTrx.CIF,VmTrx.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resp.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = resp;
                 }
                 else if (respall.MsgDefIdr == "admi.002.001.01")
                 {
                     errCt = JsonConvert.DeserializeObject<ErrorCreditTransfer>(jsonResponse);
                     st = "Error";
-                    SaveLog(VmTrx.CIF, VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCt.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(VmTrx.CIF, VmTrx.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCt.CreationDateTime, null, DateTimeStyles.RoundtripKind));
                     rrr = errCt;
                 }
                 else
                 {
                     rejCt = JsonConvert.DeserializeObject<RejectCreditTransfer>(jsonResponse);
                     st = "Reject";
-                    SaveLog(VmTrx.CIF, VmTrx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(VmTrx.CIF, VmTrx.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCt.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = rejCt;
                 }
             }
@@ -552,21 +555,21 @@ namespace BIFastWebAPI.Utility
                 {
                     resCtPrx = JsonConvert.DeserializeObject<RespCrediTransferToProxy>(jsonResponse);
                     st = "Success";
-                    SaveLog(vmProx.CIF, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmProx.CIF, vmProx.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(resCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = resCtPrx;
                 }
                 else if (respAll.MsgDefIdr == "admi.002.001.01")
                 {
                     errCtPrx = JsonConvert.DeserializeObject<RespErrCreditTransferToProxy>(jsonResponse);
                     st = "Error";
-                    SaveLog(vmProx.CIF, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCtPrx.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmProx.CIF, vmProx.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(errCtPrx.CreationDateTime, null, DateTimeStyles.RoundtripKind));
                     rrr = errCtPrx;
                 }
                 else
                 {
                     rejCtPrx = JsonConvert.DeserializeObject<RespRejectCreditTransferToProxy>(jsonResponse);
                     st = "Reject";
-                    SaveLog(vmProx.CIF, vmProx.Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmProx.CIF, vmProx.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rejCtPrx.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = rejCtPrx;
                 }
             }

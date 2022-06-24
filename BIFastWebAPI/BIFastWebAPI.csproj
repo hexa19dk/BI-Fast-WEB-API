@@ -270,9 +270,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202206230322397_AddRegistrationDataTable.cs" />
-    <Compile Include="Migrations\202206230322397_AddRegistrationDataTable.designer.cs">
-      <DependentUpon>202206230322397_AddRegistrationDataTable.cs</DependentUpon>
+    <Compile Include="Migrations\202206230920476_AddRegistrationDataTable.cs" />
+    <Compile Include="Migrations\202206230920476_AddRegistrationDataTable.designer.cs">
+      <DependentUpon>202206230920476_AddRegistrationDataTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ConfigurationB.cs" />
     <Compile Include="Migrations\ConfigurationA.cs" />
@@ -524,8 +524,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202206230322397_AddRegistrationDataTable.resx">
-      <DependentUpon>202206230322397_AddRegistrationDataTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206230920476_AddRegistrationDataTable.resx">
+      <DependentUpon>202206230920476_AddRegistrationDataTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
