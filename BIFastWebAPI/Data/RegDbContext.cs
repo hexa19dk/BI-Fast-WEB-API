@@ -14,6 +14,7 @@ namespace BIFastWebAPI.Data
         }
 
         public DbSet<RegistrationData> RegistrationDatas { get; set; }
+        public DbSet<BankMaster> BankMasters { get; set; }
 
 
     }

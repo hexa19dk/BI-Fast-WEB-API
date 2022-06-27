@@ -127,6 +127,26 @@ namespace BIFastWebAPI.Controllers
         }
 
         #endregion
+
+        #region GetBankMaster
+
+        [Route("jsonAPI/getBankMaster")]
+
+        public IHttpActionResult GetBankMaster()
+        {
+            List<BankMaster> list = hp.GetAllBankMaster();
+            if (list == null)
+            {
+                return Ok("Tidak ada List Bank");
+            }
+            else
+            {
+                return Ok(list);
+            }
+
+        }
+
+        #endregion
     }
 
 }

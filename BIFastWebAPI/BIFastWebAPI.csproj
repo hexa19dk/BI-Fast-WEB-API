@@ -265,6 +265,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\Models\ActivityLog.cs" />
+    <Compile Include="Data\Models\BankMaster.cs" />
     <Compile Include="Data\Models\RegistrationData.cs" />
     <Compile Include="Data\RegDbContext.cs" />
     <Compile Include="Global.asax.cs">
