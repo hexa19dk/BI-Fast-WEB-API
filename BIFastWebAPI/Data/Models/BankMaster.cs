@@ -12,7 +12,6 @@ namespace BIFastWebAPI.Data.Models
     {
         public int Id { get; set; }
         [StringLength(3)]
-        [Index(nameof(BankCode), IsUnique = true)]
         public string BankCode { get; set; }
         [StringLength(8)]
         [Index(nameof(SwiftCode), IsUnique = true)]
