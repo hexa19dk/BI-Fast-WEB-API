@@ -48,37 +48,10 @@ namespace BIFastWebAPI.Controllers
         #region ReversalCreditTransfer
         [HttpPost]
         [Route("jsonAPI/ReversalCreditTransfer")]
-        public IHttpActionResult ReversalCreditTransfer([FromBody] ReqReversalCreditTransfer req)
+        public IHttpActionResult ReversalCreditTransfer([FromBody] ViewModelReversal vmRev)
         {
-            //ReqReversalCreditTransfer req = new ReqReversalCreditTransfer();
-            RespReversalCreditTransfer res = new RespReversalCreditTransfer();
-            RespRejectRCT rej = new RespRejectRCT();
-            RespErrRCT err = new RespErrRCT();
-
-            string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
-            string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/ReversalCreditTransfer");
-
-            if (Hp.Ck(req.EndToEndId) && Hp.Ck(req.MsgDefIdr) && Hp.Ck(req.TranRefNUM) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.Amount) && Hp.Ck(req.Currency) && Hp.Ck(req.PurposeType) && Hp.Ck(req.SendingParticipantID) && Hp.Ck(req.DebitorAccountNo) && Hp.Ck(req.DebitorAccountType) && Hp.Ck(req.DebitorAccountName) && Hp.Ck(req.DebitorID) && Hp.Ck(req.RecipentParticipantID) && Hp.Ck(req.CreditorAccountNo) && Hp.Ck(req.CreditorAccountName) && jsonResponse.Contains("pacs.008.001.08"))
-            {
-                res = JsonConvert.DeserializeObject<RespReversalCreditTransfer>(jsonResponse);
-                st = "Success";
-                //Hp.SaveLog(vmAcc.UserId, Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                return Ok(res);
-            }
-            else if (jsonResponse.Contains("ErrorLocation") && jsonResponse.Contains("admi.002.001.01"))
-            {
-                err = JsonConvert.DeserializeObject<RespErrRCT>(jsonResponse);
-                st = "Error";
-                //Hp.SaveLog(vmAcc.UserId, Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                return Ok(err);
-            }
-            else
-            {
-                rej = JsonConvert.DeserializeObject<RespRejectRCT>(jsonResponse);
-                st = "Reject";
-                //Hp.SaveLog(vmAcc.UserId, Channel, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
-                return Ok(rej);
-            }
+            a = Hp.Reversal(vmRev);
+            return Ok(a);
         }
         #endregion
 

@@ -444,12 +444,12 @@ namespace BIFastWebAPI.Utility
             RespCreditTransfer resp = new RespCreditTransfer();
             RejectCreditTransfer rejCt = new RejectCreditTransfer();
             ErrorCreditTransfer errCt = new ErrorCreditTransfer();
-            GetSeq();
+
             try
             {
-                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + ss;
+                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + GetSeq();
                 req.MsgDefIdr = "pacs.008.001.08";
-                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + ss;
+                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + GetSeq();
                 req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 req.Amount = VmTrx.Amount + ".00";
                 req.Currency = "IDR";
@@ -593,7 +593,77 @@ namespace BIFastWebAPI.Utility
         #endregion
 
         #region Reversal Credit Transfer
-        //code
+        public Object Reversal(ViewModelReversal vmRev)
+        {
+            ReqReversalCreditTransfer req = new ReqReversalCreditTransfer();
+            RespReversalCreditTransfer res = new RespReversalCreditTransfer();
+            RespRejectRCT rej = new RespRejectRCT();
+            RespErrRCT err = new RespErrRCT();
+            RespAllReversal respAll = new RespAllReversal();
+
+            try
+            {
+                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + vmRev.ChannelType + GetSeq();
+                req.MsgDefIdr = "pacs.008.001.08";
+                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + GetSeq();
+                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+                req.Amount = vmRev.Amount + ".00";
+                req.Currency = "IDR";
+                req.PurposeType = vmRev.PurposeType;
+                req.PaymentInformation = vmRev.PaymentInformation;
+                req.SendingParticipantID = "AGTBIDJA";
+                req.DebitorAccountNo = vmRev.DebitorAccountNo;
+                req.DebitorAccountType = vmRev.DebitorAccountType;
+                req.DebitorAccountName = vmRev.DebitorAccountName;
+                req.DebitorType = vmRev.DebitorType;
+                req.DebitorID = vmRev.DebitorID;
+                req.DebitorResidentStatus = vmRev.DebitorResidentStatus;
+                req.DebitorTownName = "0300";
+                req.RecipentParticipantID = vmRev.RecipentParticipantID;
+                req.CreditorAccountNo = vmRev.CreditorAccountNo;
+                req.CreditorAccountType = vmRev.CreditorAccountType;
+                req.CreditorAccountName = vmRev.CreditorAccountName;
+                req.CreditorType = vmRev.CreditorType;
+                req.CreditorID = vmRev.CreditorID;
+                req.CreditorResidentStatus = vmRev.CreditorResidentStatus;
+                req.CreditorTownName = "0300";
+                req.PaymentInformation = vmRev.PaymentInformation;
+                req.RltdEndToEndId = vmRev.RltdEndToEndId;
+
+                string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
+                //string jsonResponse = Hp.GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/ReversalCreditTransfer");
+                string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/ReversalCreditTransfer");
+                respAll = JsonConvert.DeserializeObject<RespAllReversal>(jsonResponse);
+
+                if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
+                {
+                    res = JsonConvert.DeserializeObject<RespReversalCreditTransfer>(jsonResponse);
+                    st = "Success";
+                    SaveLog(vmRev.CIF, vmRev.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    rrr = res;
+                }
+                else if (respAll.MsgDefIdr == "admi.002.001.01")
+                {
+                    err = JsonConvert.DeserializeObject<RespErrRCT>(jsonResponse);
+                    st = "Error";
+                    SaveLog(vmRev.CIF, vmRev.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(err.CreationDateTime, null, DateTimeStyles.RoundtripKind));
+                    rrr = err;
+                }
+                else
+                {
+                    rej = JsonConvert.DeserializeObject<RespRejectRCT>(jsonResponse);
+                    st = "Reject";
+                    SaveLog(vmRev.CIF, vmRev.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rej.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    rrr = rej;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Bad Request" + ex.Message);
+            }
+
+            return rrr;
+        }
         #endregion
 
         #region Payment Status
