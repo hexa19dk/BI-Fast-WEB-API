@@ -36,7 +36,7 @@ namespace BIFastWebAPI.Utility
             return ss;
         }
 
-        public void SaveRegID(string regID, string CIF, string KTP,string Norek, string proxyValue, string proxyType)
+        public void SaveRegID(string regID, string CIF, string KTP,string Norek, string proxyValue, string proxyType, string ch)
         {
             var dt = new RegistrationData();
             dt.RegistrationID = regID;
@@ -45,6 +45,7 @@ namespace BIFastWebAPI.Utility
             dt.NoRek = Norek;
             dt.ProxyValue = proxyValue;
             dt.ProxyType = proxyType;
+            dt.Channel = ch;
 
             dt.CreatedDate = DateTime.Now;
             RegistrationData dtb = _dbr.RegistrationDatas.FirstOrDefault(
@@ -193,7 +194,7 @@ namespace BIFastWebAPI.Utility
                     respAM = JsonConvert.DeserializeObject<RespAliasManagement>(jsonResponse);
                     st = "Success";
                     SaveLog(data.CIF,data.Channel,data.OperationType,data.ProxyValue , num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind), DateTime.Parse(respAM.CreationDateTime, null, System.Globalization.DateTimeStyles.RoundtripKind));
-                    SaveRegID(respAll.RegistrationID, data.CIF, reqAM.SecondaryIDValue, reqAM.MsgSenderAccountId, reqAM.ProxyValue, reqAM.ProxyType);
+                    SaveRegID(respAll.RegistrationID, data.CIF, reqAM.SecondaryIDValue, reqAM.MsgSenderAccountId, reqAM.ProxyValue, reqAM.ProxyType, data.Channel);
                     rrr = respAM;
 
                 }
