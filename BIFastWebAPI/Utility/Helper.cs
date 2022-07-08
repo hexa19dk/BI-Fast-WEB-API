@@ -667,7 +667,54 @@ namespace BIFastWebAPI.Utility
         #endregion
 
         #region Payment Status
-        //code
+        public Object PaymentSt(VmPayStat vmSt)
+        {
+            ReqPaymentStatus req = new ReqPaymentStatus();
+            RespPaymentStatus res = new RespPaymentStatus();
+            RespRejectPaymentStatus rej = new RespRejectPaymentStatus();
+            RespErrPaymentStatus err = new RespErrPaymentStatus();
+            RespAllPaymentStatus respAll = new RespAllPaymentStatus();
+
+            try
+            {
+                //req.TranRefNUM = vmSt.TranRefNUM; // inputan dari request CT
+                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "000" + GetSeq();
+                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+                req.OrigEndToEndId = vmSt.OrigEndToEndId; // inputan dari request CT
+
+                string jsonRequest = JsonConvert.SerializeObject(req), idr = req.OrigEndToEndId, num = req.TranRefNUM;
+                string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/PaymentStatus");
+                respAll = JsonConvert.DeserializeObject<RespAllPaymentStatus>(jsonResponse);
+
+                if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
+                {
+                    res = JsonConvert.DeserializeObject<RespPaymentStatus>(jsonResponse);
+                    st = "Success";
+                    SaveLog(vmSt.CIF, vmSt.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    rrr = res;
+                }
+                else if (respAll.MsgDefIdr == "admi.002.001.01")
+                {
+                    err = JsonConvert.DeserializeObject<RespErrPaymentStatus>(jsonResponse);
+                    st = "Error";
+                    SaveLog(vmSt.CIF, vmSt.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    rrr = err;
+                }
+                else
+                {
+                    rej = JsonConvert.DeserializeObject<RespRejectPaymentStatus>(jsonResponse);
+                    st = "Reject";
+                    SaveLog(vmSt.CIF, vmSt.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    rrr = rej;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Bad Request" + ex.Message);
+            }
+
+            return rrr;
+        }
         #endregion
 
         #endregion
