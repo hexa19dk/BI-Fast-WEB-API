@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using BIFastWebAPI.Data.Models;
 using BIFastWebAPI.Data;
+using System.Globalization;
 //using System.Text.Json;
 
 namespace BIFastWebAPI.Controllers
@@ -60,24 +61,20 @@ namespace BIFastWebAPI.Controllers
         [Route("jsonAPI/prxy901")]
         public IHttpActionResult AliasNotification([FromBody] ReqAliasNotification reqAN)
         {
+            string jsonRequest = JsonConvert.SerializeObject(reqAN);
+            string jsonResponse = "ALIAS_NOTIFICATION";
 
-            string jsonRequest,jsonResponse;
-            //jsonResponse = hp.GenerateReq(reqAN, "localhost:44350/jsonAPI/prxy901");
-            jsonResponse = hp.GenerateReq(reqAN, "https://localhost:44350/jsonAPI/prxy901");
-
+            
             if (hp.Ck(reqAN.SendingSystemBIC) && hp.Ck(reqAN.ReceivingSystemBIC) && hp.Ck(reqAN.BizMsgIdr) && hp.Ck(reqAN.MsgDefIdr) && hp.Ck(reqAN.CreationDateTime) && hp.Ck(reqAN.TranRefNUM) && hp.Ck(reqAN.MsgCreationDate) && hp.Ck(reqAN.SendingParticipantID) && hp.Ck(reqAN.OrigUniqueRequestID) && hp.Ck(reqAN.ProxyType) && hp.Ck(reqAN.ProxyValue) && hp.Ck(reqAN.OriginRegistrationID) && hp.Ck(reqAN.OriginDisplayName) && hp.Ck(reqAN.OriginProxyBankID) && hp.Ck(reqAN.OriginAccountID) && hp.Ck(reqAN.OriginAccountType) && hp.Ck(reqAN.NewRegistrationID) && hp.Ck(reqAN.NewDisplayName) && hp.Ck(reqAN.NewProxyBankID) && hp.Ck(reqAN.NewAccountID) && hp.Ck(reqAN.NewAccountType))
             {
-                //sukses
+                hp.SaveLog("SVIP", "SVIP", null, reqAN.ProxyValue, reqAN.TranRefNUM, reqAN.BizMsgIdr, jsonRequest, jsonResponse, "Sukses", DateTime.Parse(reqAN.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Now);
                 return Ok();
             }
-            //else if (true)
-            //{
-            //    //reject
-            //    return Ok();
-            //}
+            
             else
             {
                 //error
+                hp.SaveLog("SVIP", "SVIP", null, reqAN.ProxyValue, reqAN.TranRefNUM, reqAN.BizMsgIdr, null, null, "Error", DateTime.Parse(reqAN.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Now);
                 return InternalServerError();
             }
 
