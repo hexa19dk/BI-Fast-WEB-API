@@ -183,8 +183,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqAM), jsonResponse, num = reqAM.TranRefNUM, idr = reqAM.BizMsgIdr;
                 //jsonResponse = GenerateReq(reqAM, "http://10.99.0.72:8355/jsonAPI/prxy001");
-                jsonResponse = GenerateReq(reqAM, "http://10.99.0.3:8355/jsonAPI/prxy001");
-                //jsonResponse = GenerateReq(reqAM, "http://10.99.48.46:8355/jsonAPI/prxy001");
+                //jsonResponse = GenerateReq(reqAM, "http://10.99.0.3:8355/jsonAPI/prxy001");
+                jsonResponse = GenerateReq(reqAM, "http://10.99.48.46:8355/jsonAPI/prxy001");
 
                 respAll = JsonConvert.DeserializeObject<AliasManagementResponses>(jsonResponse);
 
@@ -256,8 +256,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqAR), jsonResponse, num = reqAR.TranRefNUM, idr = reqAR.BizMsgIdr;
                 //jsonResponse = GenerateReq(reqAR, "http://10.99.0.72:8355/jsonAPI/prxy003");
-                jsonResponse = GenerateReq(reqAR, "http://10.99.0.3:8355/jsonAPI/prxy003");
-                //jsonResponse = GenerateReq(reqAR, "http://10.99.48.46:8355/jsonAPI/prxy003");
+                //jsonResponse = GenerateReq(reqAR, "http://10.99.0.3:8355/jsonAPI/prxy003");
+                jsonResponse = GenerateReq(reqAR, "http://10.99.48.46:8355/jsonAPI/prxy003");
 
                 respAll = JsonConvert.DeserializeObject<AliasResolutionResponses>(jsonResponse);
 
@@ -326,8 +326,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqARI), jsonResponse, num = reqARI.TranRefNUM, idr = reqARI.BizMsgIdr; ;
                 //jsonResponse = GenerateReq(reqARI, "http://10.99.0.72:8355/jsonAPI/prxy005");
-                jsonResponse = GenerateReq(reqARI, "http://10.99.0.3:8355/jsonAPI/prxy005");
-                //jsonResponse = GenerateReq(reqARI, "http://10.99.48.46:8355/jsonAPI/prxy005");
+                //jsonResponse = GenerateReq(reqARI, "http://10.99.0.3:8355/jsonAPI/prxy005");
+                jsonResponse = GenerateReq(reqARI, "http://10.99.48.46:8355/jsonAPI/prxy005");
                 respAll = JsonConvert.DeserializeObject<AliasRegInquiryResponses>(jsonResponse);
 
                 if (respAll.MsgDefIdr == "prxy.006.001.01" && respAll.StatusReasonCode == "U000")
@@ -455,7 +455,8 @@ namespace BIFastWebAPI.Utility
                 req.Amount = VmTrx.Amount + ".00";
                 req.Currency = "IDR";
                 req.PurposeType = VmTrx.PurposeType;
-                req.PaymentInformation = VmTrx.PaymentInformation;
+                req.PaymentInformation = "TR0 BIFAST - " + VmTrx.PaymentInformation;
+                //req.PaymentInformation = VmTrx.PaymentInformation;
                 req.SendingParticipantID = VmTrx.SendingParticipantID;
                 req.DebitorAccountNo = VmTrx.DebitorAccountNo;
                 req.DebitorAccountType = VmTrx.DebitorAccountType;
@@ -472,7 +473,6 @@ namespace BIFastWebAPI.Utility
                 req.CreditorID = VmTrx.CreditorID;
                 req.CreditorResidentStatus = VmTrx.CreditorResidentStatus;
                 req.CreditorTownName = "0300";
-                req.PaymentInformation = VmTrx.PaymentInformation;
 
                 string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
                 //string jsonResponse = GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
@@ -558,8 +558,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.EndToEndId, num = reqCtPrx.TranRefNUM;
                 //string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.72:8355/jsonAPI/CreditTransferToProxy");
-                string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.3:8355/jsonAPI/CreditTransferToProxy");
-                //string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.48.46:8355/jsonAPI/CreditTransferToProxy");
+                //string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.3:8355/jsonAPI/CreditTransferToProxy");
+                string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.48.46:8355/jsonAPI/CreditTransferToProxy");
                 respAll = JsonConvert.DeserializeObject<RespAllCreditProxy>(jsonResponse);
 
                 if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
@@ -685,6 +685,7 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(req), idr = req.OrigEndToEndId, num = req.TranRefNUM;
                 string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/PaymentStatus");
+                //string jsonResponse = GenerateReq(req, "http://10.99.48.46:8355/jsonAPI/PaymentStatus");
                 respAll = JsonConvert.DeserializeObject<RespAllPaymentStatus>(jsonResponse);
 
                 if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
@@ -698,14 +699,14 @@ namespace BIFastWebAPI.Utility
                 {
                     err = JsonConvert.DeserializeObject<RespErrPaymentStatus>(jsonResponse);
                     st = "Error";
-                    SaveLog(vmSt.CIF, vmSt.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmSt.CIF, vmSt.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(err.CreationDateTime, null, DateTimeStyles.RoundtripKind));
                     rrr = err;
                 }
                 else
                 {
                     rej = JsonConvert.DeserializeObject<RespRejectPaymentStatus>(jsonResponse);
                     st = "Reject";
-                    SaveLog(vmSt.CIF, vmSt.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(res.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+                    SaveLog(vmSt.CIF, vmSt.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(req.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(rej.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
                     rrr = rej;
                 }
             }
