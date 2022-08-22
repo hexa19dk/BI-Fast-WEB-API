@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using BIFastWebAPI.Data;
 using System.Linq;
 using BIFastWebAPI.Data.Models;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
+using System;
 
 namespace BIFastWebAPI
 {
@@ -18,7 +22,7 @@ namespace BIFastWebAPI
         ApplicationDbContext _db = new ApplicationDbContext();
 
 
-        
+
 
 
         #region TransactionService
@@ -57,13 +61,13 @@ namespace BIFastWebAPI
         //    return respAll;
         //}
 
-        //[WebMethod(MessageName = "Alias_Resolution", Description = "Alias Resolution")]
-        //public AliasResolutionResponses AliasResolution(AliasResolutionVM data)
-        //{
-        //    AliasResolutionResponses respAll = new AliasResolutionResponses();
-        //    respAll = hp.AliasResolution(data);
-        //    return respAll;
-        //}
+        [WebMethod(MessageName = "Alias_Resolution", Description = "Alias Resolution")]
+        public string AliasResolution(AliasResolutionVM data)
+        {
+          
+            return hp.GetXMLFromObject(hp.AliasResolution(data));
+
+        }
 
         //[WebMethod(MessageName = "Alias_Registration_inquiry", Description = "Alias Registration Inquiry")]
         //public AliasRegInquiryResponses AliasRegInquiry(AliasRegInquiryVM data)

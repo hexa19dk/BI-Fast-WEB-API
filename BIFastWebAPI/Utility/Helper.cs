@@ -6,8 +6,11 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace BIFastWebAPI.Utility
 {
@@ -125,6 +128,33 @@ namespace BIFastWebAPI.Utility
             IRestResponse response = client.Execute(request);
             string jsonResponse = response.Content;
             return jsonResponse;
+        }
+        #endregion
+
+        #region Convert object to xml
+        public string GetXMLFromObject(object o)
+        {
+            StringWriter sw = new StringWriter();
+            XmlTextWriter tw = null;
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(o.GetType());
+                tw = new XmlTextWriter(sw);
+                serializer.Serialize(tw, o);
+            }
+            catch (Exception ex)
+            {
+                //Handle Exception Code
+            }
+            finally
+            {
+                sw.Close();
+                if (tw != null)
+                {
+                    tw.Close();
+                }
+            }
+            return sw.ToString();
         }
         #endregion
 
@@ -256,8 +286,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqAR), jsonResponse, num = reqAR.TranRefNUM, idr = reqAR.BizMsgIdr;
                 //jsonResponse = GenerateReq(reqAR, "http://10.99.0.72:8355/jsonAPI/prxy003");
-                //jsonResponse = GenerateReq(reqAR, "http://10.99.0.3:8355/jsonAPI/prxy003");
-                jsonResponse = GenerateReq(reqAR, "http://10.99.48.46:8355/jsonAPI/prxy003");
+                jsonResponse = GenerateReq(reqAR, "http://10.99.0.3:8355/jsonAPI/prxy003");
+                //jsonResponse = GenerateReq(reqAR, "http://10.99.48.46:8355/jsonAPI/prxy003");
 
                 respAll = JsonConvert.DeserializeObject<AliasResolutionResponses>(jsonResponse);
 
