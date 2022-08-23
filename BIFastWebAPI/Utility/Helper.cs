@@ -12,6 +12,8 @@ using System.Web;
 using System.Web.Http;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace BIFastWebAPI.Utility
 {
@@ -264,8 +266,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqAR), jsonResponse, num = reqAR.TranRefNUM, idr = reqAR.BizMsgIdr;
                 //jsonResponse = GenerateReq(reqAR, "http://10.99.0.72:8355/jsonAPI/prxy003");
-                //jsonResponse = GenerateReq(reqAR, "http://10.99.0.3:8355/jsonAPI/prxy003");
-                jsonResponse = GenerateReq(reqAR, "http://10.99.48.46:8355/jsonAPI/prxy003");
+                jsonResponse = GenerateReq(reqAR, "http://10.99.0.3:8355/jsonAPI/prxy003");
+                //jsonResponse = GenerateReq(reqAR, "http://10.99.48.46:8355/jsonAPI/prxy003");
 
                 respAll = JsonConvert.DeserializeObject<AliasResolutionResponses>(jsonResponse);
 
@@ -334,8 +336,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqARI), jsonResponse, num = reqARI.TranRefNUM, idr = reqARI.BizMsgIdr; ;
                 //jsonResponse = GenerateReq(reqARI, "http://10.99.0.72:8355/jsonAPI/prxy005");
-                //jsonResponse = GenerateReq(reqARI, "http://10.99.0.3:8355/jsonAPI/prxy005");
-                jsonResponse = GenerateReq(reqARI, "http://10.99.48.46:8355/jsonAPI/prxy005");
+                jsonResponse = GenerateReq(reqARI, "http://10.99.0.3:8355/jsonAPI/prxy005");
+                //jsonResponse = GenerateReq(reqARI, "http://10.99.48.46:8355/jsonAPI/prxy005");
                 respAll = JsonConvert.DeserializeObject<AliasRegInquiryResponses>(jsonResponse);
 
                 if (respAll.MsgDefIdr == "prxy.006.001.01" && respAll.StatusReasonCode == "U000")
