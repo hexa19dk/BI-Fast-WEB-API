@@ -131,33 +131,6 @@ namespace BIFastWebAPI.Utility
         }
         #endregion
 
-        #region Convert object to xml
-        public string GetXMLFromObject(object o)
-        {
-            StringWriter sw = new StringWriter();
-            XmlTextWriter tw = null;
-            try
-            {
-                XmlSerializer serializer = new XmlSerializer(o.GetType());
-                tw = new XmlTextWriter(sw);
-                serializer.Serialize(tw, o);
-            }
-            catch (Exception ex)
-            {
-                //Handle Exception Code
-            }
-            finally
-            {
-                sw.Close();
-                if (tw != null)
-                {
-                    tw.Close();
-                }
-            }
-            return sw.ToString();
-        }
-        #endregion
-
 
         #region Non Transaction Function Helper
 
@@ -356,8 +329,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqARI), jsonResponse, num = reqARI.TranRefNUM, idr = reqARI.BizMsgIdr; ;
                 //jsonResponse = GenerateReq(reqARI, "http://10.99.0.72:8355/jsonAPI/prxy005");
-                //jsonResponse = GenerateReq(reqARI, "http://10.99.0.3:8355/jsonAPI/prxy005");
-                jsonResponse = GenerateReq(reqARI, "http://10.99.48.46:8355/jsonAPI/prxy005");
+                jsonResponse = GenerateReq(reqARI, "http://10.99.0.3:8355/jsonAPI/prxy005");
+                //jsonResponse = GenerateReq(reqARI, "http://10.99.48.46:8355/jsonAPI/prxy005");
                 respAll = JsonConvert.DeserializeObject<AliasRegInquiryResponses>(jsonResponse);
 
                 if (respAll.MsgDefIdr == "prxy.006.001.01" && respAll.StatusReasonCode == "U000")

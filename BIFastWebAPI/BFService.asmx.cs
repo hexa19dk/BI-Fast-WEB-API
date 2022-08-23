@@ -9,6 +9,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
 using System;
+using System.Text;
 
 namespace BIFastWebAPI
 {
@@ -53,35 +54,39 @@ namespace BIFastWebAPI
 
         #region NonTransactionService
 
-        //[WebMethod(MessageName ="Alias_Management" , Description ="Alias Management")]
-        //public AliasManagementResponses AliasManagement(AliasManagementVM data)
-        //{
-        //    AliasManagementResponses respAll = new AliasManagementResponses();
-        //    respAll = hp.AliasManagement(data);
-        //    return respAll;
-        //}
-
-        [WebMethod(MessageName = "Alias_Resolution", Description = "Alias Resolution")]
-        public string AliasResolution(AliasResolutionVM data)
+        [WebMethod(MessageName ="Alias_Management" , Description ="Alias Management")]
+        [XmlInclude(typeof(RespAliasManagement))]
+        [XmlInclude(typeof(RespRejectAliasManagement))]
+        [XmlInclude(typeof(RespErrAliasManagement))]
+        public object AliasManagement(AliasManagementVM data)
         {
-          
-            return hp.GetXMLFromObject(hp.AliasResolution(data));
-
+            return hp.AliasManagement(data);
         }
 
-        //[WebMethod(MessageName = "Alias_Registration_inquiry", Description = "Alias Registration Inquiry")]
-        //public AliasRegInquiryResponses AliasRegInquiry(AliasRegInquiryVM data)
-        //{
-        //    AliasRegInquiryResponses respAll = new AliasRegInquiryResponses();
-        //    respAll = hp.AliasRegInquiry(data);
-        //    return respAll;
-        //}
+
+        [WebMethod(MessageName = "Alias_Resolution", Description = "Alias Resolution")]
+        [XmlInclude(typeof(RespAliasResolution))]
+        [XmlInclude(typeof(RespErrAliasResolution))]
+        [XmlInclude(typeof(RespRejectAliasResolution))]
+        public object AliasResolution(AliasResolutionVM data)
+        {
+            return hp.AliasResolution(data);
+        }
+
+        [WebMethod(MessageName = "Alias_Registration_inquiry", Description = "Alias Registration Inquiry")]
+        [XmlInclude(typeof(RespAliasRegInquiry))]
+        [XmlInclude(typeof(RespRejectAliasRegInquiry))]
+        [XmlInclude(typeof(RespErrAliasRegInquiry))]
+        public object AliasRegInquiry(AliasRegInquiryVM data)
+        {
+            return hp.AliasRegInquiry(data);
+        }
 
 
         //[WebMethod(MessageName = "Get_RegID", Description = "Get Registration ID")]
-        //public RegistrationData GetRegID(string pv)
+        //public string RegistrationData GetRegID(string pv, string CIF, string KTP, string Norek)
         //{
-        //    RegistrationData data = hp.GetRegID(pv);
+        //    RegistrationData data = hp.GetRegID(pv, CIF, KTP, Norek);
         //    return data;
         //}
 
