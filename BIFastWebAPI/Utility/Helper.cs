@@ -6,8 +6,12 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace BIFastWebAPI.Utility
 {
@@ -29,13 +33,16 @@ namespace BIFastWebAPI.Utility
         }
         #endregion
 
+        #region Get Sequence
         public string GetSeq()
         {
             var newSeq = (_db.ActivityLogs.Select(x => (int?)x.Id).Max() ?? 0) + 1;
             ss = newSeq.ToString().PadLeft(8, '0');
             return ss;
         }
+        #endregion
 
+        #region store to Registration DB
         public void SaveRegID(string regID, string CIF, string KTP,string Norek, string proxyValue, string proxyType, string ch)
         {
             var dt = new RegistrationData();
@@ -61,6 +68,7 @@ namespace BIFastWebAPI.Utility
                 return;
             }
         }
+        #endregion
 
         #region GetRegId
 
@@ -183,8 +191,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqAM), jsonResponse, num = reqAM.TranRefNUM, idr = reqAM.BizMsgIdr;
                 //jsonResponse = GenerateReq(reqAM, "http://10.99.0.72:8355/jsonAPI/prxy001");
-                //jsonResponse = GenerateReq(reqAM, "http://10.99.0.3:8355/jsonAPI/prxy001");
-                jsonResponse = GenerateReq(reqAM, "http://10.99.48.46:8355/jsonAPI/prxy001");
+                jsonResponse = GenerateReq(reqAM, "http://10.99.0.3:8355/jsonAPI/prxy001");
+                //jsonResponse = GenerateReq(reqAM, "http://10.99.48.46:8355/jsonAPI/prxy001");
 
                 respAll = JsonConvert.DeserializeObject<AliasManagementResponses>(jsonResponse);
 
@@ -384,11 +392,11 @@ namespace BIFastWebAPI.Utility
             RespAccEnquiry respAcc = new RespAccEnquiry();
             RespRejectAccEnquiry rejcAcc = new RespRejectAccEnquiry();
             RespErrAccEnquiry errAcc = new RespErrAccEnquiry();
-            GetSeq();
 
             try
             {
-                reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + ss;
+                //reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + ss;
+                reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + GetSeq();
                 reqAcc.MsgDefIdr = "pacs.008.001.08";
                 reqAcc.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + ss;
                 reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
@@ -410,6 +418,7 @@ namespace BIFastWebAPI.Utility
                     respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
                     st = "Success";
                     SaveLog(vmAcc.CIF, vmAcc.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
+
                     rrr = respAcc;
                 }
                 else if (respAll.MsgDefIdr == "admi.002.001.01" && respAll.ErrorLocation != null)
@@ -558,8 +567,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.EndToEndId, num = reqCtPrx.TranRefNUM;
                 //string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.72:8355/jsonAPI/CreditTransferToProxy");
-                //string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.3:8355/jsonAPI/CreditTransferToProxy");
-                string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.48.46:8355/jsonAPI/CreditTransferToProxy");
+                string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.3:8355/jsonAPI/CreditTransferToProxy");
+                //string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.48.46:8355/jsonAPI/CreditTransferToProxy");
                 respAll = JsonConvert.DeserializeObject<RespAllCreditProxy>(jsonResponse);
 
                 if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
@@ -720,6 +729,5 @@ namespace BIFastWebAPI.Utility
         #endregion
 
         #endregion
-
     }
 }

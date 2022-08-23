@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using BIFastWebAPI.Data;
 using System.Linq;
 using BIFastWebAPI.Data.Models;
+using System.Xml.Serialization;
 
 namespace BIFastWebAPI
 {
@@ -17,18 +18,24 @@ namespace BIFastWebAPI
         Helper hp = new Helper();
         ApplicationDbContext _db = new ApplicationDbContext();
 
-
-        
-
-
         #region TransactionService
-        //[WebMethod(MessageName = "CreditTransfer", Description = "for CreditTransfer")]
-        //public RespCreditTrfAll Transaction(ViewModelTransaction vmTrx)
-        //{
-        //    RespCreditTrfAll resp = new RespCreditTrfAll();
-        //    resp = hp.CreditTransferAll(vmTrx);
-        //    return resp;
-        //}
+        [WebMethod(MessageName = "AccountInquiry", Description = "Account Inquiry")]
+        [XmlInclude(typeof(RespAccEnquiry))]
+        [XmlInclude(typeof(RespRejectAccEnquiry))]
+        [XmlInclude(typeof(ErrorCreditTransfer))]
+        public object Inquiry(ViewModelAccount vmAcc)
+        {
+            return hp.AccountEnquiry(vmAcc);
+        }
+
+        [WebMethod(MessageName = "CreditTransfer", Description = "for CreditTransfer")]
+        [XmlInclude(typeof(RespCreditTransfer))]
+        [XmlInclude(typeof(RejectCreditTransfer))]
+        [XmlInclude(typeof(RejectCreditTransfer))]
+        public object Transaction(ViewModelTransaction vmTrx)
+        {
+            return hp.CreditTransferAll(vmTrx);
+        }
 
         //[WebMethod(MessageName = "CreditProxy", Description = "Credit Transfer To Proxy")]
         //public RespAllCreditProxy TransactionProxy(ViewModelProxy vmProx)
@@ -38,13 +45,6 @@ namespace BIFastWebAPI
         //    return resp;
         //}
 
-        //[WebMethod(MessageName = "AccountInquiry", Description = "Account Inquiry")]
-        //public RespAllAccount Inquiry(ViewModelAccount vmAcc)
-        //{
-        //    RespAllAccount resp = new RespAllAccount();
-        //    resp = hp.AccountEnquiry(vmAcc);
-        //    return resp;
-        //}
         #endregion
 
         #region NonTransactionService
