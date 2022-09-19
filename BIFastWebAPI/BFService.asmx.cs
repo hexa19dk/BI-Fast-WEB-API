@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using BIFastWebAPI.Data;
 using System.Linq;
 using BIFastWebAPI.Data.Models;
+using System.Xml.Serialization;
 
 namespace BIFastWebAPI
 {
@@ -30,7 +31,7 @@ namespace BIFastWebAPI
         
 
 
-        #region TransactionService
+        
         //[WebMethod(MessageName = "CreditTransfer", Description = "for CreditTransfer")]
         //public RespCreditTrfAll Transaction(ViewModelTransaction vmTrx)
         //{
@@ -86,7 +87,7 @@ namespace BIFastWebAPI
         //    RegistrationData data = hp.GetRegID(pv, CIF, KTP, Norek);
         //    return data;
         //}
-
         #endregion
+
     }
 }

@@ -271,10 +271,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202208010417149_AddRegistrationDataTable.cs" />
-    <Compile Include="Migrations\202208010417149_AddRegistrationDataTable.designer.cs">
-      <DependentUpon>202208010417149_AddRegistrationDataTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\ConfigurationB.cs" />
     <Compile Include="Migrations\ConfigurationA.cs" />
     <Compile Include="Models\BIFastAliasSysNotification.cs" />
@@ -523,11 +519,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202208010417149_AddRegistrationDataTable.resx">
-      <DependentUpon>202208010417149_AddRegistrationDataTable.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

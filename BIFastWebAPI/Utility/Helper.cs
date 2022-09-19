@@ -38,8 +38,9 @@ namespace BIFastWebAPI.Utility
         #region Get Sequence
         public string GetSeq()
         {
-            var newSeq = (_db.ActivityLogs.Select(x => (int?)x.Id).Max() ?? 0) + 1;
-            ss = newSeq.ToString().PadLeft(8, '0');
+            Random r = new Random();
+            int rInt = r.Next(0, 99999999);
+            ss =  rInt.ToString().PadLeft(8, '0');
             return ss;
         }
         #endregion
@@ -150,7 +151,7 @@ namespace BIFastWebAPI.Utility
             RespRejectAliasManagement rejAM = new RespRejectAliasManagement();
             RespErrAliasManagement errAM = new RespErrAliasManagement();
 
-            GetSeq();
+            string ss = GetSeq();
             try
             {
                 if (data.OperationType == "NEWR")
@@ -246,7 +247,7 @@ namespace BIFastWebAPI.Utility
             RespRejectAliasResolution rejAR = new RespRejectAliasResolution();
             RespErrAliasResolution errAR = new RespErrAliasResolution();
 
-            GetSeq();
+            string ss = GetSeq();
 
             try
             {
@@ -314,7 +315,7 @@ namespace BIFastWebAPI.Utility
             RespRejectAliasRegInquiry rejARI = new RespRejectAliasRegInquiry();
             RespErrAliasRegInquiry errARI = new RespErrAliasRegInquiry();
 
-            GetSeq();
+            string ss = GetSeq();
             rID = GetRegIDKTP(data.CIF, data.SecondaryIDValue, data.MsgSenderAccountId);
             
 
@@ -394,11 +395,12 @@ namespace BIFastWebAPI.Utility
             RespAccEnquiry respAcc = new RespAccEnquiry();
             RespRejectAccEnquiry rejcAcc = new RespRejectAccEnquiry();
             RespErrAccEnquiry errAcc = new RespErrAccEnquiry();
+            string ss = GetSeq();
 
             try
             {
                 //reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + ss;
-                reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + GetSeq();
+                reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + ss;
                 reqAcc.MsgDefIdr = "pacs.008.001.08";
                 reqAcc.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + ss;
                 reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
@@ -456,12 +458,12 @@ namespace BIFastWebAPI.Utility
             RespCreditTransfer resp = new RespCreditTransfer();
             RejectCreditTransfer rejCt = new RejectCreditTransfer();
             ErrorCreditTransfer errCt = new ErrorCreditTransfer();
-
+            string ss = GetSeq();
             try
             {
-                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + GetSeq();
+                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + ss;
                 req.MsgDefIdr = "pacs.008.001.08";
-                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + GetSeq();
+                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + ss;
                 req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 req.Amount = VmTrx.Amount + ".00";
                 req.Currency = "IDR";
@@ -530,7 +532,7 @@ namespace BIFastWebAPI.Utility
             RespRejectCreditTransferToProxy rejCtPrx = new RespRejectCreditTransferToProxy();
             RespErrCreditTransferToProxy errCtPrx = new RespErrCreditTransferToProxy();
             RespAllCreditProxy respAll = new RespAllCreditProxy();
-            GetSeq();
+            string ss = GetSeq();
             try
             {
                 reqCtPrx.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + "O" + vmProx.ChannelType + ss;
@@ -612,12 +614,12 @@ namespace BIFastWebAPI.Utility
             RespRejectRCT rej = new RespRejectRCT();
             RespErrRCT err = new RespErrRCT();
             RespAllReversal respAll = new RespAllReversal();
-
+            string ss = GetSeq();
             try
             {
-                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + vmRev.ChannelType + GetSeq();
+                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + vmRev.ChannelType + ss;
                 req.MsgDefIdr = "pacs.008.001.08";
-                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + GetSeq();
+                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + ss;
                 req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 req.Amount = vmRev.Amount + ".00";
                 req.Currency = "IDR";
@@ -686,11 +688,11 @@ namespace BIFastWebAPI.Utility
             RespRejectPaymentStatus rej = new RespRejectPaymentStatus();
             RespErrPaymentStatus err = new RespErrPaymentStatus();
             RespAllPaymentStatus respAll = new RespAllPaymentStatus();
-
+            string ss = GetSeq();
             try
             {
                 //req.TranRefNUM = vmSt.TranRefNUM; // inputan dari request CT
-                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "000" + GetSeq();
+                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "000" + ss;
                 req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
                 req.OrigEndToEndId = vmSt.OrigEndToEndId; // inputan dari request CT
 
