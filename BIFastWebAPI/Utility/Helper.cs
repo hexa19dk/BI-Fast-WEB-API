@@ -39,8 +39,11 @@ namespace BIFastWebAPI.Utility
         public string GetSeq()
         {
             Random r = new Random();
-            int rInt = r.Next(0, 99999999);
-            ss =  rInt.ToString().PadLeft(8, '0');
+            for(int num=0; num<=20; num++)
+            {
+                int rInt = r.Next(0, 99999999);
+                ss =  rInt.ToString().PadLeft(8, '0');
+            }
             return ss;
         }
         #endregion
@@ -413,7 +416,7 @@ namespace BIFastWebAPI.Utility
                 string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
                 //string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
                 string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.3:8355/jsonAPI/AccountEnquiry");
-                //string jsonResponse = GenerateReq(reqAcc, "http://10.99.48.46:8355/jsonAPI/AccountEnquiry");
+                ////string jsonResponse = GenerateReq(reqAcc, "http://10.99.48.46:8355/jsonAPI/AccountEnquiry");
 
                 respAll = JsonConvert.DeserializeObject<RespAllAccount>(jsonResponse);
 
@@ -459,6 +462,7 @@ namespace BIFastWebAPI.Utility
             RejectCreditTransfer rejCt = new RejectCreditTransfer();
             ErrorCreditTransfer errCt = new ErrorCreditTransfer();
             string ss = GetSeq();
+
             try
             {
                 req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + ss;
@@ -489,8 +493,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
                 //string jsonResponse = GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
-                string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/CreditTransfer");
-                //string jsonResponse = GenerateReq(req, "http://10.99.48.46:8355/jsonAPI/CreditTransfer");
+                //string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/CreditTransfer");
+                string jsonResponse = GenerateReq(req, "http://10.99.48.46:8355/jsonAPI/CreditTransfer");
                 respall = JsonConvert.DeserializeObject<RespCreditTrfAll>(jsonResponse);
 
                 if (respall.MsgDefIdr == "pacs.002.001.10" && respall.ReasonCode == "U000")
@@ -533,6 +537,7 @@ namespace BIFastWebAPI.Utility
             RespErrCreditTransferToProxy errCtPrx = new RespErrCreditTransferToProxy();
             RespAllCreditProxy respAll = new RespAllCreditProxy();
             string ss = GetSeq();
+
             try
             {
                 reqCtPrx.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + "O" + vmProx.ChannelType + ss;
@@ -571,8 +576,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(reqCtPrx), idr = reqCtPrx.EndToEndId, num = reqCtPrx.TranRefNUM;
                 //string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.72:8355/jsonAPI/CreditTransferToProxy");
-                string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.3:8355/jsonAPI/CreditTransferToProxy");
-                //string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.48.46:8355/jsonAPI/CreditTransferToProxy");
+                //string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.0.3:8355/jsonAPI/CreditTransferToProxy");
+                string jsonResponse = GenerateReq(reqCtPrx, "http://10.99.48.46:8355/jsonAPI/CreditTransferToProxy");
                 respAll = JsonConvert.DeserializeObject<RespAllCreditProxy>(jsonResponse);
 
                 if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
@@ -689,6 +694,7 @@ namespace BIFastWebAPI.Utility
             RespErrPaymentStatus err = new RespErrPaymentStatus();
             RespAllPaymentStatus respAll = new RespAllPaymentStatus();
             string ss = GetSeq();
+
             try
             {
                 //req.TranRefNUM = vmSt.TranRefNUM; // inputan dari request CT
@@ -697,8 +703,8 @@ namespace BIFastWebAPI.Utility
                 req.OrigEndToEndId = vmSt.OrigEndToEndId; // inputan dari request CT
 
                 string jsonRequest = JsonConvert.SerializeObject(req), idr = req.OrigEndToEndId, num = req.TranRefNUM;
-                string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/PaymentStatus");
-                //string jsonResponse = GenerateReq(req, "http://10.99.48.46:8355/jsonAPI/PaymentStatus");
+                //string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/PaymentStatus");
+                string jsonResponse = GenerateReq(req, "http://10.99.48.46:8355/jsonAPI/PaymentStatus");
                 respAll = JsonConvert.DeserializeObject<RespAllPaymentStatus>(jsonResponse);
 
                 if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
