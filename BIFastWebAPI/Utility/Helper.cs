@@ -41,17 +41,21 @@ namespace BIFastWebAPI.Utility
 
         public string GetSeq()
         {
+            string sss = GenerateGet("http://www.randomnumberapi.com/api/v1.0/random?min=0&max=99999999&count=1").Remove(0,1);
+            string ssa = sss.Remove(sss.Length - 1, 1);
 
-            
-            lock (r)
-            {
-                int rInt = r.Next(0, 99999999);
-                ss = rInt.ToString().PadLeft(8, '0');
+            //lock (r)
+            //{
+            //var zeroDate = DateTime.Now;
+            //int uniqueId = (int)(zeroDate.Ticks / 10000);
+            ////int rInt = r.Next(0, 99999999);
+            //    ss = uniqueId.ToString().PadLeft(8, '0');
 
-                return ss;
-            }
-         
-        }
+            //    return ss;
+            //}
+            string ss = ssa.PadLeft(8, '0');
+            return ss;
+        }   
         #endregion
 
         #region store to Registration DB
@@ -145,6 +149,16 @@ namespace BIFastWebAPI.Utility
             IRestResponse response = client.Execute(request);
             string jsonResponse = response.Content;
             return jsonResponse;
+        }
+
+        public string GenerateGet(string link)
+        {
+            var client = new RestClient(link);
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            string res = response.Content;
+            return res;
+
         }
         #endregion
 
