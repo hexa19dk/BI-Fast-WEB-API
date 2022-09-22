@@ -23,6 +23,7 @@ namespace BIFastWebAPI.Utility
         RegDbContext _dbr = new RegDbContext();
         string st = "", ss = "", chan, tt = "", Date = DateTime.Now.ToString("yyyyMMdd"), rID = "";
         object rrr;
+        Random r = new Random();
 
         #region Check Isnull?
         public bool Ck(string str)
@@ -41,7 +42,7 @@ namespace BIFastWebAPI.Utility
         public string GetSeq()
         {
 
-            Random r = new Random();
+            
             lock (r)
             {
                 int rInt = r.Next(0, 99999999);
