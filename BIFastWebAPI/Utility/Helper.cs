@@ -36,12 +36,16 @@ namespace BIFastWebAPI.Utility
         #endregion
 
         #region Get Sequence
+
+        
         public string GetSeq()
         {
+            string timestamp = DateTime.UtcNow.ToString("Hmmssfff",
+                                            CultureInfo.InvariantCulture);
             Random r = new Random();
-            for(int num=0; num<=20; num++)
+            for(int num=0; num<=4; num++)
             {
-                int rInt = r.Next(0, 99999999);
+                int rInt = r.Next(0, Int32.Parse(timestamp));
                 ss =  rInt.ToString().PadLeft(8, '0');
             }
             return ss;
