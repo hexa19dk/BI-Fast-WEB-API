@@ -41,8 +41,8 @@ namespace BIFastWebAPI.Utility
 
         public string GetSeq()
         {
-            string sss = GenerateGet("http://www.randomnumberapi.com/api/v1.0/random?min=0&max=99999999&count=1").Remove(0,1);
-            string ssa = sss.Remove(sss.Length - 1, 1);
+            ////string sss = GenerateGet("http://www.randomnumberapi.com/api/v1.0/random?min=0&max=99999999&count=1").Remove(0,1);
+            ////string ssa = sss.Remove(sss.Length - 1, 1);
 
             //lock (r)
             //{
@@ -53,7 +53,10 @@ namespace BIFastWebAPI.Utility
 
             //    return ss;
             //}
-            string ss = ssa.PadLeft(8, '0');
+            ////string ss = ssa.PadLeft(8, '0');
+            ///
+            Random r = new Random(Guid.NewGuid().GetHashCode());
+            string ss = r.Next(0, 99999999).ToString().PadLeft(8, '0');
             return ss;
         }   
         #endregion
