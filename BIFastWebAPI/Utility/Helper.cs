@@ -183,7 +183,7 @@ namespace BIFastWebAPI.Utility
                 reqAM.MsgDefIdr = "prxy.001.001.01";
                 reqAM.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
                 reqAM.TranRefNUM = Date + "AGTBIDJA" + tt + ss;
-                reqAM.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:fff");
+                reqAM.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqAM.SendingParticipantID = "AGTBIDJA";
                 reqAM.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqAM.OperationType = data.OperationType;
@@ -269,7 +269,7 @@ namespace BIFastWebAPI.Utility
                 reqAR.MsgDefIdr = "prxy.003.001.01";
                 reqAR.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
                 reqAR.TranRefNUM = Date + "AGTBIDJA610" + ss;
-                reqAR.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:fff");
+                reqAR.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqAR.SendingParticipantID = "AGTBIDJA";
                 reqAR.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqAR.AlisaResolutionLookup = data.AlisaResolutionLookup;
@@ -340,7 +340,7 @@ namespace BIFastWebAPI.Utility
                 reqARI.MsgDefIdr = "prxy.005.001.01";
                 reqARI.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
                 reqARI.TranRefNUM = Date + "AGTBIDJA620" + ss;
-                reqARI.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:fff");
+                reqARI.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqARI.SendingParticipantID = "AGTBIDJA";
                 reqARI.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqARI.RegistrationID = rID;
