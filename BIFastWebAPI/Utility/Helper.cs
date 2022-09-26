@@ -41,20 +41,6 @@ namespace BIFastWebAPI.Utility
 
         public string GetSeq()
         {
-            ////string sss = GenerateGet("http://www.randomnumberapi.com/api/v1.0/random?min=0&max=99999999&count=1").Remove(0,1);
-            ////string ssa = sss.Remove(sss.Length - 1, 1);
-
-            //lock (r)
-            //{
-            //var zeroDate = DateTime.Now;
-            //int uniqueId = (int)(zeroDate.Ticks / 10000);
-            ////int rInt = r.Next(0, 99999999);
-            //    ss = uniqueId.ToString().PadLeft(8, '0');
-
-            //    return ss;
-            //}
-            ////string ss = ssa.PadLeft(8, '0');
-            ///
             Random r = new Random(Guid.NewGuid().GetHashCode());
             string ss = r.Next(0, 99999999).ToString().PadLeft(8, '0');
             return ss;
@@ -197,7 +183,7 @@ namespace BIFastWebAPI.Utility
                 reqAM.MsgDefIdr = "prxy.001.001.01";
                 reqAM.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
                 reqAM.TranRefNUM = Date + "AGTBIDJA" + tt + ss;
-                reqAM.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:sss");
+                reqAM.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:fff");
                 reqAM.SendingParticipantID = "AGTBIDJA";
                 reqAM.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqAM.OperationType = data.OperationType;
@@ -283,7 +269,7 @@ namespace BIFastWebAPI.Utility
                 reqAR.MsgDefIdr = "prxy.003.001.01";
                 reqAR.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
                 reqAR.TranRefNUM = Date + "AGTBIDJA610" + ss;
-                reqAR.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:sss");
+                reqAR.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:fff");
                 reqAR.SendingParticipantID = "AGTBIDJA";
                 reqAR.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqAR.AlisaResolutionLookup = data.AlisaResolutionLookup;
@@ -354,7 +340,7 @@ namespace BIFastWebAPI.Utility
                 reqARI.MsgDefIdr = "prxy.005.001.01";
                 reqARI.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
                 reqARI.TranRefNUM = Date + "AGTBIDJA620" + ss;
-                reqARI.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:sss");
+                reqARI.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:fff");
                 reqARI.SendingParticipantID = "AGTBIDJA";
                 reqARI.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqARI.RegistrationID = rID;
@@ -429,7 +415,7 @@ namespace BIFastWebAPI.Utility
                 reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + ss;
                 reqAcc.MsgDefIdr = "pacs.008.001.08";
                 reqAcc.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + ss;
-                reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+                reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqAcc.RecipentParticipantID = vmAcc.RecipentParticipantID;
                 reqAcc.CreditorAccountNo = vmAcc.CreditorAccountNo;
                 reqAcc.Amount = vmAcc.Amount + ".00";
@@ -439,7 +425,7 @@ namespace BIFastWebAPI.Utility
                 string jsonRequest = JsonConvert.SerializeObject(reqAcc), idr = reqAcc.EndToEndId, num = reqAcc.TranRefNUM;
                 //string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.72:8355/jsonAPI/AccountEnquiry");
                 string jsonResponse = GenerateReq(reqAcc, "http://10.99.0.3:8355/jsonAPI/AccountEnquiry");
-                ////string jsonResponse = GenerateReq(reqAcc, "http://10.99.48.46:8355/jsonAPI/AccountEnquiry");
+                //string jsonResponse = GenerateReq(reqAcc, "http://10.99.48.46:8355/jsonAPI/AccountEnquiry");
 
                 respAll = JsonConvert.DeserializeObject<RespAllAccount>(jsonResponse);
 
@@ -491,7 +477,7 @@ namespace BIFastWebAPI.Utility
                 req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + ss;
                 req.MsgDefIdr = "pacs.008.001.08";
                 req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + ss;
-                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 req.Amount = VmTrx.Amount + ".00";
                 req.Currency = "IDR";
                 req.PurposeType = VmTrx.PurposeType;
@@ -516,8 +502,8 @@ namespace BIFastWebAPI.Utility
 
                 string jsonRequest = JsonConvert.SerializeObject(req), idr = req.EndToEndId, num = req.TranRefNUM;
                 //string jsonResponse = GenerateReq(req, "http://10.99.0.72:8355/jsonAPI/CreditTransfer");
-                //string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/CreditTransfer");
-                string jsonResponse = GenerateReq(req, "http://10.99.48.46:8355/jsonAPI/CreditTransfer");
+                string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/CreditTransfer");
+                //string jsonResponse = GenerateReq(req, "http://10.99.48.46:8355/jsonAPI/CreditTransfer");
                 respall = JsonConvert.DeserializeObject<RespCreditTrfAll>(jsonResponse);
 
                 if (respall.MsgDefIdr == "pacs.002.001.10" && respall.ReasonCode == "U000")
@@ -566,7 +552,7 @@ namespace BIFastWebAPI.Utility
                 reqCtPrx.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + "O" + vmProx.ChannelType + ss;
                 reqCtPrx.MsgDefIdr = "pacs.008.001.08";
                 reqCtPrx.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + ss;
-                reqCtPrx.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+                reqCtPrx.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqCtPrx.Amount = vmProx.Amount + ".00";
                 reqCtPrx.Currency = "IDR";
                 reqCtPrx.PurposeType = vmProx.PurposeType;
@@ -648,7 +634,7 @@ namespace BIFastWebAPI.Utility
                 req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + vmRev.ChannelType + ss;
                 req.MsgDefIdr = "pacs.008.001.08";
                 req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + ss;
-                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 req.Amount = vmRev.Amount + ".00";
                 req.Currency = "IDR";
                 req.PurposeType = vmRev.PurposeType;
@@ -722,12 +708,12 @@ namespace BIFastWebAPI.Utility
             {
                 //req.TranRefNUM = vmSt.TranRefNUM; // inputan dari request CT
                 req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "000" + ss;
-                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.sss");
+                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 req.OrigEndToEndId = vmSt.OrigEndToEndId; // inputan dari request CT
 
                 string jsonRequest = JsonConvert.SerializeObject(req), idr = req.OrigEndToEndId, num = req.TranRefNUM;
-                //string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/PaymentStatus");
-                string jsonResponse = GenerateReq(req, "http://10.99.48.46:8355/jsonAPI/PaymentStatus");
+                string jsonResponse = GenerateReq(req, "http://10.99.0.3:8355/jsonAPI/PaymentStatus");
+                //string jsonResponse = GenerateReq(req, "http://10.99.48.46:8355/jsonAPI/PaymentStatus");
                 respAll = JsonConvert.DeserializeObject<RespAllPaymentStatus>(jsonResponse);
 
                 if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
