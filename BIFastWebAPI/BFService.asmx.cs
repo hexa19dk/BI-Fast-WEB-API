@@ -28,25 +28,25 @@ namespace BIFastWebAPI
             return hp.AccountEnquiry(vmAcc);
         }
 
-        
+
+        [WebMethod(MessageName = "CreditTransfer", Description = "for CreditTransfer")]
+        [XmlInclude(typeof(RespCreditTransfer))]
+        [XmlInclude(typeof(RejectCreditTransfer))]
+        [XmlInclude(typeof(ErrorCreditTransfer))]
+        public object Transaction(ViewModelTransaction vmTrx)
+        {
+           return hp.CreditTransferAll(vmTrx);
+        }
 
 
-        
-        //[WebMethod(MessageName = "CreditTransfer", Description = "for CreditTransfer")]
-        //public RespCreditTrfAll Transaction(ViewModelTransaction vmTrx)
-        //{
-        //    RespCreditTrfAll resp = new RespCreditTrfAll();
-        //    resp = hp.CreditTransferAll(vmTrx);
-        //    return resp;
-        //}
-
-        //[WebMethod(MessageName = "CreditProxy", Description = "Credit Transfer To Proxy")]
-        //public RespAllCreditProxy TransactionProxy(ViewModelProxy vmProx)
-        //{
-        //    RespAllCreditProxy resp = new RespAllCreditProxy();
-        //    resp = hp.CreditToProxy(vmProx);
-        //    return resp;
-        //}
+        [WebMethod(MessageName = "CreditProxy", Description = "Credit Transfer To Proxy")]
+        [XmlInclude(typeof(RespCrediTransferToProxy))]
+        [XmlInclude(typeof(RespRejectCreditTransferToProxy))]
+        [XmlInclude(typeof(RespErrCreditTransferToProxy))]
+        public object TransactionProxy(ViewModelProxy vmProx)
+        {
+            return hp.CreditToProxy(vmProx);
+        }
 
         #endregion
 
