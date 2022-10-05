@@ -128,7 +128,7 @@ namespace BIFastWebAPI.Utility
         #endregion
 
         #region GenerateRequest
-        public string GenerateReq(object reqModel, string link)
+        public string GenerateReq(dynamic reqModel, string link)
         {
             string jsonRequest = JsonConvert.SerializeObject(reqModel);
             var client = new RestClient(link);
@@ -136,7 +136,44 @@ namespace BIFastWebAPI.Utility
             request.AddHeader("Content-Type", "application/json");
             request.AddParameter("application/json", jsonRequest, ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
+            
             string jsonResponse = response.Content;
+            if (response.StatusCode == System.Net.HttpStatusCode.RequestTimeout)
+            {
+                if (reqModel.EndToEndId != null)
+                {
+                    var errTOT = new RespRejectAccEnquiry
+                    {
+                        MsgDefIdr = "Generated from Middleware",
+                        TranRefNUM = reqModel.TranRefNUM,
+                        MsgCreationDate = reqModel.MsgCreationDate,
+                        OrigEndToEndId = reqModel.EndToEndId,
+                        OrigTranRefNUM = reqModel.TranRefNUM,
+                        TransactionStatus = "RJCT",
+                        ReasonCode = "804",
+                        CreditorAccountNo = reqModel.CreditorAccountNo,
+                    };
+                    jsonResponse = Newtonsoft.Json.JsonConvert.SerializeObject(errTOT);
+                    return jsonResponse;
+                }
+                else
+                {
+                    var errTON = new RespRejectAliasManagement
+                    {
+                        SendingSystemBIC = reqModel.SendingSystemBIC,
+                        ReceivingSystemBIC = reqModel.ReceivingSystemBIC,
+                        BizMsgIdr = reqModel.BizMsgIdr,
+                        MsgDefIdr = "Generated from Middleware",
+                        CreationDateTime = reqModel.CreationDateTime,
+                        Reference = reqModel.TranRefNUM,
+                        RejectReason = "U805",
+                        RejectDateTime = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"),
+                    };
+                    jsonResponse = Newtonsoft.Json.JsonConvert.SerializeObject(errTON);
+                    return jsonResponse;
+                }
+                
+            }
             return jsonResponse;
         }
 
