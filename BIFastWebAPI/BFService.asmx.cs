@@ -22,7 +22,8 @@ namespace BIFastWebAPI
         [WebMethod(MessageName = "AccountInquiry", Description = "Account Inquiry")]
         [XmlInclude(typeof(RespAccEnquiry))]
         [XmlInclude(typeof(RespRejectAccEnquiry))]
-        [XmlInclude(typeof(ErrorCreditTransfer))]
+        [XmlInclude(typeof(RespErrAccEnquiry))]
+        [XmlInclude(typeof(RespAllAccount))]
         public object Inquiry(ViewModelAccount vmAcc)
         {
             return hp.AccountEnquiry(vmAcc);
@@ -33,6 +34,7 @@ namespace BIFastWebAPI
         [XmlInclude(typeof(RespCreditTransfer))]
         [XmlInclude(typeof(RejectCreditTransfer))]
         [XmlInclude(typeof(ErrorCreditTransfer))]
+        [XmlInclude(typeof(RespCreditTrfAll))]
         public object Transaction(ViewModelTransaction vmTrx)
         {
            return hp.CreditTransferAll(vmTrx);
@@ -43,6 +45,7 @@ namespace BIFastWebAPI
         [XmlInclude(typeof(RespCrediTransferToProxy))]
         [XmlInclude(typeof(RespRejectCreditTransferToProxy))]
         [XmlInclude(typeof(RespErrCreditTransferToProxy))]
+        [XmlInclude(typeof(RespAllCreditProxy))]
         public object TransactionProxy(ViewModelProxy vmProx)
         {
             return hp.CreditToProxy(vmProx);

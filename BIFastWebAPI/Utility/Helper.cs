@@ -150,7 +150,7 @@ namespace BIFastWebAPI.Utility
                         OrigEndToEndId = reqModel.EndToEndId,
                         OrigTranRefNUM = reqModel.TranRefNUM,
                         TransactionStatus = "RJCT",
-                        ReasonCode = "804",
+                        ReasonCode = "408",
                         CreditorAccountNo = reqModel.CreditorAccountNo,
                     };
                     jsonResponse = Newtonsoft.Json.JsonConvert.SerializeObject(errTOT);
@@ -218,9 +218,9 @@ namespace BIFastWebAPI.Utility
                 reqAM.ReceivingSystemBIC = "FASTIDJA";
                 reqAM.BizMsgIdr = Date + "AGTBIDJA" + tt + "O" + data.ChannelType + ss;
                 reqAM.MsgDefIdr = "prxy.001.001.01";
-                reqAM.CreationDateTime = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
+                reqAM.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
                 reqAM.TranRefNUM = Date + "AGTBIDJA" + tt + ss;
-                reqAM.MsgCreationDate = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.fff");
+                reqAM.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqAM.SendingParticipantID = "AGTBIDJA";
                 reqAM.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqAM.OperationType = data.OperationType;
@@ -304,9 +304,9 @@ namespace BIFastWebAPI.Utility
                 reqAR.ReceivingSystemBIC = "FASTIDJA";
                 reqAR.BizMsgIdr = Date + "AGTBIDJA610O" + data.ChannelType + ss;
                 reqAR.MsgDefIdr = "prxy.003.001.01";
-                reqAR.CreationDateTime = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
+                reqAR.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
                 reqAR.TranRefNUM = Date + "AGTBIDJA610" + ss;
-                reqAR.MsgCreationDate = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.fff");
+                reqAR.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqAR.SendingParticipantID = "AGTBIDJA";
                 reqAR.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqAR.AlisaResolutionLookup = data.AlisaResolutionLookup;
@@ -375,9 +375,9 @@ namespace BIFastWebAPI.Utility
                 reqARI.ReceivingSystemBIC = "FASTIDJA";
                 reqARI.BizMsgIdr = Date + "AGTBIDJA620O" + data.ChannelType + ss;
                 reqARI.MsgDefIdr = "prxy.005.001.01";
-                reqARI.CreationDateTime = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
+                reqARI.CreationDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.ssZ");
                 reqARI.TranRefNUM = Date + "AGTBIDJA620" + ss;
-                reqARI.MsgCreationDate = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.fff");
+                reqARI.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqARI.SendingParticipantID = "AGTBIDJA";
                 reqARI.MsgSenderAccountId = data.MsgSenderAccountId;
                 reqARI.RegistrationID = rID;
@@ -449,10 +449,11 @@ namespace BIFastWebAPI.Utility
             try
             {
                 //reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + ss;
-                reqAcc.EndToEndId = DateTime.Now.AddHours(7).ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + ss;
+                reqAcc.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + "O" + vmAcc.ChannelType + ss;
                 reqAcc.MsgDefIdr = "pacs.008.001.08";
-                reqAcc.TranRefNUM = DateTime.Now.AddHours(7).ToString("yyyyMMdd") + "AGTBIDJA" + "510" + ss;
-                reqAcc.MsgCreationDate = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.fff");
+                reqAcc.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "510" + ss;
+                //reqAcc.MsgCreationDate = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.fff");
+                reqAcc.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqAcc.RecipentParticipantID = vmAcc.RecipentParticipantID;
                 reqAcc.CreditorAccountNo = vmAcc.CreditorAccountNo;
                 reqAcc.Amount = vmAcc.Amount + ".00";
@@ -469,6 +470,7 @@ namespace BIFastWebAPI.Utility
                 if (respAll.MsgDefIdr == "pacs.002.001.10" && respAll.ReasonCode == "U000")
                 {
                     respAcc = JsonConvert.DeserializeObject<RespAccEnquiry>(jsonResponse);
+
                     st = "Success";
                     SaveLog(vmAcc.CIF, vmAcc.Channel, null, null, num, idr, jsonRequest, jsonResponse, st, DateTime.Parse(reqAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind), DateTime.Parse(respAcc.MsgCreationDate, null, DateTimeStyles.RoundtripKind));
 
@@ -511,10 +513,10 @@ namespace BIFastWebAPI.Utility
 
             try
             {
-                req.EndToEndId = DateTime.Now.AddHours(7).ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + ss;
+                req.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + "O" + VmTrx.ChannelType + ss;
                 req.MsgDefIdr = "pacs.008.001.08";
-                req.TranRefNUM = DateTime.Now.AddHours(7).ToString("yyyyMMdd") + "AGTBIDJA" + "010" + ss;
-                req.MsgCreationDate = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.fff");
+                req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "010" + ss;
+                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 req.Amount = VmTrx.Amount + ".00";
                 req.Currency = "IDR";
                 req.PurposeType = VmTrx.PurposeType;
@@ -586,10 +588,10 @@ namespace BIFastWebAPI.Utility
 
             try
             {
-                reqCtPrx.EndToEndId = DateTime.Now.AddHours(7).ToString("yyyyMMdd") + "AGTBIDJA" + "110" + "O" + vmProx.ChannelType + ss;
+                reqCtPrx.EndToEndId = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + "O" + vmProx.ChannelType + ss;
                 reqCtPrx.MsgDefIdr = "pacs.008.001.08";
-                reqCtPrx.TranRefNUM = DateTime.Now.AddHours(7).ToString("yyyyMMdd") + "AGTBIDJA" + "110" + ss;
-                reqCtPrx.MsgCreationDate = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.fff");
+                reqCtPrx.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "110" + ss;
+                reqCtPrx.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 reqCtPrx.Amount = vmProx.Amount + ".00";
                 reqCtPrx.Currency = "IDR";
                 reqCtPrx.PurposeType = vmProx.PurposeType;
@@ -745,7 +747,7 @@ namespace BIFastWebAPI.Utility
             {
                 //req.TranRefNUM = vmSt.TranRefNUM; // inputan dari request CT
                 req.TranRefNUM = DateTime.Now.ToString("yyyyMMdd") + "AGTBIDJA" + "000" + ss;
-                req.MsgCreationDate = DateTime.UtcNow.AddHours(7).ToString("yyyy-MM-ddTHH:MM:ss.fff");
+                req.MsgCreationDate = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:MM:ss.fff");
                 req.OrigEndToEndId = vmSt.OrigEndToEndId; // inputan dari request CT
 
                 string jsonRequest = JsonConvert.SerializeObject(req), idr = req.OrigEndToEndId, num = req.TranRefNUM;
