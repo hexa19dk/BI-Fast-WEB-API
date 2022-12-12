@@ -138,8 +138,25 @@ namespace BIFastWebAPI.Utility
             IRestResponse response = client.Execute(request);
             
             string jsonResponse = response.Content;
+           
             if (response.StatusCode == System.Net.HttpStatusCode.RequestTimeout)
             {
+                if (jsonResponse.Contains("SendingSystemBIC"))
+                {
+                    var errTON = new RespRejectAliasManagement
+                    {
+                        SendingSystemBIC = reqModel.SendingSystemBIC,
+                        ReceivingSystemBIC = reqModel.ReceivingSystemBIC,
+                        BizMsgIdr = reqModel.BizMsgIdr,
+                        MsgDefIdr = "Generated from Middleware",
+                        CreationDateTime = reqModel.CreationDateTime,
+                        Reference = reqModel.TranRefNUM,
+                        RejectReason = "U805",
+                        RejectDateTime = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"),
+                    };
+                    jsonResponse = Newtonsoft.Json.JsonConvert.SerializeObject(errTON);
+                    return jsonResponse;
+                }
                 if (reqModel.EndToEndId != null)
                 {
                     var errTOT = new RespRejectAccEnquiry
@@ -156,23 +173,7 @@ namespace BIFastWebAPI.Utility
                     jsonResponse = Newtonsoft.Json.JsonConvert.SerializeObject(errTOT);
                     return jsonResponse;
                 }
-                else
-                {
-                    var errTON = new RespRejectAliasManagement
-                    {
-                        SendingSystemBIC = reqModel.SendingSystemBIC,
-                        ReceivingSystemBIC = reqModel.ReceivingSystemBIC,
-                        BizMsgIdr = reqModel.BizMsgIdr,
-                        MsgDefIdr = "Generated from Middleware",
-                        CreationDateTime = reqModel.CreationDateTime,
-                        Reference = reqModel.TranRefNUM,
-                        RejectReason = "U805",
-                        RejectDateTime = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss"),
-                    };
-                    jsonResponse = Newtonsoft.Json.JsonConvert.SerializeObject(errTON);
-                    return jsonResponse;
-                }
-                
+                              
             }
             return jsonResponse;
         }
