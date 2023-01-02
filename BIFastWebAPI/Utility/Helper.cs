@@ -521,15 +521,15 @@ namespace BIFastWebAPI.Utility
                 req.Currency = "IDR";
                 req.PurposeType = VmTrx.PurposeType;
 
-                if (VmTrx.Channel == "CMS - Credit Transfer")
-                {
-                    req.PaymentInformation = "TR1 BIFAST - " + VmTrx.PaymentInformation;
-                } 
-                else
-                {
-                    req.PaymentInformation = "TR0 BIFAST - " + VmTrx.PaymentInformation;
-                }
-                //req.PaymentInformation = VmTrx.PaymentInformation;
+                //if (VmTrx.Channel == "CMS - Credit Transfer")
+                //{
+                //    req.PaymentInformation = "TR1 BIFAST - " + VmTrx.PaymentInformation;
+                //} 
+                //else
+                //{
+                //    req.PaymentInformation = "TR0 BIFAST - " + VmTrx.PaymentInformation;
+                //}
+                req.PaymentInformation = VmTrx.PaymentInformation;
 
                 req.SendingParticipantID = VmTrx.SendingParticipantID;
                 req.DebitorAccountNo = VmTrx.DebitorAccountNo;
